@@ -13,15 +13,36 @@ class Recipe {
   //compare ids of ingredientsData.id and recipe.ingredients.id
   //filter ingredientsData, then for each filtered obj, push obj.name to acc
   //output - ["wheat flour", "bicarbonate of soda"]
+  filterIngredients(ingredient){
+    return ingredientsData.filter(dataIng => dataIng.id === ingredient.id);
+  }
+
   getIngredientNames() {
     return this.ingredients.reduce((acc, ingredient) => {
-      let filteredIngs = ingredientsData.filter(dataIng => dataIng.id === ingredient.id);
+      let filteredIngs = this.filterIngredients(ingredient);
       filteredIngs.forEach((filterIng) => {
         acc.push(filterIng.name);
       });
       return acc;
     },[]);
   }
+
+  getRecipeCost(){
+    return this.ingredients.reduce((acc, ingredient) => {
+      let filteredIngs = this.filterIngredients(ingredient);
+      filteredIngs.forEach((filterIng) => {
+        acc += (ingredient.quantity.amount * filterIng.estimatedCostInCents)
+      });
+      return acc;
+    },0);
+  };
+
+    getRecipeDirections(){
+      return this.instructions.map((instruction) => {
+        return `Step ${instruction.number}: ${instruction.instruction}`
+      })
+    }
+
 }
 
 export default Recipe;
