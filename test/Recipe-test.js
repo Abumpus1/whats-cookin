@@ -4,7 +4,24 @@ import Recipe from '../src/classes/Recipe';
 
 describe('Recipe', () => {
   let recipe;
+  let ingredients;
   beforeEach(() => {
+    ingredients = [{
+    "id": 20081,
+    "name": "wheat flour",
+    "estimatedCostInCents": 142
+    },
+    {
+      "id": 18372,
+      "name": "bicarbonate of soda",
+      "estimatedCostInCents": 582
+    },
+    {
+      "id": 1123,
+      "name": "eggs",
+      "estimatedCostInCents": 472
+    }];
+
     recipe = new Recipe({
       "id": 595736,
       "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -95,6 +112,11 @@ describe('Recipe', () => {
       "snack"
     ]);
   });
+
+  it('Should have method that determines ingredient name', ()=> {
+    let ingNames = recipe.getIngredientNames();
+    expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"])
+  })
 });
 
 
