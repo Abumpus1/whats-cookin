@@ -11,12 +11,17 @@ describe('Recipe Repository', () => {
   });
 
   it('Should be a function', () => {
-    console.log(recipeRepo);
     expect(RecipeRepository).to.be.a('function');
   });
-  
-  it("should hold recipe data", () => {
+
+  it('should hold recipe data', () => {
     expect(recipeRepo.recipes).to.deep.equal(recipeData);
   });
 
+  // it('should have a method that sorts based on tag', ()=> {
+  //   let sortedRecipes = recipeRepo.sortByTag("side dish");
+  
+  //   expect(sortedRecipes[0]).to.have.nested.property('id', 741603)
+  //   expect(sortedRecipes).to.have.a.lengthof
+  // });
 });
