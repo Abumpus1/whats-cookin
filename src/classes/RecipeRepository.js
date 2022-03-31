@@ -1,7 +1,14 @@
 class RecipeRepository {
-  constructor() {
+  constructor(recipes) {
+    this.recipes = recipes;
+  }
 
-    // One class to get you started!
+  sortByTag(tag) {
+   return this.recipes.filter(recipe => recipe.tags.includes(tag));
+  }
+
+  sortByName(nameInput) {
+    return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
   }
 }
 
