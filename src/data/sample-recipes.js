@@ -162,5 +162,5 @@ const sampleRecipes = [
     "name": "Mock Udi’s Gluten Free Whole Grain Bread",
     "tags": []
   }
-]
+];
 export default sampleRecipes;
