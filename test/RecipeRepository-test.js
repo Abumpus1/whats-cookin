@@ -18,10 +18,17 @@ describe('Recipe Repository', () => {
     expect(recipeRepo.recipes).to.deep.equal(sampleRecipes);
   });
 
-  // it('should have a method that sorts based on tag', ()=> {
-  //   let sortedRecipes = recipeRepo.sortByTag("side dish");
-  
-  //   expect(sortedRecipes[0]).to.have.nested.property('id', 741603)
-  //   expect(sortedRecipes).to.have.a.lengthof
-  // });
+  it('should have a method that sorts based on tag', ()=> {
+    let sortedRecipes = recipeRepo.sortByTag("main dish");
+
+    expect(sortedRecipes).to.have.a.lengthOf(1);
+    expect(sortedRecipes[0]).to.deep.equal(sampleRecipes[1]);
+  });
+
+  it('should have a method that sorts based on name', () => {
+    let sortedRecipes = recipeRepo.sortByName("Wing Sauce");
+
+    expect(sortedRecipes).to.have.a.lengthOf(1);
+    expect(sortedRecipes[0]).to.deep.equal(sampleRecipes[2]);
+  });
 });
