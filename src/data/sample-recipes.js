@@ -16,20 +16,6 @@ const sampleRecipes = [
           "amount": 0.5,
           "unit": "tsp"
         }
-      },
-      {
-        "id": 1123,
-        "quantity": {
-          "amount": 1,
-          "unit": "large"
-        }
-      },
-      {
-        "id": 19335,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "c"
-        }
       }
     ],
     "instructions": [
@@ -40,24 +26,13 @@ const sampleRecipes = [
       {
         "instruction": "Add egg and vanilla and mix until combined.",
         "number": 2
-      },
-      {
-        "instruction": "Add dry ingredients and mix on low just until incorporated. Stir in chocolate chips.Scoop the dough into 1,5 tablespoon size balls and place on a plate or sheet. Cover with saran wrap and chill at least 2 hours or overnight.When ready to bake, preheat oven to 350 degrees.",
-        "number": 3
-      },
-      {
-        "instruction": "Place the cookie dough balls into ungreased muffin pan. Sprinkle with sea salt.",
-        "number": 4
       }
     ],
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "tags": [
       "antipasti",
       "starter",
-      "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "snack"
     ]
   },
   {
@@ -92,13 +67,6 @@ const sampleRecipes = [
           "unit": "tablespoon"
         }
       },
-      {
-        "id": 11215,
-        "quantity": {
-          "amount": 1,
-          "unit": "clove"
-        }
-      }
     ],
     "instructions": [
       {
@@ -137,20 +105,6 @@ const sampleRecipes = [
         "quantity": {
           "amount": 2,
           "unit": "cups"
-        }
-      },
-      {
-        "id": 4582,
-        "quantity": {
-          "amount": 4,
-          "unit": "servings"
-        }
-      },
-      {
-        "id": 2031,
-        "quantity": {
-          "amount": 4,
-          "unit": "teaspoons"
         }
       }
     ],
