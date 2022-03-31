@@ -2,27 +2,9 @@ import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
 import sampleRecipes from '../src/data/sample-recipes';
 
-
 describe('Recipe', () => {
   let recipe;
-  let ingredients;
   beforeEach(() => {
-    ingredients = [{
-    "id": 20081,
-    "name": "wheat flour",
-    "estimatedCostInCents": 142
-    },
-    {
-      "id": 18372,
-      "name": "bicarbonate of soda",
-      "estimatedCostInCents": 582
-    },
-    {
-      "id": 1123,
-      "name": "eggs",
-      "estimatedCostInCents": 472
-    }];
-
     recipe = new Recipe(sampleRecipes[0]);
   });
 
@@ -41,7 +23,7 @@ describe('Recipe', () => {
   it('Should have ingredients', () => {
     expect(recipe.ingredients).to.deep.equal(sampleRecipes[0].ingredients);
   });
-  
+
   it('Should have instructions', () => {
     expect(recipe.instructions).to.deep.equal(sampleRecipes[0].instructions);
   });
