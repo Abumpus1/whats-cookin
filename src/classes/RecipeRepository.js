@@ -2,7 +2,7 @@ import Recipe from '../classes/Recipe';
 class RecipeRepository {
   constructor(recipes) {
     this.recipes = recipes.map(recipe => new Recipe(recipe));
-    this.filteredRecipes = [];
+    this.filteredRecipes = this.recipes;
     this.checkedTags = {};
   }
 
@@ -10,12 +10,17 @@ class RecipeRepository {
    // return this.recipes.filter(recipe => recipe.tags.includes(tag));
   // }
 
-  sortByName(nameInput) {
+//in filterByName, if filteredRecipes and checkedTags are both empty, then
+  filterByName(nameInput) {
     return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
   }
 
-  sortByTags() {
+  resetFilteredRecipes(){
     this.filteredRecipes = this.recipes;
+  }
+
+  filterByTags() {
+    this.resetFilteredRecipes();
     Object.keys(this.checkedTags).forEach(tag => {
       this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag));
     });
@@ -28,7 +33,7 @@ class RecipeRepository {
     } else {
       this.checkedTags[tag] = tag;
     }
-    sortByTags();
+    return this.filterByTags();
   }
 }
 
