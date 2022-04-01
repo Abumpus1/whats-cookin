@@ -1,6 +1,7 @@
+import Recipe from '../classes/Recipe';
 class RecipeRepository {
   constructor(recipes) {
-    this.recipes = recipes;
+    this.recipes = recipes.map(recipe => new Recipe(recipe));
   }
 
   sortByTag(tag) {

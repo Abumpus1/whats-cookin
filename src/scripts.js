@@ -12,6 +12,11 @@ const recipesList = document.querySelector(".recipes-list");
 const tagFilter = document.querySelector(".tag-filter");
 const allRecipesBox = document.querySelector(".all-recipes-box");
 const recipePage = document.querySelector(".recipe-page");
+const recipeImage = document.querySelector(".large-recipe-image");
+const recipeIngredients = document.querySelector(".ingredients");
+const recipeDirections = document.querySelector(".directions-list");
+const recipeTotalCost = document.querySelector(".actual-cost");
+
 //FUNCTIONS//
 const hide = (element => {
   element.classList.add("hidden");
@@ -37,16 +42,31 @@ const displayAllRecipes = () => {
   })
 }
 
-const displayRecipeDetails = (event) => {
+const displayRecipePage = (event) => {
   activeRecipeRepo.recipes.forEach(recipe => {
     if(event.target.closest(".recipe").id === `${recipe.id}`){
-      console.log("IT WORKED");
+      hide(tagFilter);
+      hide(allRecipesBox);
+      show(recipePage);
+      displaySelectedRecipe(recipe);
+      console.log(recipe);
     }
   });
 }
 
+const displaySelectedRecipe = (recipe) => {
+  //innerHTML all up in here
+  recipeImage.innerHTML = `<img src="${recipe.image}">`;
+  recipe.getIngredientNames().forEach(ingredient => {
+    recipeIngredients.innerHTML = `<p>${ingredient}<p>`
+  })
+  // recipeDirections.innerHTML
+  // recipeTotalCost.innerText
+}
+
+
 //EVENT LISTENERS//
 window.addEventListener('load', displayAllRecipes)
 recipesList.addEventListener('click', (event) => {
-  displayRecipeDetails(event);
+  displayRecipePage(event);
 })
