@@ -47,7 +47,7 @@ describe('Recipe', () => {
 
   it('Should have method to get cost of ingredients', ()=> {
     let ingCost = recipe.getRecipeCost();
-    expect(ingCost).to.equal(504);
+    expect(ingCost).to.equal(5.04);
   });
 
   it('Should have method to return directions', ()=> {

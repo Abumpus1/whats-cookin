@@ -23,13 +23,15 @@ class Recipe {
   }
 
   getRecipeCost(){
-    return this.ingredients.reduce((acc, ingredient) => {
+    let costInCents = this.ingredients.reduce((acc, ingredient) => {
       let filteredIngs = this.filterIngredients(ingredient);
       filteredIngs.forEach((filterIng) => {
         acc += (ingredient.quantity.amount * filterIng.estimatedCostInCents);
+        console.log(acc);
       });
-      return acc;
+      return acc
     },0);
+    return Math.round(costInCents)/100;
   }
 
   getRecipeDirections(){
