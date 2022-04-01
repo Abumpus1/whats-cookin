@@ -6,17 +6,24 @@
   </head>
   <body>
     <nav> 
-      <label></label>
-    <h1>Whats Cookin</h1>
-      <form></form>
+      <div class="menu nav">
+        <h3>MENU</h3>
+      </div>
+    <h1 class="nav">Whats Cookin</h1>
+    <form class="nav" id="form" role="search">
+      <input type="search" id="query" name="q"
+       placeholder="Search..."
+       aria-label="Search through site content">
+      <button>Search</button>
+    </form>
     </nav>
     <main>
-      <article>
+      <article class="hidden homepage">
         <section>
           <h2>Try This Today</h2>
         </section>
       </article>
-      <aside>
+      <aside class="hidden homepage">
         <div>
           <h2>Recommended Meal Ideas</h2>
         </div>
@@ -55,11 +62,11 @@
         </section>
       </div>
       </aside>
-      <aside>
-        <div>
+      <aside class="tag-filter">
+        <div class="filter-title">
           <h3>Filter by Tag</h3>
         </div>
-        <section>
+        <section class="tags">
           <div>
             <input type="checkbox" class="checkboxes" id="tag1">
             <label for="tag1">Favorites</label><br>
@@ -142,27 +149,30 @@
           </div>
         </section>
       </aside>
-      <article>
-        <section>
-          <div>
+      <article class="recipe-page hidden">
+        <section class="recipe-ingredients-box">
+          <div class="recipe-image">
 
           </div>
-          <div>
+          <div class="recipe-ingredients">
             <div>
               <h3>Ingredients</h3>
             </div>
-            <div>
+            <div class="ingredients">
 
             </div>
-            <div>
+            <div class="ingredients-cost">
               <h3>Total Cost of Ingredients</h3>
             </div>
           </div>
         </section>
-        <section>
+        <section class="directions-box">
           <div>
             <div>
               <h3>Directions</h3>
+            </div>
+            <div class="directions-list">
+
             </div>
           </div>
         </section>

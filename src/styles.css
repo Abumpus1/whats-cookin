@@ -1,3 +1,24 @@
-body {
-  background-color: blueviolet;
+* {
+  border: solid rgb(40, 40, 44) 1px;
 }
+
+body {
+  background-color: rgb(215, 214, 239);
+  margin: 0px;
+}
+
+.hidden {
+  display: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 15px; */
+  padding: left 33px;
+}
+/* 
+.nav {
+  margin: left 13px;
+  margin: right 13px;
+} */
