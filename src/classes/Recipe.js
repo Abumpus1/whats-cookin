@@ -1,5 +1,3 @@
-import ingredientsData from '../data/ingredients';
-
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
@@ -10,21 +8,21 @@ class Recipe {
     this.tags = recipe.tags;
   }
 
-  filterIngredients(ingredient){
+  filterIngredients(ingredient, ingredientsData){
     return ingredientsData.filter(dataIng => dataIng.id === ingredient.id);
   }
 
-  getIngredientNames() {
+  getIngredientNames(ingredientsData) {
     return this.ingredients.reduce((acc, ingredient) => {
-      let filteredIngs = this.filterIngredients(ingredient);
+      let filteredIngs = this.filterIngredients(ingredient, ingredientsData);
       filteredIngs.forEach((filterIng) => acc.push(filterIng.name));
       return acc;
     },[]);
   }
 
-  getRecipeCost(){
+  getRecipeCost(ingredientsData){
     let costInCents = this.ingredients.reduce((acc, ingredient) => {
-      let filteredIngs = this.filterIngredients(ingredient);
+      let filteredIngs = this.filterIngredients(ingredient, ingredientsData);
       filteredIngs.forEach((filterIng) => {
         acc += (ingredient.quantity.amount * filterIng.estimatedCostInCents);
       });
