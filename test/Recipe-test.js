@@ -4,6 +4,7 @@ import sampleRecipes from '../src/data/sample-recipes';
 
 describe('Recipe', () => {
   let recipe;
+
   beforeEach(() => {
     recipe = new Recipe(sampleRecipes[0]);
   });
@@ -13,11 +14,11 @@ describe('Recipe', () => {
   });
 
   it('Should have an id', () =>{
-    expect(recipe.id).to.equal(595736)
+    expect(recipe.id).to.equal(595736);
   });
 
   it('Should have an image', () =>{
-    expect(recipe.image).to.equal("https://spoonacular.com/recipeImages/595736-556x370.jpg")
+    expect(recipe.image).to.equal("https://spoonacular.com/recipeImages/595736-556x370.jpg");
   });
 
   it('Should have ingredients', () => {
@@ -42,7 +43,7 @@ describe('Recipe', () => {
 
   it('Should have method that determines ingredient name', ()=> {
     let ingNames = recipe.getIngredientNames();
-    expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"])
+    expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"]);
   });
 
   it('Should have method to get cost of ingredients', ()=> {

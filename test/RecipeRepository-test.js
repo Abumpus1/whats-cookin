@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
-import sampleRecipes from '../src/data/sample-recipes'
+import sampleRecipes from '../src/data/sample-recipes';
 
 describe('Recipe Repository', () => {
   let recipeRepo;

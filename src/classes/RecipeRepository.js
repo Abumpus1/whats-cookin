@@ -6,10 +6,6 @@ class RecipeRepository {
     this.checkedTags = {};
   }
 
-  // sortByTag(tag) {
-   // return this.recipes.filter(recipe => recipe.tags.includes(tag));
-  // }
-
 //in filterByName, if filteredRecipes and checkedTags are both empty, then
   filterByName(nameInput) {
     return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));

@@ -27,9 +27,8 @@ class Recipe {
       let filteredIngs = this.filterIngredients(ingredient);
       filteredIngs.forEach((filterIng) => {
         acc += (ingredient.quantity.amount * filterIng.estimatedCostInCents);
-        console.log(acc);
       });
-      return acc
+      return acc;
     },0);
     return Math.round(costInCents)/100;
   }
