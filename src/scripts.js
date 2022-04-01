@@ -61,6 +61,10 @@ const displaySelectedRecipe = (recipe) => {
   recipe.getIngredientNames().forEach(ingredient => {
     recipeIngredients.innerHTML += `<p>${ingredient}<p>`
   })
+  recipe.getRecipeDirections().forEach(direction => {
+    recipeDirections.innerHTML += `<p>${direction}<p>`
+  })
+
   // recipeDirections.innerHTML
   // recipeTotalCost.innerText
 }
