@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
 import sampleRecipes from '../src/data/sample-recipes';
+import sampleIngredients from '../src/data/sample-ingredients';
 
 describe('Recipe', () => {
   let recipe;
@@ -42,12 +43,12 @@ describe('Recipe', () => {
   });
 
   it('Should have method that determines ingredient name', ()=> {
-    let ingNames = recipe.getIngredientNames();
+    let ingNames = recipe.getIngredientNames(sampleIngredients);
     expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"]);
   });
 
   it('Should have method to get cost of ingredients', ()=> {
-    let ingCost = recipe.getRecipeCost();
+    let ingCost = recipe.getRecipeCost(sampleIngredients);
     expect(ingCost).to.equal(5.04);
   });
 

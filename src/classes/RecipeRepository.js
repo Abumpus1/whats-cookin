@@ -1,7 +1,8 @@
 import Recipe from '../classes/Recipe';
 class RecipeRepository {
-  constructor(recipes) {
+  constructor(recipes, ingredients) {
     this.recipes = recipes.map(recipe => new Recipe(recipe));
+    this.ingredients = ingredients.map(ingredient => new Ingredient(ingredient));
     this.filteredRecipes = this.recipes;
     this.checkedTags = {};
   }
