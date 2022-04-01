@@ -57,8 +57,9 @@ const displayRecipePage = (event) => {
 const displaySelectedRecipe = (recipe) => {
   //innerHTML all up in here
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
+  recipeIngredients.innerHTML = "";
   recipe.getIngredientNames().forEach(ingredient => {
-    recipeIngredients.innerHTML = `<p>${ingredient}<p>`
+    recipeIngredients.innerHTML += `<p>${ingredient}<p>`
   })
   // recipeDirections.innerHTML
   // recipeTotalCost.innerText
