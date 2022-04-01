@@ -1,4 +1,5 @@
 import Recipe from '../classes/Recipe';
+import Ingredient from '../classes/Ingredient';
 class RecipeRepository {
   constructor(recipes, ingredients) {
     this.recipes = recipes.map(recipe => new Recipe(recipe));
@@ -7,7 +8,6 @@ class RecipeRepository {
     this.checkedTags = {};
   }
 
-//in filterByName, if filteredRecipes and checkedTags are both empty, then
   filterByName(nameInput) {
     return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
   }

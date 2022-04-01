@@ -3,7 +3,7 @@ import Ingredient from '../src/classes/Ingredient';
 import sampleIngredients from '../src/data/sample-ingredients';
 
 describe('Ingredient', () => {
-  let ingredient
+  let ingredient;
 
   beforeEach(() => {
     ingredient = new Ingredient(sampleIngredients[0]);
