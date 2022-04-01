@@ -16,6 +16,7 @@ const recipeImage = document.querySelector(".large-recipe-image");
 const recipeIngredients = document.querySelector(".ingredients");
 const recipeDirections = document.querySelector(".directions-list");
 const recipeTotalCost = document.querySelector(".actual-cost");
+const tagCheckBoxes = document.querySelector(".tags");
 
 //FUNCTIONS//
 const hide = (element => {
@@ -72,4 +73,7 @@ const displaySelectedRecipe = (recipe) => {
 window.addEventListener('load', displayAllRecipes)
 recipesList.addEventListener('click', (event) => {
   displayRecipePage(event);
+})
+tagCheckBoxes.addEventListener('click', (event) => {
+  console.log(event.target.innerText.toLowerCase());
 })
