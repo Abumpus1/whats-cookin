@@ -3,10 +3,12 @@ import apiCalls from './apiCalls';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import RecipeRepository from './classes/recipeRepository';
+import usersData from './data/users'
 import recipeData from './data/recipes';
 import ingredientsData from './data/ingredients';
 
-const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData);
+const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
+console.log(activeRecipeRepo);
 
 //QUERY SELECTORS//
 const recipesList = document.querySelector(".recipes-list");
@@ -40,9 +42,13 @@ const displayAllRecipes = () => {
       <div>
         <h3>${recipe.name}</h3>
       </div>
+      <div class="favorite-button">
+        <p>🤍</p>
+        <p class="hidden">♥️</p>
+      </div>
     </section>
     `
-  })
+  });
 }
 
 const displayRecipePage = (event) => {
