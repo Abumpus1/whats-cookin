@@ -18,8 +18,12 @@ class User {
       });
     }
   }
-//decideToCook method
 
+  decideToCook(recipeId) {
+    if(!this.recipesToCook.includes(recipeId)){
+      this.recipesToCook.push(recipeId)
+    }
+  }
 }
 
 export default User;

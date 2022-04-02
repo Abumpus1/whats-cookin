@@ -52,4 +52,10 @@ describe('User', () => {
     expect(user.favoriteRecipes).to.deep.equal([]);
   });
 
+  it('Should have a method to add recipes to recipes to cook array', () => {
+    user.decideToCook(595736);
+
+    expect(user.recipesToCook).to.deep.equal([595736]);
+  });
+
 });
