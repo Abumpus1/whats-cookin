@@ -18,6 +18,10 @@ describe('Recipe Repository', () => {
     expect(recipeRepo.recipes).to.deep.equal(sampleRecipes);
   });
 
+  it('Should hold ingredients data', () => {
+    expect(recipeRepo.ingredients).to.deep.equal(sampleIngredients);
+  });
+
   it('Should start with all recipes as filtered recipes', () => {
     expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
   });

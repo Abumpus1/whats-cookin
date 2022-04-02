@@ -1,11 +1,12 @@
 import './styles.css';
 import apiCalls from './apiCalls';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-import RecipeRepository from './classes/recipeRepository'
-import recipeData from './data/recipes'
+import './images/turing-logo.png';
+import RecipeRepository from './classes/recipeRepository';
+import recipeData from './data/recipes';
+import ingredientsData from './data/ingredients';
 
-const activeRecipeRepo = new RecipeRepository(recipeData)
+const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData);
 
 //QUERY SELECTORS//
 const recipesList = document.querySelector(".recipes-list");
@@ -29,7 +30,7 @@ const show = (element => {
 
 const displayAllRecipes = () => {
   recipesList.innerHTML = "";
-  activeRecipeRepo.recipes.forEach(recipe => {
+  activeRecipeRepo.filteredRecipes.forEach(recipe => {
     recipesList.innerHTML += `
     <section class="recipe" id="${recipe.id}">
       <div>
@@ -50,7 +51,6 @@ const displayRecipePage = (event) => {
       hide(allRecipesBox);
       show(recipePage);
       displaySelectedRecipe(recipe);
-      console.log(recipe);
     }
   });
 }
@@ -59,13 +59,18 @@ const displaySelectedRecipe = (recipe) => {
   //innerHTML all up in here
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
   recipeIngredients.innerHTML = "";
-  recipe.getIngredientNames().forEach(ingredient => {
+  recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
     recipeIngredients.innerHTML += `<p>${ingredient}<p>`
   })
   recipe.getRecipeDirections().forEach(direction => {
     recipeDirections.innerHTML += `<p>${direction}<p>`
   })
-  recipeTotalCost.innerText = ` $${recipe.getRecipeCost()}`
+  recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`
+}
+
+const clickTag = (tagName) => {
+  activeRecipeRepo.checkTag(tagName);
+  displayAllRecipes();
 }
 
 
@@ -75,5 +80,7 @@ recipesList.addEventListener('click', (event) => {
   displayRecipePage(event);
 })
 tagCheckBoxes.addEventListener('click', (event) => {
-  console.log(event.target.innerText.toLowerCase());
+  if (event.target.dataset.tagName) {
+    clickTag(event.target.dataset.tagName);
+  }
 })
