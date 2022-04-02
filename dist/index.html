@@ -6,24 +6,26 @@
   </head>
   <body>
     <nav>
-      <div class="menu nav">
-        <h3>MENU</h3>
+      <div class="menu-nav">
+        <h3 class="menu-drop">MENU</h3>
       </div>
-    <h1 class="nav">Whats Cookin</h1>
-    <form class="nav" id="form" role="search">
-      <input type="search" id="query" name="q"
-       placeholder="Search..."
-       aria-label="Search through site content">
-      <button>Search</button>
-    </form>
+    <h1 class="nav">What's Cookin</h1>
+    <div class="search-bar">
+      <form class="nav" id="form" role="search">
+        <input type="search" id="query" name="q"
+         placeholder="Search..."
+         aria-label="Search through site content">
+        <button>Search</button>
+      </form>
+    </div>
     </nav>
     <main>
-      <article class="hidden homepage">
+      <article class="homepage">
         <section>
           <h2>Try This Today</h2>
         </section>
       </article>
-      <aside class="hidden homepage">
+      <aside class="homepage">
         <div>
           <h2>Recommended Meal Ideas</h2>
         </div>
@@ -60,9 +62,9 @@
         </section>
       </div>
       </aside>
-      <aside class="tag-filter">
+      <aside class="hidden tag-filter">
         <div class="filter-title">
-          <h3>Filter by Tag</h3>
+          <h3 class="filter-tag-text">Filter by Tag</h3>
         </div>
         <section class="tags">
           <div>
@@ -147,7 +149,7 @@
           </div>
         </section>
       </aside>
-      <article class="all-recipes-box">
+      <article class="hidden all-recipes-box">
         <section class="recipes-list" id="recipesList">
         </section>
       </article>

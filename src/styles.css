@@ -1,5 +1,6 @@
 * {
   border: solid rgb(40, 40, 44) 1px;
+  font-family: monaco
 }
 
 .all-recipes-box {
@@ -11,12 +12,42 @@ body {
   margin: 0px;
 }
 
+
+/* .checkboxes {
+  font-size: 33px;
+} */
+
+.filter-tag-text {
+  font-size: 20pt;
+}
+
+
+h1 {
+  font-size: 28pt;
+  margin-left: 144px;
+  margin-top: 37px;
+
+}
+
 .hidden {
   display: none;
 }
 
+label {
+  font-size: 18pt;
+}
+
 main {
   display: flex;
+}
+
+.menu-drop {
+  font-size: 24pt;
+}
+
+.menu-nav {
+  margin-left: 42px;
+  margin-top: 10px;
 }
 
 nav {
@@ -31,7 +62,7 @@ nav {
   margin: right 13px;
 } */
 .recipe {
-  width: 200px;
+  width: 300px;
   height: 300px;
 }
 
@@ -43,11 +74,17 @@ nav {
 
 .recipe-image {
   height: 200px;
-  width: 200px;
+  width: 290px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-right: 42px;
 }
 
 .tag-filter {
-  margin-left: 20px;
-  margin-right: 50px;
+  margin-left: 50px;
   width: 14%;
 }
+
