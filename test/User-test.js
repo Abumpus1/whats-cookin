@@ -32,4 +32,24 @@ describe('User', () => {
     expect(user.recipesToCook).to.deep.equal([]);
   });
 
+  it('Should have a method to allow user to favorite recipes', () => {
+    user.toggleFavoriteRecipe(595736);
+
+    expect(user.favoriteRecipes).to.deep.equal([595736]);
+
+    user.toggleFavoriteRecipe(412309);
+
+    expect(user.favoriteRecipes).to.deep.equal([595736, 412309]);
+  });
+
+  it('Should have a method to allow user to unfavorite recipes', () => {
+    user.toggleFavoriteRecipe(595736);
+
+    expect(user.favoriteRecipes).to.deep.equal([595736]);
+
+    user.toggleFavoriteRecipe(595736);
+
+    expect(user.favoriteRecipes).to.deep.equal([]);
+  });
+
 });
