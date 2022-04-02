@@ -1,11 +1,14 @@
 import Recipe from '../classes/Recipe';
 import Ingredient from '../classes/Ingredient';
+import User from '../classes/User';
+
 class RecipeRepository {
-  constructor(recipes, ingredients) {
+  constructor(recipes, ingredients, user) {
     this.recipes = recipes.map(recipe => new Recipe(recipe));
     this.ingredients = ingredients.map(ingredient => new Ingredient(ingredient));
     this.filteredRecipes = this.recipes;
     this.checkedTags = [];
+    this.currentUser = new User(user);
   }
 
   filterByName(nameInput) {

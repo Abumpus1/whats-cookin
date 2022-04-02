@@ -57,7 +57,6 @@ const displayRecipePage = (event) => {
 }
 
 const displaySelectedRecipe = (recipe) => {
-  //innerHTML all up in here
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
   recipeIngredients.innerHTML = "";
   recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
@@ -77,6 +76,7 @@ const searchRecipes = () => {
   activeRecipeRepo.filterByName(searchInput.value);
   displayAllRecipes();
 }
+
 
 
 //EVENT LISTENERS//

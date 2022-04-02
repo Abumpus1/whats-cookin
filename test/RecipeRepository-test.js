@@ -2,12 +2,14 @@ import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import sampleRecipes from '../src/data/sample-recipes';
 import sampleIngredients from '../src/data/sample-ingredients';
+import User from '../src/classes/User';
+import sampleUsers from '../src/data/sample-users';
 
 describe('Recipe Repository', () => {
   let recipeRepo;
 
   beforeEach(() => {
-    recipeRepo = new RecipeRepository(sampleRecipes, sampleIngredients);
+    recipeRepo = new RecipeRepository(sampleRecipes, sampleIngredients, sampleUsers[0]);
   });
 
   it('Should be a function', () => {
@@ -28,6 +30,10 @@ describe('Recipe Repository', () => {
 
   it('Should start with an empty array of checked tags', () => {
     expect(recipeRepo.checkedTags).to.deep.equal([]);
+  });
+
+  it('Should have a current user', () => {
+    expect(recipeRepo.currentUser.name).to.equal("Saige O'Kon")
   });
 
   it('Should have a method to add tags to checked tags array', () => {
