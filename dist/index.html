@@ -6,181 +6,187 @@
   </head>
   <body>
     <nav>
-      <div class="menu-nav">
-        <h3 class="menu-drop">MENU</h3>
+        <div class="menu-nav">
+          <h3 class="menu-drop">MENU</h3>
+        </div>
+      <h1 class="nav">What's Cookin</h1>
+      <div class="search-bar">
+        <form class="nav" id="form" role="search">
+          <input type="search" id="query" name="q"
+          placeholder="Search..."
+          aria-label="Search through site content">
+          <button>Search</button>
+        </form>
       </div>
-    <h1 class="nav">What's Cookin</h1>
-    <div class="search-bar">
-      <form class="nav" id="form" role="search">
-        <input type="search" id="query" name="q"
-         placeholder="Search..."
-         aria-label="Search through site content">
-        <button>Search</button>
-      </form>
-    </div>
     </nav>
     <main>
-      <article class="homepage">
-        <section>
-          <h2>Try This Today</h2>
-        </section>
-      </article>
-      <aside class="homepage">
-        <div>
-          <h2>Recommended Meal Ideas</h2>
-        </div>
-      <div>
-        <section>
-          <div>
-          </div>
-          <div>
-          </div>
-        </section>
-        <section>
-          <div>
-
-          </div>
-          <div>
-
-          </div>
-        </section>
-        <section>
-          <div>
-
-          </div>
-          <div>
-
-          </div>
-        </section>
-        <section>
-          <div>
-
-          </div>
-          <div>
-
-          </div>
-        </section>
-      </div>
-      </aside>
-      <aside class="hidden tag-filter">
-        <div class="filter-title">
-          <h3 class="filter-tag-text">Filter by Tag</h3>
-        </div>
-        <section class="tags">
-          <div>
-            <input data-tag-name="favorites" type="checkbox" class="checkboxes" id="tag1">
-            <label for="tag1">Favorites</label><br>
-          </div>
-          <div>
-            <input data-tag-name="antipasti" type="checkbox" class="checkboxes" id="tag2">
-            <label for="tag2">Antipasti</label><br>
-          </div>
-          <div>
-            <input data-tag-name="antipasto" type="checkbox" class="checkboxes" id="tag3">
-            <label for="tag3">Antipasto</label><br>
-          </div>
-          <div>
-            <input data-tag-name="appetizer" type="checkbox" class="checkboxes" id="tag4">
-            <label for="tag4">Appetizer</label><br>
-          </div>
-          <div>
-            <input data-tag-name="breakfast" type="checkbox" class="checkboxes" id="tag5">
-            <label for="tag5">Breakfast</label><br>
-          </div>
-          <div>
-            <input data-tag-name="brunch" type="checkbox" class="checkboxes" id="tag6">
-            <label for="tag6">Brunch</label><br>
-          </div>
-          <div>
-            <input data-tag-name="condiment" type="checkbox" class="checkboxes" id="tag7">
-            <label for="tag7">Condiment</label><br>
-          </div>
-          <div>
-            <input data-tag-name="dinner" type="checkbox" class="checkboxes" id="tag8">
-            <label for="tag8">Dinner</label><br>
-          </div>
-          <div>
-            <input data-tag-name="dip" type="checkbox" class="checkboxes" id="tag9">
-            <label for="tag9">Dip</label><br>
-          </div>
-          <div>
-            <input data-tag-name="hor d'oeuvre" type="checkbox" class="checkboxes" id="tag10">
-            <label for="tag10">Hor D'Oeuvre</label><br>
-          </div>
-          <div>
-            <input data-tag-name="lunch" type="checkbox" class="checkboxes" id="tag11">
-            <label for="tag11">Lunch</label><br>
-          </div>
-          <div>
-            <input data-tag-name="main course" type="checkbox" class="checkboxes" id="tag12">
-            <label for="tag12">Main Course</label><br>
-          </div>
-          <div>
-            <input data-tag-name="main dish" type="checkbox" class="checkboxes" id="tag13">
-            <label for="tag13">Main Dish</label><br>
-          </div>
-          <div>
-            <input data-tag-name="morning meal" type="checkbox" class="checkboxes" id="tag14">
-            <label for="tag14">Morning Meal</label><br>
-          </div>
-          <div>
-            <input data-tag-name="salad" type="checkbox" class="checkboxes" id="tag15">
-            <label for="tag15">Salad</label><br>
-          </div>
-          <div>
-            <input data-tag-name="sauce" type="checkbox" class="checkboxes" id="tag16">
-            <label for="tag16">Sauce</label><br>
-          </div>
-          <div>
-            <input data-tag-name="side dish" type="checkbox" class="checkboxes" id="tag17">
-            <label for="tag17">Side Dish</label><br>
-          </div>
-          <div>
-            <input data-tag-name="snack" type="checkbox" class="checkboxes" id="tag18">
-            <label for="tag18">Snack</label><br>
-          </div>
-          <div>
-            <input data-tag-name="spread" type="checkbox" class="checkboxes" id="tag19">
-            <label for="tag19">Spread</label><br>
-          </div>
-          <div>
-            <input data-tag-name="starter" type="checkbox" class="checkboxes" id="tag20">
-            <label for="tag20">Starter</label><br>
-          </div>
-        </section>
-      </aside>
-      <article class="hidden all-recipes-box">
-        <section class="recipes-list" id="recipesList">
-        </section>
-      </article>
-      <article class="recipe-page hidden">
-        <section class="recipe-ingredients-box">
-          <div class="large-recipe-image">
-
-          </div>
-          <div class="recipe-ingredients">
+      <section class="hidden homepage-container">
+        <article class="homepage">
+          <section>
+            <h2>Try This Today</h2>
+          </section>
+        </article>
+        <aside class="homepage">
             <div>
-              <h3>Ingredients</h3>
+              <h2>Recommended Meal Ideas</h2>
             </div>
-            <div class="ingredients">
-
-            </div>
-            <div class="ingredients-cost">
-              <h3>Total Cost of Ingredients:<span class="actual-cost">$</span></h3>
-            </div>
-          </div>
-        </section>
-        <section class="directions-box">
           <div>
+            <section>
+              <div>
+              </div>
+              <div>
+              </div>
+            </section>
+            <section>
+              <div>
+  
+              </div>
+              <div>
+  
+              </div>
+            </section>
+            <section>
+              <div>
+  
+              </div>
+              <div>
+  
+              </div>
+            </section>
+            <section>
+              <div>
+  
+              </div>
+              <div>
+  
+              </div>
+            </section>
+          </div>
+        </aside>
+      </section>
+      <section class="all-recipes-page-container">
+        <aside class="tag-filter">
+          <div class="filter-title">
+            <h3 class="filter-tag-text">Filter by Tag</h3>
+          </div>
+          <section class="tags">
             <div>
-              <h3>Directions</h3>
+              <input data-tag-name="favorites" type="checkbox" class="checkboxes" id="tag1">
+              <label for="tag1">Favorites</label><br>
             </div>
-            <div class="directions-list">
+            <div>
+              <input data-tag-name="antipasti" type="checkbox" class="checkboxes" id="tag2">
+              <label for="tag2">Antipasti</label><br>
+            </div>
+            <div>
+              <input data-tag-name="antipasto" type="checkbox" class="checkboxes" id="tag3">
+              <label for="tag3">Antipasto</label><br>
+            </div>
+            <div>
+              <input data-tag-name="appetizer" type="checkbox" class="checkboxes" id="tag4">
+              <label for="tag4">Appetizer</label><br>
+            </div>
+            <div>
+              <input data-tag-name="breakfast" type="checkbox" class="checkboxes" id="tag5">
+              <label for="tag5">Breakfast</label><br>
+            </div>
+            <div>
+              <input data-tag-name="brunch" type="checkbox" class="checkboxes" id="tag6">
+              <label for="tag6">Brunch</label><br>
+            </div>
+            <div>
+              <input data-tag-name="condiment" type="checkbox" class="checkboxes" id="tag7">
+              <label for="tag7">Condiment</label><br>
+            </div>
+            <div>
+              <input data-tag-name="dinner" type="checkbox" class="checkboxes" id="tag8">
+              <label for="tag8">Dinner</label><br>
+            </div>
+            <div>
+              <input data-tag-name="dip" type="checkbox" class="checkboxes" id="tag9">
+              <label for="tag9">Dip</label><br>
+            </div>
+            <div>
+              <input data-tag-name="hor d'oeuvre" type="checkbox" class="checkboxes" id="tag10">
+              <label for="tag10">Hor D'Oeuvre</label><br>
+            </div>
+            <div>
+              <input data-tag-name="lunch" type="checkbox" class="checkboxes" id="tag11">
+              <label for="tag11">Lunch</label><br>
+            </div>
+            <div>
+              <input data-tag-name="main course" type="checkbox" class="checkboxes" id="tag12">
+              <label for="tag12">Main Course</label><br>
+            </div>
+            <div>
+              <input data-tag-name="main dish" type="checkbox" class="checkboxes" id="tag13">
+              <label for="tag13">Main Dish</label><br>
+            </div>
+            <div>
+              <input data-tag-name="morning meal" type="checkbox" class="checkboxes" id="tag14">
+              <label for="tag14">Morning Meal</label><br>
+            </div>
+            <div>
+              <input data-tag-name="salad" type="checkbox" class="checkboxes" id="tag15">
+              <label for="tag15">Salad</label><br>
+            </div>
+            <div>
+              <input data-tag-name="sauce" type="checkbox" class="checkboxes" id="tag16">
+              <label for="tag16">Sauce</label><br>
+            </div>
+            <div>
+              <input data-tag-name="side dish" type="checkbox" class="checkboxes" id="tag17">
+              <label for="tag17">Side Dish</label><br>
+            </div>
+            <div>
+              <input data-tag-name="snack" type="checkbox" class="checkboxes" id="tag18">
+              <label for="tag18">Snack</label><br>
+            </div>
+            <div>
+              <input data-tag-name="spread" type="checkbox" class="checkboxes" id="tag19">
+              <label for="tag19">Spread</label><br>
+            </div>
+            <div>
+              <input data-tag-name="starter" type="checkbox" class="checkboxes" id="tag20">
+              <label for="tag20">Starter</label><br>
+            </div>
+          </section>
+        </aside>
+        <article class="all-recipes-container">
+          <section class="recipes-list" id="recipesList">
+          </section>
+        </article>
+      </section>
+      <section>
+        <article class="hidden recipe-details-page">
+          <section class="recipe-ingredients-container">
+            <div class="recipe-image-large">
 
             </div>
-          </div>
-        </section>
-      </article>
+            <div class="recipe-ingredients">
+              <div>
+                <h3>Ingredients</h3>
+              </div>
+              <div class="ingredients-list">
+
+              </div>
+              <div class="ingredients-cost">
+                <h3>Total Cost of Ingredients:<span class="actual-cost">$</span></h3>
+              </div>
+            </div>
+          </section>
+          <section class="directions-box">
+            <div>
+              <div>
+                <h3>Directions</h3>
+              </div>
+              <div class="directions-list">
+
+              </div>
+            </div>
+          </section>
+        </article>
+      </section> 
     </main>
   </body>
 
