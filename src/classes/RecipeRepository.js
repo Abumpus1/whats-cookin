@@ -5,7 +5,7 @@ class RecipeRepository {
     this.recipes = recipes.map(recipe => new Recipe(recipe));
     this.ingredients = ingredients.map(ingredient => new Ingredient(ingredient));
     this.filteredRecipes = this.recipes;
-    this.checkedTags = {};
+    this.checkedTags = [];
   }
 
   filterByName(nameInput) {
@@ -22,17 +22,20 @@ class RecipeRepository {
   }
 
   filterByTags() {
-    Object.keys(this.checkedTags).forEach(tag => {
+    this.checkedTags.forEach(tag => {
       this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag));
     });
-    this.filteredRecipes;
   }
 
   checkTag(tag, nameInput){
-    if(this.checkedTags[tag]){
-      delete this.checkedTags[tag];
+    if(!this.checkedTags.includes(tag)){
+      this.checkedTags.push(tag);
     } else {
-      this.checkedTags[tag] = tag;
+      this.checkedTags.forEach((checkedTag, i) => {
+        if(checkedTag === tag){
+          this.checkedTags.splice(i, 1)
+        }
+      });
     }
     this.filterByName(nameInput);
   }
