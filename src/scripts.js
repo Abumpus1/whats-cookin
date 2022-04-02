@@ -18,6 +18,7 @@ const recipeIngredients = document.querySelector(".ingredients");
 const recipeDirections = document.querySelector(".directions-list");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
+const searchInput = document.querySelector("#query");
 
 //FUNCTIONS//
 const hide = (element => {
@@ -69,7 +70,11 @@ const displaySelectedRecipe = (recipe) => {
 }
 
 const clickTag = (tagName) => {
-  activeRecipeRepo.checkTag(tagName);
+  activeRecipeRepo.checkTag(tagName, searchInput.value);
+  displayAllRecipes();
+}
+const searchRecipes = () => {
+  activeRecipeRepo.filterByName(searchInput.value);
   displayAllRecipes();
 }
 
@@ -78,9 +83,13 @@ const clickTag = (tagName) => {
 window.addEventListener('load', displayAllRecipes)
 recipesList.addEventListener('click', (event) => {
   displayRecipePage(event);
-})
+});
 tagCheckBoxes.addEventListener('click', (event) => {
   if (event.target.dataset.tagName) {
     clickTag(event.target.dataset.tagName);
   }
-})
+});
+searchInput.addEventListener('input', (event) => {
+  event.preventDefault();
+  searchRecipes();
+});

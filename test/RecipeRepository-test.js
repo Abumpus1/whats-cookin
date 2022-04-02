@@ -37,10 +37,10 @@ describe('Recipe Repository', () => {
   });
 
   it('Should have a method that sorts based on tag', ()=> {
-    let sortedRecipes = recipeRepo.checkTag("main dish");
+    recipeRepo.checkTag("main dish");
 
-    expect(sortedRecipes).to.have.a.lengthOf(1);
-    expect(sortedRecipes[0]).to.deep.equal(sampleRecipes[1]);
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[1]);
   });
 
   it('Should have a method that can sort based on multiple tags', () => {
@@ -79,9 +79,9 @@ describe('Recipe Repository', () => {
   });
 
   it('Should have a method that sorts based on name', () => {
-    let sortedRecipes = recipeRepo.filterByName("Wing Sauce");
+    recipeRepo.filterByName("Wing Sauce");
 
-    expect(sortedRecipes).to.have.a.lengthOf(1);
-    expect(sortedRecipes[0]).to.deep.equal(sampleRecipes[2]);
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
   });
 });

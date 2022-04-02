@@ -9,7 +9,12 @@ class RecipeRepository {
   }
 
   filterByName(nameInput) {
-    return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
+    if (!nameInput) {
+      nameInput = "";
+    }
+    this.resetFilteredRecipes();
+    this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
+    this.filterByTags();
   }
 
   resetFilteredRecipes(){
@@ -17,20 +22,19 @@ class RecipeRepository {
   }
 
   filterByTags() {
-    this.resetFilteredRecipes();
     Object.keys(this.checkedTags).forEach(tag => {
       this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag));
     });
-    return this.filteredRecipes;
+    this.filteredRecipes;
   }
 
-  checkTag(tag){
+  checkTag(tag, nameInput){
     if(this.checkedTags[tag]){
-      delete this.checkedTags[tag]
+      delete this.checkedTags[tag];
     } else {
       this.checkedTags[tag] = tag;
     }
-    return this.filterByTags();
+    this.filterByName(nameInput);
   }
 }
 
