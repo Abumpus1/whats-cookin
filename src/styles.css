@@ -1,3 +1,53 @@
+* {
+  border: solid rgb(40, 40, 44) 1px;
+}
+
+.all-recipes-box {
+  width: 86%;
+}
+
 body {
-  background-color: blueviolet;
+  background-color: rgb(215, 214, 239);
+  margin: 0px;
+}
+
+.hidden {
+  display: none;
+}
+
+main {
+  display: flex;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 15px; */
+  padding: left 33px;
+}
+/*
+.nav {
+  margin: left 13px;
+  margin: right 13px;
+} */
+.recipe {
+  width: 200px;
+  height: 300px;
+}
+
+.recipes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.recipe-image {
+  height: 200px;
+  width: 200px;
+}
+
+.tag-filter {
+  margin-left: 20px;
+  margin-right: 50px;
+  width: 14%;
 }

@@ -1,14 +1,40 @@
+import Recipe from '../classes/Recipe';
+import Ingredient from '../classes/Ingredient';
 class RecipeRepository {
-  constructor(recipes) {
-    this.recipes = recipes;
+  constructor(recipes, ingredients) {
+    this.recipes = recipes.map(recipe => new Recipe(recipe));
+    this.ingredients = ingredients.map(ingredient => new Ingredient(ingredient));
+    this.filteredRecipes = this.recipes;
+    this.checkedTags = {};
   }
 
-  sortByTag(tag) {
-   return this.recipes.filter(recipe => recipe.tags.includes(tag));
+  filterByName(nameInput) {
+    if (!nameInput) {
+      nameInput = "";
+    }
+    this.resetFilteredRecipes();
+    this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
+    this.filterByTags();
   }
 
-  sortByName(nameInput) {
-    return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
+  resetFilteredRecipes(){
+    this.filteredRecipes = this.recipes;
+  }
+
+  filterByTags() {
+    Object.keys(this.checkedTags).forEach(tag => {
+      this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag));
+    });
+    this.filteredRecipes;
+  }
+
+  checkTag(tag, nameInput){
+    if(this.checkedTags[tag]){
+      delete this.checkedTags[tag];
+    } else {
+      this.checkedTags[tag] = tag;
+    }
+    this.filterByName(nameInput);
   }
 }
 

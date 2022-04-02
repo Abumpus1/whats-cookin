@@ -1,9 +1,11 @@
 import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
 import sampleRecipes from '../src/data/sample-recipes';
+import sampleIngredients from '../src/data/sample-ingredients';
 
 describe('Recipe', () => {
   let recipe;
+
   beforeEach(() => {
     recipe = new Recipe(sampleRecipes[0]);
   });
@@ -13,11 +15,11 @@ describe('Recipe', () => {
   });
 
   it('Should have an id', () =>{
-    expect(recipe.id).to.equal(595736)
+    expect(recipe.id).to.equal(595736);
   });
 
   it('Should have an image', () =>{
-    expect(recipe.image).to.equal("https://spoonacular.com/recipeImages/595736-556x370.jpg")
+    expect(recipe.image).to.equal("https://spoonacular.com/recipeImages/595736-556x370.jpg");
   });
 
   it('Should have ingredients', () => {
@@ -41,13 +43,13 @@ describe('Recipe', () => {
   });
 
   it('Should have method that determines ingredient name', ()=> {
-    let ingNames = recipe.getIngredientNames();
-    expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"])
+    let ingNames = recipe.getIngredientNames(sampleIngredients);
+    expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"]);
   });
 
   it('Should have method to get cost of ingredients', ()=> {
-    let ingCost = recipe.getRecipeCost();
-    expect(ingCost).to.equal(504);
+    let ingCost = recipe.getRecipeCost(sampleIngredients);
+    expect(ingCost).to.equal(5.04);
   });
 
   it('Should have method to return directions', ()=> {
