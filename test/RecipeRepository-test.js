@@ -90,4 +90,18 @@ describe('Recipe Repository', () => {
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
     expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
   });
+
+  it('Should have a method that adds favorites tag', () => {
+    recipeRepo.toggleFavoriteTag("595736");
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([595736]);
+    expect(recipeRepo.recipes[0].tags).to.include('favorite');
+  });
+
+  it('Should have a method that removes favorites tag', () => {
+    recipeRepo.toggleFavoriteTag("595736");
+    recipeRepo.toggleFavoriteTag("595736");
+
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([]);
+    expect(recipeRepo.recipes[0].tags).to.not.include('favorite');
+  });
 });
