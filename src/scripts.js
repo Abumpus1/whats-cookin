@@ -41,22 +41,23 @@ const displayAllRecipes = () => {
       <div>
         <h3>${recipe.name}</h3>
       </div>
-      <div class="favorite-button">`
-      if(!checkFavoritesList(recipe.id)){
-        recipesList.innerHTML += `
-          <p id="${recipe.id}">🤍</p>
-          <p class="hidden" id="${recipe.id}">♥️</p>
-        </div>
-      </section>`
-      } else {
-        recipesList.innerHTML += `
-          <p class="hidden" id="${recipe.id}">🤍</p>
+      <div class="favorite-button">
+
+
           <p id="${recipe.id}">♥️</p>
         </div>
       </section>`
-    }
+    // }
   });
 }
+
+// if(!checkFavoritesList(recipe.id)){
+//   recipesList.innerHTML += `
+//     <p id="${recipe.id}">🤍</p>
+//   </div>
+// </section>`
+// } else {
+  // recipesList.innerHTML += `
 
 const checkFavoritesList = (recipeId) => {
  // let isFavorite;
@@ -68,7 +69,7 @@ const checkFavoritesList = (recipeId) => {
 }
 
 const clickFavoriteButton = (event) => {
-  activeRecipeRepo.toggleFavoriteTag(event.target.id);
+  activeRecipeRepo.toggleFavoriteTag(event.target.id, searchInput.value);
   console.log(activeRecipeRepo.currentUser.favoriteRecipes);
   displayAllRecipes();
   //if recipeid matches

@@ -43,22 +43,26 @@ class RecipeRepository {
     this.filterByName(nameInput);
   }
 
-  toggleFavoriteTag(recipe){
-  recipe = parseInt(recipe);
-  this.currentUser.toggleFavoriteRecipe(recipe);
-  this.currentUser.favoriteRecipes.forEach(favRecipeId => {
+  toggleFavoriteTag(recipe, nameInput){
+    recipe = parseInt(recipe);
+    this.currentUser.toggleFavoriteRecipe(recipe);
+    this.currentUser.favoriteRecipes.forEach(favRecipeId => {
     this.recipes.forEach(repoRecipe => {
       if(repoRecipe.id === favRecipeId && !repoRecipe.tags.includes('favorite')){
         repoRecipe.tags.push('favorite');
-      } else if(repoRecipe.id === favRecipeId){
+        console.log("repoRecipe tags: ", repoRecipe.tags);
+      } else {
+          console.log("passes line 54");
           repoRecipe.tags.forEach((tag, i) => {
-            if(tag === 'favorite'){
+            if(tag === 'favorite' && repoRecipe.id === recipe){
               repoRecipe.tags.splice(i, 1);
+              console.log("aftersplice tags: ", repoRecipe.tags);
             }
           });
         }
       });
     });
+    this.filterByName(nameInput);
   }
 
 }
