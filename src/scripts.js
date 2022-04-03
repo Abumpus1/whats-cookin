@@ -16,6 +16,7 @@ const recipePage = document.querySelector(".recipe-page-container");
 const recipeImage = document.querySelector(".recipe-image-large");
 const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
+const addToCookCheckBox = document.querySelector(".save-recipe");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
@@ -83,6 +84,8 @@ const displayRecipePage = (event) => {
 }
 
 const displaySelectedRecipe = (recipe) => {
+  addToCookCheckBox.id = `${recipe.id}`
+
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
   recipeIngredients.innerHTML = "";
 
@@ -106,6 +109,10 @@ const searchRecipes = () => {
   displayAllRecipes();
 }
 
+const addToCookList = () => {
+  activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+}
+
 //EVENT LISTENERS//
 window.addEventListener('load', displayAllRecipes);
 
@@ -122,6 +129,8 @@ tagCheckBoxes.addEventListener('click', (event) => {
     clickTag(event.target.dataset.tagName);
   }
 });
+
+addToCookCheckBox.addEventListener('click', addToCookList);
 
 searchInput.addEventListener('input', (event) => {
   event.preventDefault();
