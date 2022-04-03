@@ -22,6 +22,12 @@ class User {
   decideToCook(recipeId) {
     if(!this.recipesToCook.includes(recipeId)){
       this.recipesToCook.push(recipeId)
+    } else {
+      this.recipesToCook.forEach((recipe, i) => {
+        if (recipe === recipeId) {
+          this.recipesToCook.splice(i, 1)
+        }
+      })
     }
   }
 }

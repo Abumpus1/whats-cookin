@@ -3,19 +3,21 @@ import apiCalls from './apiCalls';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import RecipeRepository from './classes/recipeRepository';
+import usersData from './data/users'
 import recipeData from './data/recipes';
 import ingredientsData from './data/ingredients';
 
-const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData);
+const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
 
 //QUERY SELECTORS//
+const navTitle = document.querySelector("h1");
 const recipesList = document.querySelector(".recipes-list");
-const tagFilter = document.querySelector(".tag-filter");
-const allRecipesBox = document.querySelector(".all-recipes-box");
-const recipePage = document.querySelector(".recipe-page");
-const recipeImage = document.querySelector(".large-recipe-image");
-const recipeIngredients = document.querySelector(".ingredients");
+const allRecipesPage = document.querySelector(".all-recipes-page-container");
+const recipePage = document.querySelector(".recipe-page-container");
+const recipeImage = document.querySelector(".recipe-image-large");
+const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
+const addToCookCheckBox = document.querySelector(".save-recipe");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
@@ -26,47 +28,86 @@ const hide = (element => {
 });
 
 const show = (element => {
-  element.classList.remove("hidden")
+  element.classList.remove("hidden");
 });
+
+const goHome = () => {
+  hide(recipePage);
+  show(allRecipesPage);
+  addToCookCheckBox.checked = false;
+}
 
 const displayAllRecipes = () => {
   recipesList.innerHTML = "";
   activeRecipeRepo.filteredRecipes.forEach(recipe => {
+    if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
+      recipesList.innerHTML += `
+      <section class="recipe" id="${recipe.id}">
+        <div>
+          <img src="${recipe.image}" class="recipe-image">
+        </div>
+        <div class="recipe-name-favorite">
+        <div class="favorite-button">
+            <p id="${recipe.id}">❤️</p>
+          </div>
+        <div>
+          <h3>${recipe.name}</h3>
+        </div>
+        </div>
+        </section>`
+    } else {
     recipesList.innerHTML += `
     <section class="recipe" id="${recipe.id}">
       <div>
         <img src="${recipe.image}" class="recipe-image">
       </div>
+      <div class="recipe-name-favorite">
+      <div class="favorite-button">
+          <p id="${recipe.id}">🤍</p>
+        </div>
       <div>
         <h3>${recipe.name}</h3>
       </div>
-    </section>
-    `
-  })
+        </div>
+      </section>`
+    }
+  });
+}
+
+const clickFavoriteButton = (event) => {
+  activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
+  activeRecipeRepo.filterByName(searchInput.value);
+  displayAllRecipes();
 }
 
 const displayRecipePage = (event) => {
   activeRecipeRepo.recipes.forEach(recipe => {
     if(event.target.closest(".recipe").id === `${recipe.id}`){
-      hide(tagFilter);
-      hide(allRecipesBox);
+      hide(allRecipesPage);
       show(recipePage);
       displaySelectedRecipe(recipe);
+      if (activeRecipeRepo.currentUser.recipesToCook.includes(addToCookCheckBox.id)) {
+        addToCookCheckBox.checked = true;
+      }
     }
   });
 }
 
 const displaySelectedRecipe = (recipe) => {
-  //innerHTML all up in here
+  addToCookCheckBox.id = `${recipe.id}`
+
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
   recipeIngredients.innerHTML = "";
+
   recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
-    recipeIngredients.innerHTML += `<p>${ingredient}<p>`
-  })
+    recipeIngredients.innerHTML += `<p>${ingredient}<p>`;
+  });
+
   recipe.getRecipeDirections().forEach(direction => {
-    recipeDirections.innerHTML += `<p>${direction}<p>`
-  })
-  recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`
+    recipeDirections.innerHTML += `<p>${direction}<p>`;
+  });
+
+  recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
 }
 
 const clickTag = (tagName) => {
@@ -78,17 +119,31 @@ const searchRecipes = () => {
   displayAllRecipes();
 }
 
+const addToCookList = () => {
+  activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+}
 
 //EVENT LISTENERS//
-window.addEventListener('load', displayAllRecipes)
+window.addEventListener('load', displayAllRecipes);
+
+navTitle.addEventListener('click', goHome);
+
 recipesList.addEventListener('click', (event) => {
-  displayRecipePage(event);
+  if(event.target.nodeName === 'P'){
+    clickFavoriteButton(event);
+  } else {
+    displayRecipePage(event);
+  }
 });
+
 tagCheckBoxes.addEventListener('click', (event) => {
   if (event.target.dataset.tagName) {
     clickTag(event.target.dataset.tagName);
   }
 });
+
+addToCookCheckBox.addEventListener('click', addToCookList);
+
 searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();
