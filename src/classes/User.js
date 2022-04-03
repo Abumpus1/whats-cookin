@@ -29,7 +29,6 @@ class User {
         }
       })
     }
-    console.log("recipes to cook: ", this.recipesToCook);
   }
 }
 

@@ -10,6 +10,7 @@ import ingredientsData from './data/ingredients';
 const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
 
 //QUERY SELECTORS//
+const navTitle = document.querySelector("h1");
 const recipesList = document.querySelector(".recipes-list");
 const allRecipesPage = document.querySelector(".all-recipes-page-container");
 const recipePage = document.querySelector(".recipe-page-container");
@@ -29,6 +30,12 @@ const hide = (element => {
 const show = (element => {
   element.classList.remove("hidden");
 });
+
+const goHome = () => {
+  hide(recipePage);
+  show(allRecipesPage);
+  addToCookCheckBox.checked = false;
+}
 
 const displayAllRecipes = () => {
   recipesList.innerHTML = "";
@@ -79,6 +86,9 @@ const displayRecipePage = (event) => {
       hide(allRecipesPage);
       show(recipePage);
       displaySelectedRecipe(recipe);
+      if (activeRecipeRepo.currentUser.recipesToCook.includes(addToCookCheckBox.id)) {
+        addToCookCheckBox.checked = true;
+      }
     }
   });
 }
@@ -115,6 +125,8 @@ const addToCookList = () => {
 
 //EVENT LISTENERS//
 window.addEventListener('load', displayAllRecipes);
+
+navTitle.addEventListener('click', goHome);
 
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
