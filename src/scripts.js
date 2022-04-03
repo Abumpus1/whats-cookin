@@ -38,12 +38,14 @@ const displayAllRecipes = () => {
         <div>
           <img src="${recipe.image}" class="recipe-image">
         </div>
-        <div>
-          <h3>${recipe.name}</h3>
-        </div>
+        <div class="recipe-name-favorite">
         <div class="favorite-button">
             <p id="${recipe.id}">❤️</p>
           </div>
+        <div>
+          <h3>${recipe.name}</h3>
+        </div>
+        </div>
         </section>`
     } else {
     recipesList.innerHTML += `
@@ -51,11 +53,13 @@ const displayAllRecipes = () => {
       <div>
         <img src="${recipe.image}" class="recipe-image">
       </div>
+      <div class="recipe-name-favorite">
+      <div class="favorite-button">
+          <p id="${recipe.id}">🤍</p>
+        </div>
       <div>
         <h3>${recipe.name}</h3>
       </div>
-      <div class="favorite-button">
-          <p id="${recipe.id}">🤍</p>
         </div>
       </section>`
     }
