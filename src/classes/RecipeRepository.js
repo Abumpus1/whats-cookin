@@ -6,8 +6,7 @@ class RecipeRepository {
   constructor(recipes, ingredients, user) {
     this.recipes = recipes.map(recipe => new Recipe(recipe));
     this.ingredients = ingredients.map(ingredient => new Ingredient(ingredient));
-    this.currentRecipes = this.recipes;
-    this.filteredRecipes = [];
+    this.filteredRecipes = this.recipes;
     this.checkedTags = [];
     this.currentUser = new User(user);
   }
@@ -26,7 +25,6 @@ class RecipeRepository {
   }
 
   resetFilteredRecipes(){
-    this.currentRecipes = this.recipes;
     this.filteredRecipes = this.recipes;
   }
 
@@ -43,7 +41,6 @@ class RecipeRepository {
     this.checkedTags.forEach(tag => {
       this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag) || (tag === "favorite" && this.currentUser.favoriteRecipes.includes(recipe.id)));
     });
-    this.currentRecipes = this.filteredRecipes;
   }
 
   toggleFavorite(recipeId) {

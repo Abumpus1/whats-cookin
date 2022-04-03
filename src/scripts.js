@@ -32,7 +32,7 @@ const show = (element => {
 
 const displayAllRecipes = () => {
   recipesList.innerHTML = "";
-  activeRecipeRepo.currentRecipes.forEach(recipe => {
+  activeRecipeRepo.filteredRecipes.forEach(recipe => {
     if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
@@ -65,7 +65,6 @@ const displayAllRecipes = () => {
 
 const clickFavoriteButton = (event) => {
   activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
-  console.log(activeRecipeRepo.currentUser.favoriteRecipes);
   activeRecipeRepo.filterByName(searchInput.value);
   displayAllRecipes();
 }
@@ -111,7 +110,7 @@ recipesList.addEventListener('click', (event) => {
   console.log(event.target.nodeName);
   if(event.target.nodeName === 'P'){
     clickFavoriteButton(event);
-  } else if (event.target.id){
+  } else {
     displayRecipePage(event);
   }
 });
