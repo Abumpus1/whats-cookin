@@ -8,7 +8,6 @@ import recipeData from './data/recipes';
 import ingredientsData from './data/ingredients';
 
 const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
-console.log(activeRecipeRepo);
 
 //QUERY SELECTORS//
 const recipesList = document.querySelector(".recipes-list");
@@ -107,7 +106,6 @@ const searchRecipes = () => {
 window.addEventListener('load', displayAllRecipes);
 
 recipesList.addEventListener('click', (event) => {
-  console.log(event.target.nodeName);
   if(event.target.nodeName === 'P'){
     clickFavoriteButton(event);
   } else {
