@@ -27,12 +27,26 @@ const hide = (element => {
 });
 
 const show = (element => {
-  element.classList.remove("hidden")
+  element.classList.remove("hidden");
 });
 
 const displayAllRecipes = () => {
   recipesList.innerHTML = "";
-  activeRecipeRepo.filteredRecipes.forEach(recipe => {
+  activeRecipeRepo.currentRecipes.forEach(recipe => {
+    if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
+      recipesList.innerHTML += `
+      <section class="recipe" id="${recipe.id}">
+        <div>
+          <img src="${recipe.image}" class="recipe-image">
+        </div>
+        <div>
+          <h3>${recipe.name}</h3>
+        </div>
+        <div class="favorite-button">
+            <p id="${recipe.id}">❤️</p>
+          </div>
+        </section>`
+    } else {
     recipesList.innerHTML += `
     <section class="recipe" id="${recipe.id}">
       <div>
@@ -42,51 +56,21 @@ const displayAllRecipes = () => {
         <h3>${recipe.name}</h3>
       </div>
       <div class="favorite-button">
-
-
-          <p id="${recipe.id}">♥️</p>
+          <p id="${recipe.id}">🤍</p>
         </div>
       </section>`
-    // }
+    }
   });
 }
 
-// if(!checkFavoritesList(recipe.id)){
-//   recipesList.innerHTML += `
-//     <p id="${recipe.id}">🤍</p>
-//   </div>
-// </section>`
-// } else {
-  // recipesList.innerHTML += `
-
-const checkFavoritesList = (recipeId) => {
- // let isFavorite;
- return activeRecipeRepo.currentUser.favoriteRecipes.includes(recipeId)
-  // forEach(favRecipe => {
-  //     isFavorite = recipeId === favRecipe
-  // });
-    // return isFavorite
-}
-
 const clickFavoriteButton = (event) => {
-  activeRecipeRepo.toggleFavoriteTag(event.target.id, searchInput.value);
+  activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
   console.log(activeRecipeRepo.currentUser.favoriteRecipes);
+  activeRecipeRepo.filterByName(searchInput.value);
   displayAllRecipes();
-  //if recipeid matches
-  //check if tags already include 'favorite'
-  //if not - hide white heart, show red
-  //if fav is a tag, hide red heart, show white
-  //foreach users.favoriteRecipes
-  //if recipeID === favoriteRecipes
-  //
-  //loop through activeRecipeRepo.recipes
-  //loop through activeRecipeRepo.users.favoriteRecipes
-  //foreach fav recipe === recipe, on that element create element and attach to fav button div
-  //
 }
 
 const displayRecipePage = (event) => {
-  // console.log(event.target.closest(".recipe").id);
   activeRecipeRepo.recipes.forEach(recipe => {
     if(event.target.closest(".recipe").id === `${recipe.id}`){
       hide(allRecipesPage);
@@ -101,14 +85,14 @@ const displaySelectedRecipe = (recipe) => {
   recipeIngredients.innerHTML = "";
 
   recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
-    recipeIngredients.innerHTML += `<p>${ingredient}<p>`
+    recipeIngredients.innerHTML += `<p>${ingredient}<p>`;
   });
 
   recipe.getRecipeDirections().forEach(direction => {
-    recipeDirections.innerHTML += `<p>${direction}<p>`
+    recipeDirections.innerHTML += `<p>${direction}<p>`;
   });
 
-  recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`
+  recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
 }
 
 const clickTag = (tagName) => {
@@ -120,10 +104,9 @@ const searchRecipes = () => {
   displayAllRecipes();
 }
 
-
-
 //EVENT LISTENERS//
-window.addEventListener('load', displayAllRecipes)
+window.addEventListener('load', displayAllRecipes);
+
 recipesList.addEventListener('click', (event) => {
   console.log(event.target.nodeName);
   if(event.target.nodeName === 'P'){
