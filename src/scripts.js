@@ -1,13 +1,11 @@
 import './styles.css';
-import apiCalls from './apiCalls';
+// import apiCalls from './apiCalls';
+import { fetchedUserData, fetchedIngredientsData, fetchedRecipesData } from './apiCalls';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import RecipeRepository from './classes/recipeRepository';
-import usersData from './data/users'
-import recipeData from './data/recipes';
-import ingredientsData from './data/ingredients';
 
-const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
+let activeRecipeRepo;
 
 //QUERY SELECTORS//
 const navTitle = document.querySelector("h1");
@@ -23,6 +21,20 @@ const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 
 //FUNCTIONS//
+
+const fetchAllData = () => {
+  let response = []
+  Promise.all([fetchedRecipesData(), fetchedIngredientsData(), fetchedUserData()])
+    .then(data => response.push(data))
+  assignData(response)
+}
+
+const assignData = (response) => {
+  setTimeout(() => {
+    activeRecipeRepo = new RecipeRepository(response[0][0].recipeData, response[0][1].ingredientsData, response[0][2].usersData[Math.floor(Math.random() * response[0][2].usersData.length)]); 
+  },100)
+}
+
 const hide = (element => {
   element.classList.add("hidden");
 });
@@ -55,7 +67,6 @@ const displayAllRecipes = () => {
           </div>
         </div>
       </section>`
-        
     } else {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
@@ -125,7 +136,12 @@ const addToCookList = () => {
 }
 
 //EVENT LISTENERS//
-window.addEventListener('load', displayAllRecipes);
+window.addEventListener('load', () =>{
+  fetchAllData()
+  setTimeout(() => {
+  displayAllRecipes()
+  },160)
+});
 
 navTitle.addEventListener('click', goHome);
 
