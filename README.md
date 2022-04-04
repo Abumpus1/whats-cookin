@@ -1,16 +1,59 @@
-# What's Cookin'? Starter Kit
+# What's Cookin'!
 
-The details of this project are outlined in the <a href="https://frontend.turing.edu/projects/What%27sCookin-PartOne.html" target="\__blank">project spec</a>.
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [How to Set Up](#how-to-set-up)
+- [Deployed Link](#deployed-link)
+- [Learning Goals](#learning-goals)
+- [Future Features](#future-features)
+- [Contributors](#contributors)
 
-## Set Up
+## Project Overview
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button.
-2. All group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
-4. Run npm start in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page). `Control + C` is the command to stop running the local server. Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.
-5. Make sure both members of your team are collaborators on the forked repo.
-6. Do not run `npm audit fix --force`. This will update to the latest version of packages. We need to be using `webpack-dev-server@3.11.2` which is not the latest version. If you start to run into Webpack errors, first check that all group members are using the correct version.
+### Welcome to **What's Cookin'**!
+What's Cookin' is an application that presents the user with a variety of recipes. The user can add a recipe to their favorites by clicking the heart icon
+found within the title "sticky note" attached to each recipe. The user can then chose to filter by their favorites, or by any of the other tags found on the left sidebar, by
+clicking their desired tag name.
 
-## Testing
+The user can also search by name by typing their inquiry in the search bar at the top right of the page. When the user clicks on a chosen recipe, they will see the necessary ingredients, total cost, and the instructions for cooking. They can also choose to add the selected recipe to their "What to Cook Next" list.
 
-Mocha and chai are already set up, with a boilerplate test for you.
+### Check Out the Page In Action!
+![Screen Recording 2022-04-04 at 5 51 53 PM](https://user-images.githubusercontent.com/93603551/161645897-7d389f5c-df98-4966-8e1a-a5482d122ffc.gif)
+
+### Project Wireframes Using Excalidraw
+
+<img width="500" alt="Screen Shot of all recipes page wireframe" src="https://user-images.githubusercontent.com/93603551/161634405-0ef6e479-cd67-4816-9c02-7d9fd56f86bd.jpeg"><br>
+
+<br>
+<img width="500" alt="Screen Shot of recipe details page wireframe" src="https://user-images.githubusercontent.com/93603551/161626977-5ed4625a-c124-4c51-b300-8c46cec55ae9.jpeg">
+
+### Technologies Used
+
+- JavaScript
+- Webpack
+- Mocha and Chai
+
+### How to Set Up
+
+-  Clone this [repo]()
+- `cd` into the `whats-cookin` directory
+- Run `npm install`
+- Run `npm start`
+- Open a window in your web browser of choice, and visit localhost:8080 to view the app!
+
+### Learning Goals and Outcomes
+Our main goals for this project were to gain familiarity with fetch API, Webpack and the GitHub project board. We pair-programmed most of the project, with the goal of everyone learning and understanding the code synchronously. With 3 different time zones between us, this proved a difficult task. Using the GitHub project board helped us to keep track of each component of the project and achieve our MVP by the project's deadline.
+
+
+### Future Features
+- Add error messages/sad paths for filtered recipe results that return nothing (for example: "Sorry, no recipes found! Please try another search!").
+- Add main landing page that showcases random recipes.
+- Add the specific amount of ingredients needed in recipe details page.
+- Build out drop-down choices for menu button in header navigation bar.
+- Add user's pantry to data model, and incorporate into the Want To Cook functionality.
+
+### Contributors
+- [Alex Bumpus](https://github.com/Abumpus1)
+- [Nickolai Orlov](https://github.com/orlov-n)
+- [Emma Brooke-Davidson](https://github.com/emmacbd)
