@@ -35,31 +35,32 @@ const displayAllRecipes = () => {
     if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
+        <div class="recipe-image-container">
+          <img src="${recipe.image}" class="recipe-image">
+        </div>
+        <div class="rotated-opposite recipe-name-favorite">
+          <div class="favorite-button"> 
+            <p id="${recipe.id}">❤️</p>
+          </div>
+          <div class="recipe-name-label-container">
+            <h3 class="recipe-name-label">${recipe.name}</h3>
+          </div>
+        </div>
+      </section>`
+        
+    } else {
+      recipesList.innerHTML += `
+      <section class="recipe" id="${recipe.id}">
         <div>
           <img src="${recipe.image}" class="recipe-image">
         </div>
-        <div class="recipe-name-favorite">
-        <div class="favorite-button">
-            <p id="${recipe.id}">❤️</p>
+        <div class="rotated recipe-name-favorite">
+          <div class="favorite-button">
+            <p id="${recipe.id}">🤍</p>
           </div>
-        <div>
-          <h3>${recipe.name}</h3>
-        </div>
-        </div>
-        </section>`
-    } else {
-    recipesList.innerHTML += `
-    <section class="recipe" id="${recipe.id}">
-      <div>
-        <img src="${recipe.image}" class="recipe-image">
-      </div>
-      <div class="recipe-name-favorite">
-      <div class="favorite-button">
-          <p id="${recipe.id}">🤍</p>
-        </div>
-      <div>
-        <h3>${recipe.name}</h3>
-      </div>
+          <div class="recipe-name-label-container">
+            <h3 class="recipe-name-label">${recipe.name}</h3>
+          </div>
         </div>
       </section>`
     }

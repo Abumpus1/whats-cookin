@@ -1,7 +1,6 @@
 * {
-  border: solid rgb(40, 40, 44) 1px;
+  /* border: solid rgb(40, 40, 44) 1px; */
   font-family: monaco
-
 }
 
 body {
@@ -12,12 +11,12 @@ body {
   left: 0;
   right: 0;
   position: fixed;
-  text-shadow: 2px 2px 3px #111111;
+  text-shadow: 0px 1px 2px #111111;
+
 }
 .all-recipes-container {
   width: 86%;
 } 
-
 
 .all-recipes-page-container {
   display: flex;
@@ -25,46 +24,55 @@ body {
 }
 
 .directions-box {
+  /* display: flex; */
   width: 38%;
   border-radius: 34px;
   border: solid rgb(183, 183, 249) 6px;
-  height: 87%;
+  height: 773px;
+  box-shadow: 15px 15px 8px gray;
+
 }
 
-.directions-label {
-  margin-top: 10px;
-  margin-left: 40%;
-}
+/* .directions-label { */
+  /* margin-top: 10px; */
+  /* margin-left: 40%; */
+/* } */
 
 .directions-label-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  margin-bottom: 1px;
 }
 
 .directions-list {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
-  max-height: 738px;
+  max-height:608px;
   overflow-y: scroll;
-  /* overflow-wrap: break-word; */
+  margin-left: 44px;
+}
+.directions-list > p{
+ margin-right: 34px;
+ margin-top: 5px;
+ margin-bottom: 5px;
 }
 
 .favorite-button {
   width: 20px;
   position: relative;
-  /* margin: -180px; */
-  /* margin-bottom: 180px;
-  margin-left: 25px; */
   vertical-align: 50px; 
+  margin-top: -11px;
+  margin-left: 82px;
+  margin-right: 0px;
 }
-
 
 .filter-tag-text {
   font-size: 18pt;
 }
-
 
 h1 {
   font-size: 28pt;
@@ -78,33 +86,27 @@ h1 {
   margin: 3px;
 }
 
-
 .ingredients-list {
-  /* margin: 10px; */
   width: 100%;
   height: 344px;
   display: flex;
-  justify-content: center;
-
-
-  align-items: center; 
   flex-direction: column;
   border-radius: 33px;
   max-height: 338px;
   overflow-y: scroll;
+  /* margin: 18px; */
+  /* margin-left: 133px; */
+} 
+.ingredients-list > p {
+  margin: 3px;
+  margin-left: 43px
 } 
 
-
-
 label {
-  font-size: 18pt;
+  font-size: 12pt;
 }
 
 main {
-  /* top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0; */
   height: 100%;
 }
 
@@ -126,12 +128,12 @@ nav {
   border: solid rgb(183, 183, 249) 9px;
   padding: 0px;
   height: 63px;
-  
 }
 
 .recipe {
   width: 300px;
   height: 300px;
+  margin-top: 44px;
 }
 
 .recipe-details-page {
@@ -142,35 +144,46 @@ nav {
   height: 100%;
 }
 
+.recipe-image-container {
+  margin-bottom: 33px;
+}
+
 .recipe-image {
   top: 0;
   left: 0;
   height: 200px;
   width: 290px;
   border-radius: 44px;
-
+  box-shadow: 15px 15px 8px gray;
+  margin-top: 12px;
 }
+
 .recipe-image-large {
   height: 304px;
   width: 70%;
   border-radius: 33px;
   margin-bottom: 22px;
   border: solid rgb(183, 183, 249) 6px;
-
-
+  box-shadow: 15px 15px 8px gray;
 
 }
 
- .recipe-ingredients {
+.recipe-image-large > img {
+  height: 304px;
+  border-radius: 33px;
   width: 100%;
+}
+
+ .recipe-ingredients {
+  width: 70%;
   display: flex;
   align-items: center; 
   flex-direction: column;
   border-radius: 33px;
   border: solid rgb(183, 183, 249) 6px;
   justify-content: center;
-  /* max-height: 338px;
-  overflow-y: scroll; */
+  box-shadow: 15px 15px 8px gray;
+
 } 
 
 .recipe-ingredients-container {
@@ -180,24 +193,50 @@ nav {
   flex-direction: column;
   border-radius: 45px;
   height: 88%;
+  margin-right: -355px;
 }
 
 .recipes-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
-
+  overflow-y: scroll;
+  max-height: 800px;
+  min-height: 355px;
 }
 
 .recipe-name-favorite {
   display: flex;
+  margin-left: 56px;
+  margin-right: 20px;
+  width: 181px;
+  height: 155px;
+  background: pink;
+  margin-top: -55px;
+  margin-bottom: 0px;
+  box-shadow: 2px 2px 3px black;
+  flex-direction: column-reverse;
+}
+
+.recipe-name-label-container {
+  display: flex;
+  /* justify-content: center; */
+  margin: 0px;
+}
+
+.recipe-name-label {
+  margin-top: 0px;
+  margin-left: 11px;
+  font-family: 'Grape Nuts', cursive;
+  font-size: 22px;
+  margin: 0px;
+  margin-top: -107px;
+  margin-left: 13px;
 }
 
 .recipe-page-container {
   height: 100%;
 }
-
 
 .search-bar {
   display: flex;
@@ -210,7 +249,18 @@ nav {
   width: 14%;
 }
 
-
 .hidden {
   display: none;
 }
+
+.rotated {
+  transform: rotate(10deg);
+  background-color: pink;
+}
+
+.rotated-opposite {
+  transform: rotate(0deg);
+  background-color: pink;
+  margin-top: -105px;
+}
+
