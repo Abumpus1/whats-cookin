@@ -1,9 +1,6 @@
 import './styles.css';
 import { fetchedUserData, fetchedIngredientsData, fetchedRecipesData } from './apiCalls';
-import './images/turing-logo.png';
 import RecipeRepository from './classes/recipeRepository';
-
-let activeRecipeRepo;
 
 //QUERY SELECTORS//
 const navTitle = document.querySelector("h1");
@@ -20,6 +17,7 @@ const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 
+let activeRecipeRepo;
 //FUNCTIONS//
 
 const fetchAllData = () => {
