@@ -10,12 +10,14 @@ import ingredientsData from './data/ingredients';
 const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
 
 //QUERY SELECTORS//
+const navTitle = document.querySelector("h1");
 const recipesList = document.querySelector(".recipes-list");
 const allRecipesPage = document.querySelector(".all-recipes-page-container");
 const recipePage = document.querySelector(".recipe-page-container");
 const recipeImage = document.querySelector(".recipe-image-large");
 const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
+const addToCookCheckBox = document.querySelector(".save-recipe");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
@@ -28,6 +30,12 @@ const hide = (element => {
 const show = (element => {
   element.classList.remove("hidden");
 });
+
+const goHome = () => {
+  hide(recipePage);
+  show(allRecipesPage);
+  addToCookCheckBox.checked = false;
+}
 
 const displayAllRecipes = () => {
   recipesList.innerHTML = "";
@@ -79,11 +87,16 @@ const displayRecipePage = (event) => {
       hide(allRecipesPage);
       show(recipePage);
       displaySelectedRecipe(recipe);
+      if (activeRecipeRepo.currentUser.recipesToCook.includes(addToCookCheckBox.id)) {
+        addToCookCheckBox.checked = true;
+      }
     }
   });
 }
 
 const displaySelectedRecipe = (recipe) => {
+  addToCookCheckBox.id = `${recipe.id}`
+
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
   recipeIngredients.innerHTML = "";
 
@@ -107,8 +120,14 @@ const searchRecipes = () => {
   displayAllRecipes();
 }
 
+const addToCookList = () => {
+  activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+}
+
 //EVENT LISTENERS//
 window.addEventListener('load', displayAllRecipes);
+
+navTitle.addEventListener('click', goHome);
 
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
@@ -123,6 +142,8 @@ tagCheckBoxes.addEventListener('click', (event) => {
     clickTag(event.target.dataset.tagName);
   }
 });
+
+addToCookCheckBox.addEventListener('click', addToCookList);
 
 searchInput.addEventListener('input', (event) => {
   event.preventDefault();
