@@ -34,21 +34,21 @@ class RecipeRepository {
     }
     this.resetFilteredRecipes();
     this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()) || recipe.ingredients.reduce((acc,ing) => {
-      acc.push(this.ingredients.find(mainIng => ing.id === mainIng.id).name)
+      acc.push(this.ingredients.find(mainIng => ing.id === mainIng.id).name);
       return acc;
     },[]).some(ing2 => ing2.includes(nameInput.toLowerCase())));
     this.filterByTags();
+  }
+
+  toggleFavorite(recipeId) {
+    recipeId = parseInt(recipeId);
+    this.currentUser.toggleFavoriteRecipe(recipeId);
   }
 
   filterByTags() {
     this.checkedTags.forEach(tag => {
       this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag) || (tag === "favorite" && this.currentUser.favoriteRecipes.includes(recipe.id)));
     });
-  }
-
-  toggleFavorite(recipeId) {
-    recipeId = parseInt(recipeId);
-    this.currentUser.toggleFavoriteRecipe(recipeId);
   }
 
 }

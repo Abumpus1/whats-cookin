@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import sampleRecipes from '../src/data/sample-recipes';
 import sampleIngredients from '../src/data/sample-ingredients';
-import User from '../src/classes/User';
 import sampleUsers from '../src/data/sample-users';
 
 describe('Recipe Repository', () => {
@@ -33,7 +32,7 @@ describe('Recipe Repository', () => {
   });
 
   it('Should have a current user', () => {
-    expect(recipeRepo.currentUser.name).to.equal("Saige O'Kon")
+    expect(recipeRepo.currentUser.name).to.equal("Saige O'Kon");
   });
 
   it('Should have a method to add tags to checked tags array', () => {
@@ -42,7 +41,9 @@ describe('Recipe Repository', () => {
     expect(recipeRepo.checkedTags).to.deep.equal(["main dish"]);
   });
 
-  it('Should have a method that sorts based on tag', ()=> {
+  it('Should have a method that sorts based on tag', () => {
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
+
     recipeRepo.checkTag("main dish");
 
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
@@ -50,6 +51,8 @@ describe('Recipe Repository', () => {
   });
 
   it('Should have a method that can sort based on multiple tags', () => {
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
+    
     recipeRepo.checkTag("main dish");
 
     expect(recipeRepo.checkedTags).to.deep.equal(["main dish"]);
@@ -91,17 +94,38 @@ describe('Recipe Repository', () => {
     expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
   });
 
-  it('Should have a method that adds favorites tag', () => {
-    recipeRepo.toggleFavoriteTag("595736");
-    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([595736]);
-    expect(recipeRepo.recipes[0].tags).to.include('favorite');
+  it('Should have a method that resets filteredRecipes array', () => {
+    recipeRepo.checkTag("main dish");
+
+    expect(recipeRepo.checkedTags).to.deep.equal(["main dish"]);
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[1]);
+
+    recipeRepo.resetFilteredRecipes();
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
+    expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
   });
 
-  it('Should have a method that removes favorites tag', () => {
-    recipeRepo.toggleFavoriteTag("595736");
-    recipeRepo.toggleFavoriteTag("595736");
+  it('Should have a method that adds favorites', () => {
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([]);
+    
+    recipeRepo.toggleFavorite("123456");
+    recipeRepo.toggleFavorite("998765");
+
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([123456, 998765]);
+  });
+
+  it('Should have that method also remove favorites', () => {
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([]);
+    
+    recipeRepo.toggleFavorite("123456");
+
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([123456]);
+  
+    recipeRepo.toggleFavorite("123456");
 
     expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([]);
-    expect(recipeRepo.recipes[0].tags).to.not.include('favorite');
   });
+
 });

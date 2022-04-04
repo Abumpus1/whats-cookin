@@ -27,7 +27,7 @@ class User {
         if (recipe === recipeId) {
           this.recipesToCook.splice(i, 1)
         }
-      })
+      });
     }
   }
 }

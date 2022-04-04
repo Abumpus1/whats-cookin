@@ -14,11 +14,11 @@ describe('Recipe', () => {
     expect(Recipe).to.be.a('function');
   });
 
-  it('Should have an id', () =>{
+  it('Should have an id', () => {
     expect(recipe.id).to.equal(595736);
   });
 
-  it('Should have an image', () =>{
+  it('Should have an image', () => {
     expect(recipe.image).to.equal("https://spoonacular.com/recipeImages/595736-556x370.jpg");
   });
 
@@ -42,17 +42,17 @@ describe('Recipe', () => {
     ]);
   });
 
-  it('Should have method that determines ingredient name', ()=> {
+  it('Should have method that determines ingredient name', () => {
     let ingNames = recipe.getIngredientNames(sampleIngredients);
     expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"]);
   });
 
-  it('Should have method to get cost of ingredients', ()=> {
+  it('Should have method to get cost of ingredients', () => {
     let ingCost = recipe.getRecipeCost(sampleIngredients);
     expect(ingCost).to.equal(5.04);
   });
 
-  it('Should have method to return directions', ()=> {
+  it('Should have method to return directions', () => {
     let recipeDirections = recipe.getRecipeDirections();
     expect(recipeDirections).to.deep.equal(["Step 1: In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.", "Step 2: Add egg and vanilla and mix until combined."]);
   });
