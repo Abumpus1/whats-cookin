@@ -33,7 +33,10 @@ class RecipeRepository {
       nameInput = "";
     }
     this.resetFilteredRecipes();
-    this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()));
+    this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()) || recipe.ingredients.reduce((acc,ing) => {
+      acc.push(this.ingredients.find(mainIng => ing.id === mainIng.id).name)
+      return acc;
+    },[]).some(ing2 => ing2.includes(nameInput.toLowerCase())));
     this.filterByTags();
   }
 

@@ -1,5 +1,6 @@
 import './styles.css';
-import apiCalls from './apiCalls';
+// import apiCalls from './apiCalls';
+import { fetchedUserData, fetchedIngredientsData, fetchedRecipesData } from './apiCalls';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import RecipeRepository from './classes/recipeRepository';
@@ -7,7 +8,7 @@ import usersData from './data/users'
 import recipeData from './data/recipes';
 import ingredientsData from './data/ingredients';
 
-const activeRecipeRepo = new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
+let activeRecipeRepo //= new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
 
 //QUERY SELECTORS//
 const navTitle = document.querySelector("h1");
@@ -23,6 +24,23 @@ const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 
 //FUNCTIONS//
+
+const fetchAllData = () => {
+  let response = []
+  Promise.all([fetchedRecipesData(), fetchedIngredientsData(), fetchedUserData()])
+    .then(data => response.push(data))
+  console.log("this is the response!: ", response);
+  assignData(response)
+}
+
+const assignData = (response) => {
+  setTimeout(() => {
+    console.log("1", 1, response[0][2]);
+
+    activeRecipeRepo = new RecipeRepository(response[0][0].recipeData, response[0][1].ingredientsData, response[0][2].usersData[Math.floor(Math.random() * response[0][2].usersData.length)]); 
+  },100)
+}
+
 const hide = (element => {
   element.classList.add("hidden");
 });
@@ -38,44 +56,44 @@ const goHome = () => {
 }
 
 const displayAllRecipes = () => {
-  recipesList.innerHTML = "";
-  activeRecipeRepo.filteredRecipes.forEach(recipe => {
-    if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
-      recipesList.innerHTML += `
-      <section class="recipe" id="${recipe.id}">
+    recipesList.innerHTML = "";
+    activeRecipeRepo.filteredRecipes.forEach(recipe => {
+      if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
+        recipesList.innerHTML += `
+        <section class="recipe" id="${recipe.id}">
         <div>
-          <img src="${recipe.image}" class="recipe-image">
+        <img src="${recipe.image}" class="recipe-image">
         </div>
         <div class="recipe-name-favorite">
         <div class="favorite-button">
-            <p id="${recipe.id}">❤️</p>
-          </div>
-        <div>
-          <h3>${recipe.name}</h3>
+        <p id="${recipe.id}">❤️</p>
+        </div>
+        <div class="recipe-name-label-container">
+        <h3>${recipe.name}</h3>
         </div>
         </div>
         </section>`
-    } else {
-    recipesList.innerHTML += `
-    <section class="recipe" id="${recipe.id}">
-      <div>
+      } else {
+        recipesList.innerHTML += `
+        <section class="recipe" id="${recipe.id}">
+        <div>
         <img src="${recipe.image}" class="recipe-image">
-      </div>
-      <div class="recipe-name-favorite">
-      <div class="favorite-button">
-          <p id="${recipe.id}">🤍</p>
         </div>
-      <div>
+        <div class="recipe-name-favorite">
+        <div class="favorite-button">
+        <p id="${recipe.id}">🤍</p>
+        </div>
+        <div class="recipe-name-label-container">
         <h3>${recipe.name}</h3>
-      </div>
         </div>
-      </section>`
-    }
-  });
-}
-
-const clickFavoriteButton = (event) => {
-  activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
+        </div>
+        </section>`
+      }
+    });
+  }
+  
+  const clickFavoriteButton = (event) => {
+    activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
   activeRecipeRepo.filterByName(searchInput.value);
   displayAllRecipes();
 }
@@ -124,7 +142,12 @@ const addToCookList = () => {
 }
 
 //EVENT LISTENERS//
-window.addEventListener('load', displayAllRecipes);
+window.addEventListener('load', () =>{
+  fetchAllData()
+  setTimeout(() => {
+  displayAllRecipes()
+  },150)
+});
 
 navTitle.addEventListener('click', goHome);
 
