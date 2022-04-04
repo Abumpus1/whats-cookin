@@ -50,44 +50,44 @@ const goHome = () => {
 }
 
 const displayAllRecipes = () => {
-    recipesList.innerHTML = "";
-    activeRecipeRepo.filteredRecipes.forEach(recipe => {
-      if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
-        recipesList.innerHTML += `
-        <section class="recipe" id="${recipe.id}">
-          <div>
-            <img src="${recipe.image}" class="recipe-image">
+  recipesList.innerHTML = "";
+  activeRecipeRepo.filteredRecipes.forEach(recipe => {
+    if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
+      recipesList.innerHTML += `
+      <section class="recipe" id="${recipe.id}">
+        <div class="recipe-image-container">
+          <img src="${recipe.image}" class="recipe-image">
+        </div>
+        <div class="rotated-opposite recipe-name-favorite">
+          <div class="favorite-button"> 
+            <p id="${recipe.id}">❤️</p>
           </div>
-          <div class="rotated recipe-name-favorite">
-            <div class="favorite-button">
-              <p id="${recipe.id}">❤️</p>
-            </div>
-            <div class="recipe-name-label-container">
-              <h3>${recipe.name}</h3>
-            </div>
+          <div class="recipe-name-label-container">
+            <h3 class="recipe-name-label">${recipe.name}</h3>
           </div>
-        </section>`
-      } else {
-        recipesList.innerHTML += `
-        <section class="recipe" id="${recipe.id}">
-          <div>
-            <img src="${recipe.image}" class="recipe-image">
+        </div>
+      </section>`
+    } else {
+      recipesList.innerHTML += `
+      <section class="recipe" id="${recipe.id}">
+        <div>
+          <img src="${recipe.image}" class="recipe-image">
+        </div>
+        <div class="rotated recipe-name-favorite">
+          <div class="favorite-button">
+            <p id="${recipe.id}">🤍</p>
           </div>
-          <div class="rotated-opposite recipe-name-favorite">
-            <div class="favorite-button">
-              <p id="${recipe.id}">🤍</p>
-            </div>
-            <div class="recipe-name-label-container">
-              <h3>${recipe.name}</h3>
-            </div>
+          <div class="recipe-name-label-container">
+            <h3 class="recipe-name-label">${recipe.name}</h3>
           </div>
-        </section>`
-      }
-    });
-  }
-  
-  const clickFavoriteButton = (event) => {
-    activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
+        </div>
+      </section>`
+    }
+  });
+}
+
+const clickFavoriteButton = (event) => {
+  activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
   activeRecipeRepo.filterByName(searchInput.value);
   displayAllRecipes();
 }
