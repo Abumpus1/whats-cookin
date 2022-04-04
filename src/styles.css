@@ -1,5 +1,6 @@
 * {
-  font-family: monaco
+  font-family: monaco;
+  font-size: 13pt;
 }
 
 body {
@@ -9,10 +10,12 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  height: 100vh;
+  width: 100vw;
   position: fixed;
   text-shadow: 0px 1px 2px #111111;
-
 }
+
 .all-recipes-container {
   width: 86%;
 } 
@@ -23,10 +26,10 @@ body {
 }
 
 .directions-box {
-  width: 38%;
+  width: 35vw;
   border-radius: 34px;
   border: solid rgb(183, 183, 249) 6px;
-  height: 773px;
+  height: 80vh;
   box-shadow: 15px 15px 8px gray;
 
 }
@@ -43,7 +46,8 @@ body {
 .directions-list {
   display: flex;
   flex-direction: column;
-  max-height:608px;
+  min-height:30vh;
+  max-height:50vh;
   overflow-y: scroll;
   margin-left: 44px;
 }
@@ -76,6 +80,15 @@ h1 {
   cursor: pointer;
 }
 
+h3 {
+  font-size: 14pt;
+}
+
+.ingredients-cost > h3, span {
+font-size: 13pt;
+margin: 5px;
+}
+
 .ingredients-label {
   margin: 3px;
 }
@@ -96,11 +109,12 @@ h1 {
 } 
 
 label {
-  font-size: 12pt;
+  font-size: 14pt;
 }
 
 main {
   height: 100%;
+
 }
 
 .menu-drop {
@@ -117,8 +131,6 @@ main {
 nav {
   display: flex;
   justify-content: space-between;
-  padding: left 33px;
-  margin-bottom: 14px;
   border: solid rgb(183, 183, 249) 9px;
   padding: 0px;
   height: 63px;
@@ -131,11 +143,14 @@ nav {
 }
 
 .recipe-details-page {
+  margin-top: 3vh;
+  height: 100vh;
   display: flex;
   justify-content: space-evenly;
   align-content: center;
   flex-direction: row;
-  height: 100%;
+  padding-left: 7vw;
+  padding-right: 7vw;
 }
 
 .recipe-image-container {
@@ -154,8 +169,9 @@ nav {
 }
 
 .recipe-image-large {
-  height: 304px;
-  width: 70%;
+  height: 38vh;
+  width: 100%;
+  max-width: 50vh;
   border-radius: 33px;
   margin-bottom: 22px;
   border: solid rgb(183, 183, 249) 6px;
@@ -163,13 +179,15 @@ nav {
 }
 
 .recipe-image-large > img {
-  height: 304px;
+  height: 38vh;
   border-radius: 33px;
   width: 100%;
 }
 
  .recipe-ingredients {
-  width: 70%;
+  width: 100%;
+  height: 38vh;
+  max-width: 50vh;
   display: flex;
   align-items: center; 
   flex-direction: column;
@@ -185,8 +203,7 @@ nav {
   align-items: center;
   flex-direction: column;
   border-radius: 45px;
-  height: 88%;
-  margin-right: -355px;
+  height: 80vh;
 }
 
 .recipes-list {
@@ -194,8 +211,8 @@ nav {
   flex-wrap: wrap;
   justify-content: space-around;
   overflow-y: scroll;
-  max-height: 800px;
-  min-height: 355px;
+  max-height: 88vh;
+  min-height: 50%;
 }
 
 .recipe-name-favorite {
@@ -227,6 +244,10 @@ nav {
 }
 
 .recipe-page-container {
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
   height: 100%;
 }
 
@@ -263,4 +284,3 @@ nav {
 .hidden {
   display: none;
 }
-
