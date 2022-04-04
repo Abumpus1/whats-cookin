@@ -17,7 +17,7 @@ const recipeName = document.querySelector(".recipe-name-large");
 const recipeImage = document.querySelector(".recipe-image-large");
 const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
-const addToCookCheckBox = document.querySelector(".save-recipe");
+const addToCookCheckBox = document.querySelector(".add-to-cook-checkbox");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
@@ -25,13 +25,13 @@ const searchInput = document.querySelector("#query");
 //FUNCTIONS//
 
 const fetchAllData = () => {
-  let response = []
+  let response = [];
   Promise.all([fetchedRecipesData(), fetchedIngredientsData(), fetchedUserData()])
     .then(data => {
       response.push(data)
       assignData(response)
       displayAllRecipes()
-    })
+    });
 }
 
 const assignData = (response) => {
@@ -132,8 +132,10 @@ const searchRecipes = () => {
   displayAllRecipes();
 }
 
-const addToCookList = () => {
-  activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+const addToCookList = (event) => {
+  if(event.target.dataset.tagName === "add-to-cook") {
+    activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+  }
 }
 
 //EVENT LISTENERS//
@@ -152,7 +154,9 @@ tagCheckBoxes.addEventListener('click', (event) => {
     clickTag(event.target.dataset.tagName);
   }
 });
-addToCookCheckBox.addEventListener('click', addToCookList);
+addToCookCheckBox.addEventListener('click', (event) => {
+  addToCookList(event)
+});
 searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();

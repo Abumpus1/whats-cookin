@@ -48,7 +48,7 @@ body {
   margin-left: 44px;
 }
 
-.directions-list > p{
+.directions-list > p {
  margin-right: 34px;
  margin-top: 5px;
  margin-bottom: 5px;
@@ -61,6 +61,7 @@ body {
   margin-top: -11px;
   margin-left: 82px;
   margin-right: 0px;
+  cursor: pointer;
 }
 
 .filter-tag-text {
@@ -72,7 +73,7 @@ h1 {
   margin-left: 144px;
   margin-top: 3px;
   border-radius: 77px;
-
+  cursor: pointer;
 }
 
 .ingredients-label {
@@ -105,6 +106,7 @@ main {
 .menu-drop {
   font-size: 24pt;
   margin: 0px;
+  cursor: pointer;
 }
 
 .menu-nav {
@@ -148,6 +150,7 @@ nav {
   border-radius: 44px;
   box-shadow: 15px 15px 8px gray;
   margin-top: 12px;
+  cursor: pointer;
 }
 
 .recipe-image-large {
@@ -233,13 +236,13 @@ nav {
   margin-right: 42px;
 }
 
+.tags > div > input, label{
+  cursor: pointer;
+}
+
 .tag-filter {
   margin-left: 50px;
   width: 14%;
-}
-
-.hidden {
-  display: none;
 }
 
 .rotated {
@@ -251,5 +254,13 @@ nav {
   transform: rotate(0deg);
   background-color: pink;
   margin-top: -105px;
+}
+
+.save-recipe {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
 
