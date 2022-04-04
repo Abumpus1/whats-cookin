@@ -132,9 +132,10 @@ main {
 nav {
   display: flex;
   justify-content: space-between;
-  border: solid rgb(183, 183, 249) 9px;
+  border-bottom: solid rgb(183, 183, 249) 9px;
   padding: 0px;
   height: 63px;
+  box-shadow: 2px 2px 10px grey;
 }
 
 .recipe {
@@ -269,6 +270,7 @@ nav {
   padding-top: 0;
   max-width: 230px;
   border-right: solid #b7b7f9  10px;
+  box-shadow: 2px 2px 10px grey;
 }
 
 .rotated {
