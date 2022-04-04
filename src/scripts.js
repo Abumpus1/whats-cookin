@@ -1,38 +1,37 @@
 import './styles.css';
-// import apiCalls from './apiCalls';
 import { fetchedUserData, fetchedIngredientsData, fetchedRecipesData } from './apiCalls';
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png';
 import RecipeRepository from './classes/recipeRepository';
-
-let activeRecipeRepo;
 
 //QUERY SELECTORS//
 const navTitle = document.querySelector("h1");
+const menu = document.querySelector(".menu-drop");
 const recipesList = document.querySelector(".recipes-list");
 const allRecipesPage = document.querySelector(".all-recipes-page-container");
 const recipePage = document.querySelector(".recipe-page-container");
+const recipeName = document.querySelector(".recipe-name-large");
 const recipeImage = document.querySelector(".recipe-image-large");
 const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
-const addToCookCheckBox = document.querySelector(".save-recipe");
+const addToCookCheckBox = document.querySelector(".add-to-cook-checkbox");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 
+let activeRecipeRepo;
 //FUNCTIONS//
 
 const fetchAllData = () => {
-  let response = []
+  let response = [];
   Promise.all([fetchedRecipesData(), fetchedIngredientsData(), fetchedUserData()])
-    .then(data => response.push(data))
-  assignData(response)
+    .then(data => {
+      response.push(data)
+      assignData(response)
+      displayAllRecipes()
+    });
 }
 
 const assignData = (response) => {
-  setTimeout(() => {
     activeRecipeRepo = new RecipeRepository(response[0][0].recipeData, response[0][1].ingredientsData, response[0][2].usersData[Math.floor(Math.random() * response[0][2].usersData.length)]); 
-  },100)
 }
 
 const hide = (element => {
@@ -107,18 +106,15 @@ const displayRecipePage = (event) => {
 
 const displaySelectedRecipe = (recipe) => {
   addToCookCheckBox.id = `${recipe.id}`
-
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
+  recipeName.innerText = `${recipe.name}`
   recipeIngredients.innerHTML = "";
-
   recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
     recipeIngredients.innerHTML += `<p>${ingredient}<p>`;
   });
-
   recipe.getRecipeDirections().forEach(direction => {
     recipeDirections.innerHTML += `<p>${direction}<p>`;
   });
-
   recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
 }
 
@@ -126,25 +122,22 @@ const clickTag = (tagName) => {
   activeRecipeRepo.checkTag(tagName, searchInput.value);
   displayAllRecipes();
 }
+
 const searchRecipes = () => {
   activeRecipeRepo.filterByName(searchInput.value);
   displayAllRecipes();
 }
 
-const addToCookList = () => {
-  activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+const addToCookList = (event) => {
+  if(event.target.dataset.tagName === "add-to-cook") {
+    activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+  }
 }
 
 //EVENT LISTENERS//
-window.addEventListener('load', () =>{
-  fetchAllData()
-  setTimeout(() => {
-  displayAllRecipes()
-  },160)
-});
-
+window.addEventListener('load', fetchAllData);
 navTitle.addEventListener('click', goHome);
-
+menu.addEventListener('click', goHome);
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
     clickFavoriteButton(event);
@@ -152,15 +145,14 @@ recipesList.addEventListener('click', (event) => {
     displayRecipePage(event);
   }
 });
-
 tagCheckBoxes.addEventListener('click', (event) => {
   if (event.target.dataset.tagName) {
     clickTag(event.target.dataset.tagName);
   }
 });
-
-addToCookCheckBox.addEventListener('click', addToCookList);
-
+addToCookCheckBox.addEventListener('click', (event) => {
+  addToCookList(event)
+});
 searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();
