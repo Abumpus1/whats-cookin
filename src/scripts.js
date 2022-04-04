@@ -4,11 +4,8 @@ import { fetchedUserData, fetchedIngredientsData, fetchedRecipesData } from './a
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import RecipeRepository from './classes/recipeRepository';
-import usersData from './data/users'
-import recipeData from './data/recipes';
-import ingredientsData from './data/ingredients';
 
-let activeRecipeRepo //= new RecipeRepository(recipeData, ingredientsData, usersData[Math.floor(Math.random() * usersData.length)]);
+let activeRecipeRepo;
 
 //QUERY SELECTORS//
 const navTitle = document.querySelector("h1");
@@ -29,14 +26,11 @@ const fetchAllData = () => {
   let response = []
   Promise.all([fetchedRecipesData(), fetchedIngredientsData(), fetchedUserData()])
     .then(data => response.push(data))
-  console.log("this is the response!: ", response);
   assignData(response)
 }
 
 const assignData = (response) => {
   setTimeout(() => {
-    console.log("1", 1, response[0][2]);
-
     activeRecipeRepo = new RecipeRepository(response[0][0].recipeData, response[0][1].ingredientsData, response[0][2].usersData[Math.floor(Math.random() * response[0][2].usersData.length)]); 
   },100)
 }
@@ -61,32 +55,32 @@ const displayAllRecipes = () => {
       if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
         recipesList.innerHTML += `
         <section class="recipe" id="${recipe.id}">
-        <div>
-        <img src="${recipe.image}" class="recipe-image">
-        </div>
-        <div class="recipe-name-favorite">
-        <div class="favorite-button">
-        <p id="${recipe.id}">❤️</p>
-        </div>
-        <div class="recipe-name-label-container">
-        <h3>${recipe.name}</h3>
-        </div>
-        </div>
+          <div>
+            <img src="${recipe.image}" class="recipe-image">
+          </div>
+          <div class="rotated recipe-name-favorite">
+            <div class="favorite-button">
+              <p id="${recipe.id}">❤️</p>
+            </div>
+            <div class="recipe-name-label-container">
+              <h3>${recipe.name}</h3>
+            </div>
+          </div>
         </section>`
       } else {
         recipesList.innerHTML += `
         <section class="recipe" id="${recipe.id}">
-        <div>
-        <img src="${recipe.image}" class="recipe-image">
-        </div>
-        <div class="recipe-name-favorite">
-        <div class="favorite-button">
-        <p id="${recipe.id}">🤍</p>
-        </div>
-        <div class="recipe-name-label-container">
-        <h3>${recipe.name}</h3>
-        </div>
-        </div>
+          <div>
+            <img src="${recipe.image}" class="recipe-image">
+          </div>
+          <div class="rotated-opposite recipe-name-favorite">
+            <div class="favorite-button">
+              <p id="${recipe.id}">🤍</p>
+            </div>
+            <div class="recipe-name-label-container">
+              <h3>${recipe.name}</h3>
+            </div>
+          </div>
         </section>`
       }
     });
@@ -146,7 +140,7 @@ window.addEventListener('load', () =>{
   fetchAllData()
   setTimeout(() => {
   displayAllRecipes()
-  },150)
+  },160)
 });
 
 navTitle.addEventListener('click', goHome);

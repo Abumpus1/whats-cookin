@@ -1,6 +1,3 @@
-// Your fetch requests will live here!
-console.log('I will be a fetch request!')
-
 function fetchedUserData() {
   return fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users")
  .then(response => response.json())
