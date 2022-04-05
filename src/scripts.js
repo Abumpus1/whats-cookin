@@ -109,6 +109,7 @@ const displaySelectedRecipe = (recipe) => {
   recipeImage.innerHTML = `<img src="${recipe.image}">`;
   recipeName.innerText = `${recipe.name}`
   recipeIngredients.innerHTML = "";
+  recipeDirections.innerHTML = "";
   recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
     recipeIngredients.innerHTML += `<p>${ingredient}<p>`;
   });
