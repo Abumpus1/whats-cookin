@@ -56,4 +56,10 @@ describe('Recipe', () => {
     let recipeDirections = recipe.getRecipeDirections();
     expect(recipeDirections).to.deep.equal(["Step 1: In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.", "Step 2: Add egg and vanilla and mix until combined."]);
   });
+
+  it('Should have a helper function that returns array of correct ingredients', () => {
+    let correctIngredients = recipe.filterIngredients(recipe.ingredients[0], sampleIngredients)
+    console.log(correctIngredients);
+    expect(correctIngredients).to.deep.equal([{"id": 20081, "name": "wheat flour", "estimatedCostInCents": 142}]);
+  });
 });

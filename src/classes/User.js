@@ -7,28 +7,24 @@ class User {
     this.recipesToCook = [];
   }
 
-  toggleFavoriteRecipe(recipeId) {
-    if(!this.favoriteRecipes.includes(recipeId)){
-      this.favoriteRecipes.push(recipeId)
+  toggleId(recipeId, dataArray) {
+    if(!dataArray.includes(recipeId)){
+      dataArray.push(recipeId)
     } else {
-      this.favoriteRecipes.forEach((recipe, i) => {
+      dataArray.forEach((recipe, i) => {
         if(recipe === recipeId) {
-          this.favoriteRecipes.splice(i, 1)
+          dataArray.splice(i, 1)
         }
       });
     }
   }
 
+  toggleFavoriteRecipe(recipeId) {
+    this.toggleId(recipeId, this.favoriteRecipes);
+  }
+
   decideToCook(recipeId) {
-    if(!this.recipesToCook.includes(recipeId)){
-      this.recipesToCook.push(recipeId)
-    } else {
-      this.recipesToCook.forEach((recipe, i) => {
-        if (recipe === recipeId) {
-          this.recipesToCook.splice(i, 1)
-        }
-      });
-    }
+    this.toggleId(recipeId,this.recipesToCook);
   }
 }
 

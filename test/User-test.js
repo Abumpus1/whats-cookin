@@ -32,30 +32,45 @@ describe('User', () => {
     expect(user.recipesToCook).to.deep.equal([]);
   });
 
-  it('Should have a method to allow user to favorite recipes', () => {
-    user.toggleFavoriteRecipe(595736);
+  it('Should have a method to add recipe IDs to array', () => {
+    user.toggleId(595736, user.favoriteRecipes);
 
     expect(user.favoriteRecipes).to.deep.equal([595736]);
 
-    user.toggleFavoriteRecipe(412309);
+    user.toggleId(412309, user.favoriteRecipes);
 
     expect(user.favoriteRecipes).to.deep.equal([595736, 412309]);
   });
 
-  it('Should have a method to allow user to unfavorite recipes', () => {
-    user.toggleFavoriteRecipe(595736);
+  it('Should have a method to remove recipe IDs from array', () => {
+    user.toggleId(595736, user.favoriteRecipes);
 
     expect(user.favoriteRecipes).to.deep.equal([595736]);
 
-    user.toggleFavoriteRecipe(595736);
+    user.toggleId(595736, user.favoriteRecipes);
 
     expect(user.favoriteRecipes).to.deep.equal([]);
   });
 
-  it('Should have a method to add recipes to recipes to cook array', () => {
-    user.decideToCook(595736);
+  it('Should have same method be able to add to a different array', () => {
+    user.toggleId(595736, user.recipesToCook);
 
     expect(user.recipesToCook).to.deep.equal([595736]);
   });
 
+  it('Should have a method that calls toggleId for favorites', () => {
+    expect(user.favoriteRecipes).to.deep.equal([]);
+    
+    user.toggleFavoriteRecipe(595736);
+
+    expect(user.favoriteRecipes).to.deep.equal([595736]);
+  });
+
+  it('Should have a method that calls toggleId for favorites', () => {
+    expect(user.recipesToCook).to.deep.equal([]);
+    
+    user.decideToCook(595736);
+
+    expect(user.recipesToCook).to.deep.equal([595736]);
+  });
 });
