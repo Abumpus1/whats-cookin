@@ -39,18 +39,17 @@ class RecipeRepository {
     },[]).some(ing2 => ing2.includes(nameInput.toLowerCase())));
     this.filterByTags();
   }
-
-  toggleFavorite(recipeId) {
-    recipeId = parseInt(recipeId);
-    this.currentUser.toggleFavoriteRecipe(recipeId);
-  }
-
+  
   filterByTags() {
     this.checkedTags.forEach(tag => {
       this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag) || (tag === "favorite" && this.currentUser.favoriteRecipes.includes(recipe.id)));
     });
   }
-
+  
+  toggleFavorite(recipeId) {
+    recipeId = parseInt(recipeId);
+    this.currentUser.toggleFavoriteRecipe(recipeId);
+  }
 }
 
 export default RecipeRepository;
