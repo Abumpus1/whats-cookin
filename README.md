@@ -4,7 +4,6 @@
 - [Project Overview](#project-overview)
 - [Technologies Used](#technologies-used)
 - [How to Set Up](#how-to-set-up)
-- [Deployed Link](#deployed-link)
 - [Learning Goals](#learning-goals)
 - [Future Features](#future-features)
 - [Contributors](#contributors)
