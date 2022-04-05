@@ -36,7 +36,7 @@ The user can also search by name by typing their inquiry in the search bar at th
 
 ### How to Set Up
 
--  Clone this [repo]()
+-  Clone this repo
 - `cd` into the `whats-cookin` directory
 - Run `npm install`
 - Run `npm start`
