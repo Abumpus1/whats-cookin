@@ -11,7 +11,7 @@ class RecipeRepository {
     this.currentUser = new User(user);
   }
 
-  checkTag(tag, nameInput){
+  checkTag(tag, searchInput){
     if(!this.checkedTags.includes(tag)){
       this.checkedTags.push(tag);
     } else {
@@ -21,31 +21,31 @@ class RecipeRepository {
         }
       });
     }
-    this.filterBySearchTerm(nameInput);
+    this.filterBySearchTerm(searchInput);
   }
 
   resetFilteredRecipes(){
     this.filteredRecipes = this.recipes;
   }
 
-  filterBySearchTerm(nameInput) {
-    if (!nameInput) {
-      nameInput = "";
+  filterBySearchTerm(searchInput) {
+    if (!searchInput) {
+      searchInput = "";
     }
     this.resetFilteredRecipes();
-    
+
     this.filteredRecipes = this.filteredRecipes.filter(recipe =>
-      this.filterByRecipeName(nameInput, recipe)
-      || this.filterbyIngredientName(nameInput, recipe))
+      this.filterByRecipeName(searchInput, recipe)
+      || this.filterbyIngredientName(searchInput, recipe))
 
     this.filterByTags();
   }
 
-  filterByRecipeName(nameInput, recipe) {
-    return recipe.name.toLowerCase().includes(nameInput.toLowerCase())
+  filterByRecipeName(searchInput, recipe) {
+    return recipe.name.toLowerCase().includes(searchInput.toLowerCase())
   }
 
-  filterbyIngredientName(nameInput, recipe) {
+  filterbyIngredientName(searchInput, recipe) {
     let recipeIngNames = recipe.ingredients.reduce((acc, recipeIng) => {
       acc.push(this.ingredients.find((actualIng) => {
         return actualIng.id === recipeIng.id;
@@ -53,7 +53,7 @@ class RecipeRepository {
       return acc;
     },[]);
 
-    return recipeIngNames.some(ingredient => ingredient.includes(nameInput.toLowerCase()));
+    return recipeIngNames.some(ingredient => ingredient.includes(searchInput.toLowerCase()));
   }
 
 
