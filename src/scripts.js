@@ -1,5 +1,5 @@
 import './styles.css';
-import { fetchedUserData, fetchedIngredientsData, fetchedRecipesData } from './apiCalls';
+import { fetchData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
 //QUERY SELECTORS//
@@ -21,17 +21,16 @@ let activeRecipeRepo;
 //FUNCTIONS//
 
 const fetchAllData = () => {
-  let response = [];
-  Promise.all([fetchedRecipesData(), fetchedIngredientsData(), fetchedUserData()])
+  Promise.all([fetchData("recipes"), fetchData("ingredients"), fetchData("users")])
     .then(data => {
-      response.push(data)
-      assignData(response)
+      assignData(data)
       displayAllRecipes()
     });
 }
 
 const assignData = (response) => {
-    activeRecipeRepo = new RecipeRepository(response[0][0].recipeData, response[0][1].ingredientsData, response[0][2].usersData[Math.floor(Math.random() * response[0][2].usersData.length)]); 
+  console.log(response);
+    activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]); 
 }
 
 const hide = (element => {
