@@ -18,6 +18,15 @@ body {
 
 .all-recipes-container {
   width: 86%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
+.all-recipes-container > p {
+margin-right: 6vw;
+font-size: 1.3vw;
+margin-top: 15px;
+margin-bottom: 15px;
 } 
 
 .all-recipes-page-container {
@@ -142,6 +151,10 @@ nav {
   width: 300px;
   height: 300px;
   margin-top: 44px;
+}
+
+.recipe-count {
+  font-size: 1.3vw;
 }
 
 .recipe-details-page {
