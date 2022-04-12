@@ -18,6 +18,15 @@ body {
 
 .all-recipes-container {
   width: 86%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
+.all-recipes-container > p {
+margin-right: 6vw;
+font-size: 1.3vw;
+margin-top: 15px;
+margin-bottom: 15px;
 } 
 
 .all-recipes-page-container {
@@ -144,6 +153,10 @@ nav {
   margin-top: 44px;
 }
 
+.recipe-count {
+  font-size: 1.3vw;
+}
+
 .recipe-details-page {
   margin-top: 3vh;
   height: 100vh;
@@ -215,6 +228,7 @@ nav {
   overflow-y: scroll;
   max-height: 88vh;
   min-height: 50%;
+  width: 100%;
 }
 
 .recipe-name-favorite {
