@@ -228,6 +228,7 @@ nav {
   overflow-y: scroll;
   max-height: 88vh;
   min-height: 50%;
+  width: 100%;
 }
 
 .recipe-name-favorite {

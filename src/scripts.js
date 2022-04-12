@@ -16,6 +16,7 @@ const addToCookCheckBox = document.querySelector(".add-to-cook-checkbox");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
+const recipeCount = document.querySelector(".recipe-count");
 
 let activeRecipeRepo;
 //FUNCTIONS//
@@ -49,6 +50,7 @@ const goHome = () => {
 
 const displayAllRecipes = () => {
   recipesList.innerHTML = "";
+  recipeCount.innerText = activeRecipeRepo.filteredRecipes.length;
   activeRecipeRepo.filteredRecipes.forEach(recipe => {
     if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
       recipesList.innerHTML += `
