@@ -1,20 +1,9 @@
-function fetchedUserData() {
-  return fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users")
+function fetchData(dataLocation) {
+  return fetch(`http://localhost:3001/api/v1/${dataLocation}`)
  .then(response => response.json())
-}
-
-function fetchedIngredientsData() {
-  return fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients")
-  .then(response => response.json())
-}
-
-function fetchedRecipesData() {
-  return fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes")
-  .then(response => response.json())
+ .catch(err => console.log(err));
 }
 
 export {
-  fetchedUserData,
-  fetchedIngredientsData,
-  fetchedRecipesData
+  fetchData
 }
