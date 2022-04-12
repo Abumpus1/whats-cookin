@@ -25,12 +25,12 @@ const fetchAllData = () => {
     .then(data => {
       assignData(data)
       displayAllRecipes()
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 const assignData = (response) => {
-  console.log(response);
-    activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]); 
+    activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]);
 }
 
 const hide = (element => {
@@ -57,7 +57,7 @@ const displayAllRecipes = () => {
           <img src="${recipe.image}" class="recipe-image">
         </div>
         <div class="rotated-opposite recipe-name-favorite">
-          <div class="favorite-button"> 
+          <div class="favorite-button">
             <p id="${recipe.id}">❤️</p>
           </div>
           <div class="recipe-name-label-container">
@@ -86,7 +86,7 @@ const displayAllRecipes = () => {
 
 const clickFavoriteButton = (event) => {
   activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
-  activeRecipeRepo.filterByName(searchInput.value);
+  activeRecipeRepo.filterBySearchTerm(searchInput.value);
   displayAllRecipes();
 }
 
@@ -124,7 +124,7 @@ const clickTag = (tagName) => {
 }
 
 const searchRecipes = () => {
-  activeRecipeRepo.filterByName(searchInput.value);
+  activeRecipeRepo.filterBySearchTerm(searchInput.value);
   displayAllRecipes();
 }
 

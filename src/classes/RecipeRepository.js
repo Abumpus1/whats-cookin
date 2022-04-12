@@ -11,7 +11,7 @@ class RecipeRepository {
     this.currentUser = new User(user);
   }
 
-  checkTag(tag, nameInput){
+  checkTag(tag, searchInput){
     if(!this.checkedTags.includes(tag)){
       this.checkedTags.push(tag);
     } else {
@@ -21,31 +21,48 @@ class RecipeRepository {
         }
       });
     }
-    this.filterByName(nameInput);
+    this.filterBySearchTerm(searchInput);
   }
 
   resetFilteredRecipes(){
     this.filteredRecipes = this.recipes;
   }
 
-  filterByName(nameInput) {
-    if (!nameInput) {
-      nameInput = "";
+  filterBySearchTerm(searchInput) {
+    if (!searchInput) {
+      searchInput = "";
     }
     this.resetFilteredRecipes();
-    this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.name.toLowerCase().includes(nameInput.toLowerCase()) || recipe.ingredients.reduce((acc,ing) => {
-      acc.push(this.ingredients.find(mainIng => ing.id === mainIng.id).name);
-      return acc;
-    },[]).some(ing2 => ing2.includes(nameInput.toLowerCase())));
+
+    this.filteredRecipes = this.filteredRecipes.filter(recipe =>
+      this.filterByRecipeName(searchInput, recipe)
+      || this.filterbyIngredientName(searchInput, recipe))
+
     this.filterByTags();
   }
-  
+
+  filterByRecipeName(searchInput, recipe) {
+    return recipe.name.toLowerCase().includes(searchInput.toLowerCase())
+  }
+
+  filterbyIngredientName(searchInput, recipe) {
+    let recipeIngNames = recipe.ingredients.reduce((acc, recipeIng) => {
+      acc.push(this.ingredients.find((actualIng) => {
+        return actualIng.id === recipeIng.id;
+      }).name);
+      return acc;
+    },[]);
+
+    return recipeIngNames.some(ingredient => ingredient.includes(searchInput.toLowerCase()));
+  }
+
+
   filterByTags() {
     this.checkedTags.forEach(tag => {
       this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag) || (tag === "favorite" && this.currentUser.favoriteRecipes.includes(recipe.id)));
     });
   }
-  
+
   toggleFavorite(recipeId) {
     recipeId = parseInt(recipeId);
     this.currentUser.toggleFavoriteRecipe(recipeId);
