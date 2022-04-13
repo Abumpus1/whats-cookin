@@ -13,7 +13,7 @@ const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
 const addToCookCheckBox = document.querySelector(".add-to-cook-checkbox");
 const recipeTotalCost = document.querySelector(".actual-cost");
-const tagCheckBoxes = document.querySelector(".checkboxes");
+const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 
 let activeRecipeRepo;
