@@ -3,10 +3,9 @@ import { fetchData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
 //QUERY SELECTORS//
-const navTitle = document.querySelector("h1");
-const menu = document.querySelector(".menu-drop");
+const menu = document.querySelector(".menu-button");
 const recipesList = document.querySelector(".recipes-list");
-const allRecipesPage = document.querySelector(".all-recipes-page-container");
+const allRecipesPage = document.querySelector(".all-recipes-container");
 const recipePage = document.querySelector(".recipe-page-container");
 const recipeName = document.querySelector(".recipe-name-large");
 const recipeImage = document.querySelector(".recipe-image-large");
@@ -14,7 +13,7 @@ const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
 const addToCookCheckBox = document.querySelector(".add-to-cook-checkbox");
 const recipeTotalCost = document.querySelector(".actual-cost");
-const tagCheckBoxes = document.querySelector(".tags");
+const tagCheckBoxes = document.querySelector(".checkboxes");
 const searchInput = document.querySelector("#query");
 
 let activeRecipeRepo;
@@ -54,7 +53,7 @@ const displayAllRecipes = () => {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
         <div class="recipe-image-container">
-          <img src="${recipe.image}" class="recipe-image">
+          <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
         </div>
         <div class="rotated-opposite recipe-name-favorite">
           <div class="favorite-button">
@@ -69,7 +68,7 @@ const displayAllRecipes = () => {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
         <div>
-          <img src="${recipe.image}" class="recipe-image">
+          <img src="${recipe.image}" class="recipe-image"talt="${recipe.name}">
         </div>
         <div class="rotated recipe-name-favorite">
           <div class="favorite-button">
@@ -136,8 +135,8 @@ const addToCookList = (event) => {
 
 //EVENT LISTENERS//
 window.addEventListener('load', fetchAllData);
-navTitle.addEventListener('click', goHome);
 menu.addEventListener('click', goHome);
+
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
     clickFavoriteButton(event);
@@ -145,14 +144,17 @@ recipesList.addEventListener('click', (event) => {
     displayRecipePage(event);
   }
 });
+
 tagCheckBoxes.addEventListener('click', (event) => {
   if (event.target.dataset.tagName) {
     clickTag(event.target.dataset.tagName);
   }
 });
+
 addToCookCheckBox.addEventListener('click', (event) => {
   addToCookList(event)
 });
+
 searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();

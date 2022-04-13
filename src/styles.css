@@ -1,6 +1,21 @@
 * {
   font-family: monaco;
   font-size: 13pt;
+  /* margin: 0px;
+  padding: 0px;
+  border: 1px solid red; */
+}
+
+aside {
+  display:flex;
+  flex-direction: column;
+  margin-right:10px;
+  padding:6px;
+  padding-top: 0;
+  max-width: 200px;
+  height: 100vh;
+  border-right: solid #b7b7f9  10px;
+  box-shadow: 2px 2px 10px grey;
 }
 
 body {
@@ -17,13 +32,15 @@ body {
 }
 
 .all-recipes-container {
-  width: 86%;
-} 
-
-.all-recipes-page-container {
+  width: 100%;
   display: flex;
   height: 100%;
 }
+
+/* .all-recipes-page-container {
+  display: flex;
+  height: 100%;
+} */
 
 .directions-box {
   width: 35vw;
@@ -61,7 +78,7 @@ body {
 .favorite-button {
   width: 20px;
   position: relative;
-  vertical-align: 50px; 
+  vertical-align: 50px;
   margin-top: -27px;
   margin-bottom: -12px;
   margin-left: 82px;
@@ -78,7 +95,6 @@ h1 {
   margin-left: 144px;
   margin-top: 3px;
   border-radius: 77px;
-  cursor: pointer;
 }
 
 h3 {
@@ -107,7 +123,7 @@ margin: 5px;
 .ingredients-list > p {
   margin: 3px;
   margin-left: 43px
-} 
+}
 
 label {
   font-size: 14pt;
@@ -115,27 +131,33 @@ label {
 
 main {
   height: 100%;
-
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-content: space-around;
 }
 
-.menu-drop {
+.menu-button {
   font-size: 24pt;
   margin: 0px;
+  margin-left: 42px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
-.menu-nav {
-  margin-left: 42px;
-  margin-top: 10px;
-}
 
-nav {
+#navList {
   display: flex;
   justify-content: space-between;
   border-bottom: solid rgb(183, 183, 249) 9px;
   padding: 0px;
   height: 63px;
   box-shadow: 2px 2px 10px grey;
+}
+
+ul.no-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .recipe {
@@ -145,11 +167,12 @@ nav {
 }
 
 .recipe-details-page {
-  margin-top: 3vh;
+  margin-top: -4vh;
   height: 100vh;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-content: center;
+  align-items: center;
   flex-direction: row;
   padding-left: 7vw;
   padding-right: 7vw;
@@ -191,16 +214,16 @@ nav {
   height: 38vh;
   max-width: 50vh;
   display: flex;
-  align-items: center; 
+  align-items: center;
   flex-direction: column;
   border-radius: 33px;
   border: solid rgb(183, 183, 249) 6px;
   justify-content: center;
   box-shadow: 15px 15px 8px gray;
-} 
+}
 
 .recipe-ingredients-container {
-  width: 38%; 
+  width: 38%;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
@@ -213,7 +236,7 @@ nav {
   flex-wrap: wrap;
   justify-content: space-around;
   overflow-y: scroll;
-  max-height: 88vh;
+  max-height: 100vh;
   min-height: 50%;
 }
 
@@ -264,14 +287,13 @@ nav {
   cursor: pointer;
 }
 
-.tag-filter {
-  margin-right:10px;
-  padding:6px;
-  padding-top: 0;
-  max-width: 230px;
-  border-right: solid #b7b7f9  10px;
-  box-shadow: 2px 2px 10px grey;
+#tags {
+  display:flex;
+  flex-direction: column;
+
+
 }
+
 
 .rotated {
   transform: rotate(10deg);
