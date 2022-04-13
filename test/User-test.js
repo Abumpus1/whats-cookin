@@ -32,11 +32,15 @@ describe('User', () => {
     expect(user.recipesToCook).to.deep.equal([]);
   });
 
-  it('Should have a method to add recipe IDs to array', () => {
+  it('Should have a method to add recipe ID to array', () => {
     user.toggleId(595736, user.favoriteRecipes);
 
     expect(user.favoriteRecipes).to.deep.equal([595736]);
 
+  });
+
+  it('Should allow that method to add several recipe IDs to array', () => {
+    user.toggleId(595736, user.favoriteRecipes);
     user.toggleId(412309, user.favoriteRecipes);
 
     expect(user.favoriteRecipes).to.deep.equal([595736, 412309]);
@@ -59,16 +63,12 @@ describe('User', () => {
   });
 
   it('Should have a method that calls toggleId for favorites', () => {
-    expect(user.favoriteRecipes).to.deep.equal([]);
-    
     user.toggleFavoriteRecipe(595736);
 
     expect(user.favoriteRecipes).to.deep.equal([595736]);
   });
 
-  it('Should have a method that calls toggleId for favorites', () => {
-    expect(user.recipesToCook).to.deep.equal([]);
-    
+  it('Should have a method that calls toggleId for recipesToCook', () => {
     user.decideToCook(595736);
 
     expect(user.recipesToCook).to.deep.equal([595736]);

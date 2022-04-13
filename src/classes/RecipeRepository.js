@@ -35,14 +35,13 @@ class RecipeRepository {
     this.resetFilteredRecipes();
 
     this.filteredRecipes = this.filteredRecipes.filter(recipe =>
-      this.filterByRecipeName(searchInput, recipe)
-      || this.filterbyIngredientName(searchInput, recipe))
+      this.filterByRecipeName(searchInput, recipe) || this.filterbyIngredientName(searchInput, recipe));
 
     this.filterByTags();
   }
 
   filterByRecipeName(searchInput, recipe) {
-    return recipe.name.toLowerCase().includes(searchInput.toLowerCase())
+    return recipe.name.toLowerCase().includes(searchInput.toLowerCase());
   }
 
   filterbyIngredientName(searchInput, recipe) {

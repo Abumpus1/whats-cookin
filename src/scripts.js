@@ -13,6 +13,7 @@ const recipeImage = document.querySelector(".recipe-image-large");
 const recipeIngredients = document.querySelector(".ingredients-list");
 const recipeDirections = document.querySelector(".directions-list");
 const addToCookCheckBox = document.querySelector(".add-to-cook-checkbox");
+const addToCookInput = document.querySelector(".save-recipe");
 const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
@@ -45,7 +46,6 @@ const show = (element => {
 const goHome = () => {
   hide(recipePage);
   show(allRecipesPage);
-  addToCookCheckBox.checked = false;
 }
 
 const displayAllRecipes = () => {
@@ -56,7 +56,7 @@ const displayAllRecipes = () => {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
         <div class="recipe-image-container">
-          <img src="${recipe.image}" class="recipe-image">
+          <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
         </div>
         <div class="rotated-opposite recipe-name-favorite">
           <div class="favorite-button">
@@ -71,7 +71,7 @@ const displayAllRecipes = () => {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
         <div>
-          <img src="${recipe.image}" class="recipe-image">
+          <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
         </div>
         <div class="rotated recipe-name-favorite">
           <div class="favorite-button">
@@ -99,7 +99,9 @@ const displayRecipePage = (event) => {
       show(recipePage);
       displaySelectedRecipe(recipe);
       if (activeRecipeRepo.currentUser.recipesToCook.includes(addToCookCheckBox.id)) {
-        addToCookCheckBox.checked = true;
+        addToCookInput.checked = true;
+      } else {
+        addToCookInput.checked = false;
       }
     }
   });
@@ -107,7 +109,7 @@ const displayRecipePage = (event) => {
 
 const displaySelectedRecipe = (recipe) => {
   addToCookCheckBox.id = `${recipe.id}`
-  recipeImage.innerHTML = `<img src="${recipe.image}">`;
+  recipeImage.innerHTML = `<img src="${recipe.image}" alt="${recipe.name}">`;
   recipeName.innerText = `${recipe.name}`
   recipeIngredients.innerHTML = "";
   recipeDirections.innerHTML = "";
