@@ -8,7 +8,7 @@
   <body>
     <nav>
         <div class="menu-nav">
-          <h3 class="menu-drop">MENU</h3>
+          <h3 class="menu-drop">HOME</h3>
         </div>
       <h1 class="nav">What's Cookin</h1>
       <div class="search-bar">
@@ -153,7 +153,9 @@
           </section>
         </aside>
         <article class="all-recipes-container">
-          <p>Based on your filters, <span class="recipe-count"></span> recipes found.</p>
+          <p>Your query returned the following number of recipes: <span class="recipe-count"></span></p>
+          
+          <!-- <p>Based on your filters, <span class="recipe-count"></span> recipes found.</p> -->
           <section class="recipes-list" id="recipesList">
           </section>
         </article>
@@ -168,7 +170,11 @@
               <div>
                 <h3 class="ingredients-label">Ingredients</h3>
               </div>
-              <div class="ingredients-list">
+              <div class="ingredients-list-container">
+                <div class="ingredients-list">
+                </div>
+                <div class="ingredients-list-oos">
+                </div>
               </div>
               <div class="ingredients-cost">
                 <h3>Total Cost of Ingredients:<span class="actual-cost">$</span></h3>

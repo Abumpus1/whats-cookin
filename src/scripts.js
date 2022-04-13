@@ -3,7 +3,7 @@ import { fetchData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
 //QUERY SELECTORS//
-const navTitle = document.querySelector("h1");
+// const homeButton = document.querySelector(".home-button");
 const menu = document.querySelector(".menu-drop");
 const recipesList = document.querySelector(".recipes-list");
 const allRecipesPage = document.querySelector(".all-recipes-page-container");
@@ -138,7 +138,7 @@ const addToCookList = (event) => {
 
 //EVENT LISTENERS//
 window.addEventListener('load', fetchAllData);
-navTitle.addEventListener('click', goHome);
+// homeButton.addEventListener('click', goHome);
 menu.addEventListener('click', goHome);
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
