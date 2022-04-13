@@ -59,7 +59,6 @@ describe('Recipe', () => {
 
   it('Should have a helper function that returns array of correct ingredients', () => {
     let correctIngredients = recipe.filterIngredients(recipe.ingredients[0], sampleIngredients)
-    console.log(correctIngredients);
     expect(correctIngredients).to.deep.equal([{"id": 20081, "name": "wheat flour", "estimatedCostInCents": 142}]);
   });
 });

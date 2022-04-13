@@ -35,30 +35,44 @@ describe('Recipe Repository', () => {
     expect(recipeRepo.currentUser.name).to.equal("Saige O'Kon");
   });
 
-  it('Should have a method that filters by tags', () => {
-    expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
+  it('Should have a method that filters by tag', () => {
     recipeRepo.checkedTags = ["sauce"];
     
     recipeRepo.filterByTags();
+
     expect(recipeRepo.filteredRecipes).to.deep.equal([sampleRecipes[2]]);
   });
 
+  it('Should have a method that can filter by a different tag', () => {
+    recipeRepo.checkedTags = ["snack"];
+
+    recipeRepo.filterByTags();
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(2);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[0]);
+    expect(recipeRepo.filteredRecipes[1]).to.deep.equal(sampleRecipes[2]);
+  });
+
+
   it('Should have a method that can sort based on multiple tags', () => {
-    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
-    
-    recipeRepo.checkedTags = ["main dish"];
+    recipeRepo.checkedTags = ["snack"];
     recipeRepo.filterByTags();
 
-    expect(recipeRepo.checkedTags).to.deep.equal(["main dish"]);
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(2);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[0]);
+    expect(recipeRepo.filteredRecipes[1]).to.deep.equal(sampleRecipes[2]);
+
+    recipeRepo.checkedTags = ["snack", "sauce"];
+    recipeRepo.filterByTags();
+
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
-    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[1]);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
+  });
 
-
-    recipeRepo.checkedTags = ["main dish", "sauce"];
+  it('Should have filteredRecipes be empty if tag combination results in no matches', () => {
+    recipeRepo.checkedTags = ["snack", "main dish"];
     recipeRepo.filterByTags();
 
-    expect(recipeRepo.checkedTags).to.deep.equal(["main dish", "sauce"]);
-    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(0);
     expect(recipeRepo.filteredRecipes).to.deep.equal([]);
   });
 
@@ -67,7 +81,6 @@ describe('Recipe Repository', () => {
     recipeRepo.filterByTags();
 
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
-    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[1]);
 
     recipeRepo.resetFilteredRecipes();
 
@@ -76,34 +89,87 @@ describe('Recipe Repository', () => {
   });
 
   it('Should have a method that sorts based on name', () => {
-    recipeRepo.filterByName("Wing Sauce");
+    recipeRepo.filterBySearchTerm("Cookie");
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[0]);
+  });
+
+  it('Should have a method that sorts based on a different name', () => {
+    recipeRepo.filterBySearchTerm("Wing Sauce");
 
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
     expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
   });
 
-  it('Should have method that sorts by name also sort by tag', () => {
-    recipeRepo.filterByName("Wing Sauce");
+  it('Should not care about capitals', () => {
+    recipeRepo.filterBySearchTerm("COOKIE");
 
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
-    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[0]);
+  });
 
-    recipeRepo.checkedTags = ["main dish"];
-
-    recipeRepo.filterByName("Wing Sauce");
+  it('Should show zero results if search input is not found', () => {
+    recipeRepo.filterBySearchTerm("avacado toast");
 
     expect(recipeRepo.filteredRecipes).to.deep.equal([]);
   });
 
-  it('Should have a method to add tags to checked tags array', () => {
-    expect(recipeRepo.checkedTags).to.deep.equal([]);
+  it('Should have that method call filterByTags', () => {
+    recipeRepo.checkedTags = ["main dish"];
+    recipeRepo.filterBySearchTerm("");
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[1]);
+  });
+
+  it('Should not break when input is undefined', () => {
+    expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
+
+    recipeRepo.filterBySearchTerm();
+
+    expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
+  });
+
+  it('Should have method that sorts by both name and tag', () => {
+    recipeRepo.checkedTags = ["snack"];
+    recipeRepo.filterBySearchTerm();
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(2);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[0]);
+    expect(recipeRepo.filteredRecipes[1]).to.deep.equal(sampleRecipes[2]);
+
+    recipeRepo.filterBySearchTerm("Wing Sauce");
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
+  });
+
+  it('Should reset filteredRecipes before filtering to allow for multiple searches', () => {
+    recipeRepo.filterBySearchTerm("wing sauce");
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
+
+    recipeRepo.filterBySearchTerm("cookie");
+
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[0]);
+  });
+
+  it('Should have a method to add tag to checked tags array', () => {
     recipeRepo.checkTag("main dish");
+
     expect(recipeRepo.checkedTags).to.deep.equal(["main dish"]);
   });
 
-  it('Should filter recipes after adding a tag', () => {
-    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
+  it('Should have a method to add a different tag to checked tags array', () => {
+    recipeRepo.checkTag("snack");
 
+    expect(recipeRepo.checkedTags).to.deep.equal(["snack"]);
+  });
+
+  it('Should filter recipes after adding a tag', () => {
     recipeRepo.checkTag("main dish");
 
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
@@ -111,6 +177,21 @@ describe('Recipe Repository', () => {
   });
 
   it('Should have a method that removes existing tags from checked tags array', () => {
+
+    recipeRepo.checkTag("main dish");
+
+    expect(recipeRepo.checkedTags).to.deep.equal(["main dish"]);
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[1]);
+
+    recipeRepo.checkTag("main dish");
+
+    expect(recipeRepo.checkedTags).to.deep.equal([]);
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
+    expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
+  });
+
+  it('Should only remove the correct tag from checked tags array', () => {
 
     recipeRepo.checkTag("main dish");
 
@@ -132,20 +213,21 @@ describe('Recipe Repository', () => {
   });
 
   it('Should also filter recipes by name after adding a tag', () => {
-    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
+    recipeRepo.checkTag("snack", "Wing Sauce");
 
-    recipeRepo.checkTag("main dish");
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
-    recipeRepo.checkTag("main dish");
-    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(4);
-
-    recipeRepo.checkTag("main dish", "Wing Sauce");
-
-    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(0);
-    expect(recipeRepo.filteredRecipes).to.deep.equal([]);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[2]);
   });
 
   it('Should have a method that adds favorites', () => {
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([]);
+    
+    recipeRepo.toggleFavorite("998765");
+
+    expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([998765]);
+  });
+
+  it('Should have a method that adds multiple favorites', () => {
     expect(recipeRepo.currentUser.favoriteRecipes).to.deep.equal([]);
     
     recipeRepo.toggleFavorite("123456");
@@ -168,7 +250,17 @@ describe('Recipe Repository', () => {
     expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
     
     recipeRepo.toggleFavorite("595736");
+    recipeRepo.checkedTags = ["favorite"];
+    recipeRepo.filterByTags();
 
+    expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
+    expect(recipeRepo.filteredRecipes[0]).to.deep.equal(sampleRecipes[0]);
+  });
+
+  it('Should have checkTag work with favorites', () => {
+    expect(recipeRepo.filteredRecipes).to.deep.equal(sampleRecipes);
+    
+    recipeRepo.toggleFavorite("595736");
     recipeRepo.checkTag("favorite");
 
     expect(recipeRepo.filteredRecipes).to.have.a.lengthOf(1);
