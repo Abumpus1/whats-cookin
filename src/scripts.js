@@ -1,4 +1,5 @@
 import './styles.css';
+// import domUpdates from './domUpdates.js';
 import { fetchData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
