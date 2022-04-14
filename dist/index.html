@@ -2,25 +2,23 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Inter:wght@200&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Inter:wght@200&display=swap" rel="stylesheet">
     <title>Whats Cookin</title>
   </head>
   <body>
     <nav>
         <div class="menu-nav">
-          <h3 class="menu-drop">HOME</h3>
+          <button class="home-button">HOME</button>
         </div>
       <h1 class="nav">What's Cookin</h1>
       <div class="search-bar">
-        <form class="nav" id="form" role="search">
           <input type="search" id="query" name="q"
           placeholder="Search..."
-          aria-label="Search through site content">
-        </form>
+          aria-label="Search through recipes by name or ingredient">
       </div>
     </nav>
     <main>
-      <section class="hidden homepage-container">
+      <!-- <section class="hidden homepage-container">
         <article class="homepage">
           <section>
             <h2>Try This Today</h2>
@@ -63,7 +61,7 @@
             </section>
           </div>
         </aside>
-      </section>
+      </section> -->
       <section class=" all-recipes-page-container">
         <aside class="tag-filter">
           <div class="filter-title">
@@ -154,7 +152,7 @@
         </aside>
         <article class="all-recipes-container">
           <p>Your query returned the following number of recipes: <span class="recipe-count"></span></p>
-          
+
           <!-- <p>Based on your filters, <span class="recipe-count"></span> recipes found.</p> -->
           <section class="recipes-list" id="recipesList">
           </section>
@@ -184,9 +182,9 @@
           <section class="directions-box">
             <!-- <div> -->
               <div class="directions-label-container">
-                
+
                   <h3 class="recipe-name-large">Recipe_Name</h3>
-                
+
                 <div>
                   <div class="add-to-cook-checkbox">
                     <input data-tag-name="add-to-cook" type="checkbox" class="save-recipe" id="saveRecipe">

@@ -3,8 +3,7 @@ import { fetchData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
 //QUERY SELECTORS//
-// const homeButton = document.querySelector(".home-button");
-const menu = document.querySelector(".menu-drop");
+const homeButton = document.querySelector(".home-button");
 const recipesList = document.querySelector(".recipes-list");
 const allRecipesPage = document.querySelector(".all-recipes-page-container");
 const recipePage = document.querySelector(".recipe-page-container");
@@ -43,9 +42,21 @@ const show = (element => {
   element.classList.remove("hidden");
 });
 
+const showVis = (element => {
+  element.classList.remove("hidden-vis");
+});
+
+const hideVis = (element => {
+  element.classList.add("hidden-vis");
+});
+
+
 const goHome = () => {
   hide(recipePage);
   show(allRecipesPage);
+  showVis(searchInput);
+  searchInput.value = "";
+
 }
 
 const displayAllRecipes = () => {
@@ -55,9 +66,9 @@ const displayAllRecipes = () => {
     if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
-        <div class="recipe-image-container">
+        <button class="recipe-image-container recipe-image-button">
           <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
-        </div>
+        </button>
         <div class="rotated-opposite recipe-name-favorite">
           <div class="favorite-button">
             <p id="${recipe.id}">❤️</p>
@@ -70,9 +81,9 @@ const displayAllRecipes = () => {
     } else {
       recipesList.innerHTML += `
       <section class="recipe" id="${recipe.id}">
-        <div>
+        <button class="recipe-image-button">
           <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
-        </div>
+        </button>
         <div class="rotated recipe-name-favorite">
           <div class="favorite-button">
             <p id="${recipe.id}">🤍</p>
@@ -96,6 +107,7 @@ const displayRecipePage = (event) => {
   activeRecipeRepo.recipes.forEach(recipe => {
     if(event.target.closest(".recipe").id === `${recipe.id}`){
       hide(allRecipesPage);
+      hideVis(searchInput);
       show(recipePage);
       displaySelectedRecipe(recipe);
       if (activeRecipeRepo.currentUser.recipesToCook.includes(addToCookCheckBox.id)) {
@@ -140,8 +152,7 @@ const addToCookList = (event) => {
 
 //EVENT LISTENERS//
 window.addEventListener('load', fetchAllData);
-// homeButton.addEventListener('click', goHome);
-menu.addEventListener('click', goHome);
+homeButton.addEventListener('click', goHome);
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
     clickFavoriteButton(event);
