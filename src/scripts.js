@@ -1,5 +1,5 @@
 import './styles.css';
-// import domUpdates from './domUpdates.js';
+import domUpdates from './domUpdates.js';
 import { fetchData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
@@ -26,7 +26,7 @@ const fetchAllData = () => {
   Promise.all([fetchData("recipes"), fetchData("ingredients"), fetchData("users")])
     .then(data => {
       assignData(data)
-      displayAllRecipes()
+      domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
     })
     .catch(err => console.log(err));
 }
@@ -57,51 +57,50 @@ const goHome = () => {
   show(allRecipesPage);
   showVis(searchInput);
   searchInput.value = "";
-
 }
 
-const displayAllRecipes = () => {
-  recipesList.innerHTML = "";
-  recipeCount.innerText = activeRecipeRepo.filteredRecipes.length;
-  activeRecipeRepo.filteredRecipes.forEach(recipe => {
-    if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
-      recipesList.innerHTML += `
-      <section class="recipe" id="${recipe.id}">
-        <button class="recipe-image-container recipe-image-button">
-          <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
-        </button>
-        <div class="rotated-opposite recipe-name-favorite">
-          <div class="favorite-button">
-            <p id="${recipe.id}">❤️</p>
-          </div>
-          <div class="recipe-name-label-container">
-            <h3 class="recipe-name-label">${recipe.name}</h3>
-          </div>
-        </div>
-      </section>`
-    } else {
-      recipesList.innerHTML += `
-      <section class="recipe" id="${recipe.id}">
-        <button class="recipe-image-button">
-          <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
-        </button>
-        <div class="rotated recipe-name-favorite">
-          <div class="favorite-button">
-            <p id="${recipe.id}">🤍</p>
-          </div>
-          <div class="recipe-name-label-container">
-            <h3 class="recipe-name-label">${recipe.name}</h3>
-          </div>
-        </div>
-      </section>`
-    }
-  });
-}
+// const displayAllRecipes = () => {
+//   recipesList.innerHTML = "";
+//   recipeCount.innerText = activeRecipeRepo.filteredRecipes.length;
+//   activeRecipeRepo.filteredRecipes.forEach(recipe => {
+//     if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
+//       recipesList.innerHTML += `
+//       <section class="recipe" id="${recipe.id}">
+//         <button class="recipe-image-container recipe-image-button">
+//           <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
+//         </button>
+//         <div class="rotated-opposite recipe-name-favorite">
+//           <div class="favorite-button">
+//             <p id="${recipe.id}">❤️</p>
+//           </div>
+//           <div class="recipe-name-label-container">
+//             <h3 class="recipe-name-label">${recipe.name}</h3>
+//           </div>
+//         </div>
+//       </section>`
+//     } else {
+//       recipesList.innerHTML += `
+//       <section class="recipe" id="${recipe.id}">
+//         <button class="recipe-image-button">
+//           <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
+//         </button>
+//         <div class="rotated recipe-name-favorite">
+//           <div class="favorite-button">
+//             <p id="${recipe.id}">🤍</p>
+//           </div>
+//           <div class="recipe-name-label-container">
+//             <h3 class="recipe-name-label">${recipe.name}</h3>
+//           </div>
+//         </div>
+//       </section>`
+//     }
+//   });
+// }
 
 const clickFavoriteButton = (event) => {
   activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
   activeRecipeRepo.filterBySearchTerm(searchInput.value);
-  displayAllRecipes();
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo);
 }
 
 const displayRecipePage = (event) => {
@@ -137,12 +136,12 @@ const displaySelectedRecipe = (recipe) => {
 
 const clickTag = (tagName) => {
   activeRecipeRepo.checkTag(tagName, searchInput.value);
-  displayAllRecipes();
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
 }
 
 const searchRecipes = () => {
   activeRecipeRepo.filterBySearchTerm(searchInput.value);
-  displayAllRecipes();
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
 }
 
 const addToCookList = (event) => {
