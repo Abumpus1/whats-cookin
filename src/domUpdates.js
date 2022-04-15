@@ -74,7 +74,7 @@ let domUpdates = {
   },
 
   toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput){
-    if (activeRecipeRepo.currentUser.recipesToCook.includes(addToCookCheckBox.id)) {
+    if (activeRecipeRepo.currentUser.recipesToCook.includes(parseInt(addToCookCheckBox.id))) {
       addToCookInput.checked = true;
     } else {
       addToCookInput.checked = false;
