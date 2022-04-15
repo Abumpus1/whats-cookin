@@ -1,10 +1,10 @@
 import './styles.css';
+import domUpdates from './domUpdates.js';
 import { fetchData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
 //QUERY SELECTORS//
-// const homeButton = document.querySelector(".home-button");
-const menu = document.querySelector(".menu-drop");
+const homeButton = document.querySelector(".home-button");
 const recipesList = document.querySelector(".recipes-list");
 const allRecipesPage = document.querySelector(".all-recipes-page-container");
 const recipePage = document.querySelector(".recipe-page-container");
@@ -20,13 +20,13 @@ const searchInput = document.querySelector("#query");
 const recipeCount = document.querySelector(".recipe-count");
 
 let activeRecipeRepo;
-//FUNCTIONS//
 
+//FUNCTIONS//
 const fetchAllData = () => {
   Promise.all([fetchData("recipes"), fetchData("ingredients"), fetchData("users")])
     .then(data => {
       assignData(data)
-      displayAllRecipes()
+      domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
     })
     .catch(err => console.log(err));
 }
@@ -35,101 +35,40 @@ const assignData = (response) => {
     activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]);
 }
 
-const hide = (element => {
-  element.classList.add("hidden");
-});
-
-const show = (element => {
-  element.classList.remove("hidden");
-});
-
 const goHome = () => {
-  hide(recipePage);
-  show(allRecipesPage);
-}
-
-const displayAllRecipes = () => {
-  recipesList.innerHTML = "";
-  recipeCount.innerText = activeRecipeRepo.filteredRecipes.length;
-  activeRecipeRepo.filteredRecipes.forEach(recipe => {
-    if (activeRecipeRepo.currentUser.favoriteRecipes.includes(recipe.id)) {
-      recipesList.innerHTML += `
-      <section class="recipe" id="${recipe.id}">
-        <div class="recipe-image-container">
-          <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
-        </div>
-        <div class="rotated-opposite recipe-name-favorite">
-          <div class="favorite-button">
-            <p id="${recipe.id}">❤️</p>
-          </div>
-          <div class="recipe-name-label-container">
-            <h3 class="recipe-name-label">${recipe.name}</h3>
-          </div>
-        </div>
-      </section>`
-    } else {
-      recipesList.innerHTML += `
-      <section class="recipe" id="${recipe.id}">
-        <div>
-          <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
-        </div>
-        <div class="rotated recipe-name-favorite">
-          <div class="favorite-button">
-            <p id="${recipe.id}">🤍</p>
-          </div>
-          <div class="recipe-name-label-container">
-            <h3 class="recipe-name-label">${recipe.name}</h3>
-          </div>
-        </div>
-      </section>`
-    }
-  });
+  domUpdates.hide(recipePage);
+  domUpdates.show(allRecipesPage);
+  domUpdates.showVis(searchInput);
+  domUpdates.hideSearch(searchInput);
+  searchRecipes();
 }
 
 const clickFavoriteButton = (event) => {
   activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
   activeRecipeRepo.filterBySearchTerm(searchInput.value);
-  displayAllRecipes();
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo);
 }
 
 const displayRecipePage = (event) => {
   activeRecipeRepo.recipes.forEach(recipe => {
     if(event.target.closest(".recipe").id === `${recipe.id}`){
-      hide(allRecipesPage);
-      show(recipePage);
-      displaySelectedRecipe(recipe);
-      if (activeRecipeRepo.currentUser.recipesToCook.includes(addToCookCheckBox.id)) {
-        addToCookInput.checked = true;
-      } else {
-        addToCookInput.checked = false;
-      }
+      domUpdates.hide(allRecipesPage);
+      domUpdates.hideVis(searchInput);
+      domUpdates.show(recipePage);
+      domUpdates.displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost);
+      domUpdates.toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput);
     }
   });
 }
 
-const displaySelectedRecipe = (recipe) => {
-  addToCookCheckBox.id = `${recipe.id}`
-  recipeImage.innerHTML = `<img src="${recipe.image}" alt="${recipe.name}">`;
-  recipeName.innerText = `${recipe.name}`
-  recipeIngredients.innerHTML = "";
-  recipeDirections.innerHTML = "";
-  recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
-    recipeIngredients.innerHTML += `<p>${ingredient}<p>`;
-  });
-  recipe.getRecipeDirections().forEach(direction => {
-    recipeDirections.innerHTML += `<p>${direction}<p>`;
-  });
-  recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
-}
-
 const clickTag = (tagName) => {
   activeRecipeRepo.checkTag(tagName, searchInput.value);
-  displayAllRecipes();
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
 }
 
 const searchRecipes = () => {
   activeRecipeRepo.filterBySearchTerm(searchInput.value);
-  displayAllRecipes();
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
 }
 
 const addToCookList = (event) => {
@@ -140,8 +79,7 @@ const addToCookList = (event) => {
 
 //EVENT LISTENERS//
 window.addEventListener('load', fetchAllData);
-// homeButton.addEventListener('click', goHome);
-menu.addEventListener('click', goHome);
+homeButton.addEventListener('click', goHome);
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
     clickFavoriteButton(event);
