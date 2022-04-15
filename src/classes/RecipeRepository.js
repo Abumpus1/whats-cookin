@@ -58,7 +58,7 @@ class RecipeRepository {
 
   filterByTags() {
     this.checkedTags.forEach(tag => {
-      this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag) || (tag === "favorite" && this.currentUser.favoriteRecipes.includes(recipe.id)));
+      this.filteredRecipes = this.filteredRecipes.filter(recipe => recipe.tags.includes(tag) || (tag === "favorite" && this.currentUser.favoriteRecipes.includes(recipe.id)) || (tag === "recipeToCook" && this.currentUser.recipesToCook.includes(recipe.id)));
     });
   }
 
