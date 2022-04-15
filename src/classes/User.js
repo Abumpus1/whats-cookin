@@ -35,6 +35,18 @@ class User {
       let pantryIngredient = this.pantry.find(pantryIng => recipeIng.id === pantryIng.id);
       if (pantryIngredient && pantryIngredient.amount >= recipeIng.quantity.amount) {
         return true;
+        //not sure if this enough for what we need, may need to do more
+        //possibly else if that returns missing ings?
+      }
+    });
+  }
+
+  showPantry(ingredientsData) {
+    return this.pantry.map(pantryIng => {
+      return {
+        id: pantryIng.ingredient,
+        name: ingredientsData.find(dataIng => pantryIng === dataIng).name,
+        amount: pantryIng.amount
       }
     });
   }

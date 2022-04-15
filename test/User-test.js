@@ -72,6 +72,8 @@ describe('User', () => {
 
     expect(user.recipesToCook).to.deep.equal([595736]);
   });
+
+  
 });
 
 
@@ -85,7 +87,7 @@ describe('User', () => {
 
 
 
-3). As a user, I should be able to view what ingredients exist inside of my pantry.
+x 3). As a user, I should be able to view what ingredients exist inside of my pantry.
   - display pantry, return each ing name (compare pantry ing id to ingData id) and ing amount
 
 4). As a user, I should be able to check my list of recipes to cook and see if my pantry has enough ingredients to cook a meal.
