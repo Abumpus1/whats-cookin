@@ -11,9 +11,9 @@ let domUpdates = {
             <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
           </button>
           <div class="rotated-opposite recipe-name-favorite">
-            <div class="favorite-button">
-              <p id="${recipe.id}">❤️</p>
-            </div>
+            <button class="favorite-button">
+              <p class="heart-icon"id="${recipe.id}">❤️</p>
+            </button>
             <div class="recipe-name-label-container">
               <h3 class="recipe-name-label">${recipe.name}</h3>
             </div>
@@ -26,9 +26,9 @@ let domUpdates = {
             <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}">
           </button>
           <div class="rotated recipe-name-favorite">
-            <div class="favorite-button">
-              <p id="${recipe.id}">🤍</p>
-            </div>
+            <button class="favorite-button">
+              <p class="heart-icon" id="${recipe.id}">🤍</p>
+            </button>
             <div class="recipe-name-label-container">
               <h3 class="recipe-name-label">${recipe.name}</h3>
             </div>
