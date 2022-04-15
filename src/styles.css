@@ -68,17 +68,11 @@ margin-bottom: 15px;
 }
 
 .favorite-button {
-  /* position: relative;
-  vertical-align: 50px;
-  margin: zero;
-  margin-bottom: -12px;
-  margin-left: 82px;
-  margin-right: 0px; */
-
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  height: 45px;
   width: 40px;
   margin: 0px;
   margin-left: 140px;
@@ -86,12 +80,11 @@ margin-bottom: 15px;
   cursor: pointer;
   border: 0;
   background-color: inherit;
-  font-size: 30px;
-
 }
 
 .heart-icon {
-  font-size: 30px;
+  font-size: 23px;
+  margin-bottom: 8px;
 }
 
 .filter-tag-text {
