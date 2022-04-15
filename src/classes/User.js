@@ -45,7 +45,7 @@ class User {
     return this.pantry.map(pantryIng => {
       return {
         id: pantryIng.ingredient,
-        name: ingredientsData.find(dataIng => pantryIng === dataIng).name,
+        name: ingredientsData.find(dataIng => pantryIng.ingredient === dataIng.id).name,
         amount: pantryIng.amount
       }
     });

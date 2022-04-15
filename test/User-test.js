@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import sampleUsers from '../src/data/sample-users';
+import sampleIngredients from '../src/data/sample-ingredients';
 import User from '../src/classes/User';
 
 describe('User', () => {
@@ -73,7 +74,12 @@ describe('User', () => {
     expect(user.recipesToCook).to.deep.equal([595736]);
   });
 
-  
+  it('Should have a method to return pantry array with names of ingredients', () => {
+    let userIngredients = user.showPantry(sampleIngredients)
+    
+    expect(userIngredients).to.have.a.lengthOf(5)
+    expect(userIngredients).to.deep.include({id:20081, name: "wheat flour", amount: 5})
+  });
 });
 
 
