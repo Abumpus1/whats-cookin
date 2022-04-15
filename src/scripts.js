@@ -19,6 +19,7 @@ const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 const recipeCount = document.querySelector(".recipe-count");
 
+
 let activeRecipeRepo;
 
 //FUNCTIONS//
