@@ -68,14 +68,23 @@ margin-bottom: 15px;
 }
 
 .favorite-button {
-  width: 20px;
   position: relative;
-  vertical-align: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 40px;
+  margin: 0px;
+  margin-left: 140px;
   margin-top: -27px;
-  margin-bottom: -12px;
-  margin-left: 82px;
-  margin-right: 0px;
   cursor: pointer;
+  border: 0;
+  background-color: inherit;
+}
+
+.heart-icon {
+  font-size: 23px;
+  margin-bottom: 8px;
 }
 
 .filter-tag-text {
