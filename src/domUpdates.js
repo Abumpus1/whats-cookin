@@ -58,7 +58,7 @@ let domUpdates = {
     searchInput.value = "";
   },
 
-  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost) {
+  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer) {
     addToCookCheckBox.id = `${recipe.id}`
     recipeImage.innerHTML = `<img src="${recipe.image}" alt="${recipe.name}">`;
     recipeName.innerText = `${recipe.name}`
@@ -71,6 +71,26 @@ let domUpdates = {
       recipeDirections.innerHTML += `<p>${direction}<p>`;
     });
     recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
+    optionsContainer.innerHTML = ""
+    let sortedIngredients = activeRecipeRepo.ingredients.sort((a, b) => {
+      let aUp = a.name.toUpperCase();
+      let bUp = b.name.toUpperCase();
+      if (aUp > bUp) {
+        return 1;
+      }
+      if (aUp < bUp) {
+        return -1;
+      }
+      return 0;
+    });
+    sortedIngredients.forEach(ingredient => {
+      optionsContainer.innerHTML += `
+      <div class="option" data-id="${ingredient.id}" data-label="${ingredient.name}">
+        <input type="radio" data-label="${ingredient.name}" class="radio" id="${ingredient.id}" data-id="${ingredient.id}" name="category">
+        <label for="${ingredient.id}">${ingredient.name}</label>
+      </div>
+      `
+    })
   },
 
   toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput){

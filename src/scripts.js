@@ -57,7 +57,7 @@ const displayRecipePage = (event) => {
       domUpdates.hide(allRecipesPage);
       domUpdates.hideVis(searchInput);
       domUpdates.show(recipePage);
-      domUpdates.displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost);
+      domUpdates.displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer);
       domUpdates.toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput);
     }
   });
@@ -85,8 +85,9 @@ const openDropdown = () => {
 }
 
 const checkDropdownId = (event) => {
-  if(event.target.name === "category") {
+  if(event.target.dataset.label) {
     selected.innerText = event.target.dataset.label
+    selected.dataset.id = event.target.dataset.id
     optionsContainer.classList.remove("active")
   }
 }
