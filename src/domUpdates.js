@@ -93,13 +93,14 @@ let domUpdates = {
       return 0;
     });
     sortedIngredients.forEach(ingredient => {
-      if (ingredient.name.toLowerCase().includes(searchInput))
-      optionsContainer.innerHTML += `
-      <div class="option" data-id="${ingredient.id}" data-label="${ingredient.name}">
-        <input type="radio" data-label="${ingredient.name}" class="radio" id="${ingredient.id}" data-id="${ingredient.id}" name="category">
-        <label for="${ingredient.id}">${ingredient.name}</label>
-      </div>
-      `
+      if (ingredient.name.toLowerCase().includes(searchInput)) {
+        optionsContainer.innerHTML += `
+        <div class="option" data-id="${ingredient.id}" data-label="${ingredient.name}">
+          <input type="radio" data-label="${ingredient.name}" class="radio" id="${ingredient.id}" data-id="${ingredient.id}" name="category">
+          <label for="${ingredient.id}">${ingredient.name}</label>
+        </div>
+        `
+      }
     });
   },
 
