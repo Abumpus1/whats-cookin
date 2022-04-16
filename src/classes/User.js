@@ -5,6 +5,7 @@ class User {
     this.pantry = user.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
+    this.missingIngredients = [];
   }
 
   toggleId(recipeId, dataArray) {
@@ -27,18 +28,22 @@ class User {
     this.toggleId(recipeId,this.recipesToCook);
   }
 
-  compareIngredients(recipe) {
-    //access array of ingredients, per ingredient, look through pantry
-    // see if pantry has ingredient, if so,
-    //see if pantry ingredient has correct amount
-    return recipe.ingredients.every(recipeIng => {
-      let pantryIngredient = this.pantry.find(pantryIng => recipeIng.id === pantryIng.id);
-      if (pantryIngredient && pantryIngredient.amount >= recipeIng.quantity.amount) {
-        return true;
-        //not sure if this enough for what we need, may need to do more
-        //possibly else if that returns missing ings?
-      }
-    });
+  calculateMissing(recipeIng, pantryIng) {
+      return recipeIng.quantity.amount - pantryIng.amount
+  }
+
+  findMissingIngredients(recipe) {
+    this.missingIngredients = recipe.reduce((acc,recipeIng) => {
+      this.pantry.forEach(pantryIng => {
+        if (pantryIng.ingredient === recipeIng.id && pantryIng.amount < recipeIng.quantity.amount || !this.pantry.some(ing => ing.ingredient === recipeIng.id)) {
+          acc.push({
+            id: pantryIng.ingredient,
+            amountMissing: this.calculateMissing(recipeIng, pantryIng)
+          });
+        }
+      });
+      return acc;
+    },[]);
   }
 
   showPantry(ingredientsData) {
