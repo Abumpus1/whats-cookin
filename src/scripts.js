@@ -74,7 +74,8 @@ const searchRecipes = () => {
 
 const addToCookList = (event) => {
   if(event.target.dataset.tagName === "add-to-cook") {
-    activeRecipeRepo.currentUser.decideToCook(addToCookCheckBox.id);
+    
+    activeRecipeRepo.currentUser.decideToCook(parseInt(addToCookCheckBox.id));
   }
 }
 

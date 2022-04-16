@@ -16,6 +16,17 @@ body {
   text-shadow: 0px 1px 2px #111111;
 }
 
+.add-to-cook-checkbox-container {
+display: flex;
+justify-content: space-between;
+width: 100%;
+border: solid red 1px;
+}
+
+.add-to-cook-checkbox {
+
+}
+
 .all-recipes-container {
   width: 86%;
   display: flex;
@@ -35,10 +46,15 @@ margin-bottom: 15px;
 }
 
 .directions-box {
-  width: 35vw;
-  border-radius: 34px;
+  width: 100%;
+  height: 42vh;
+  max-width: 130vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 33px;
   border: solid rgb(183, 183, 249) 6px;
-  height: 87vh;
+  justify-content: center;
   box-shadow: 15px 15px 8px gray;
 
 }
@@ -48,17 +64,19 @@ margin-bottom: 15px;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin: 0px;
-  margin-bottom: 31px;
+  margin: -17pxpx;
+  margin-bottom: 4px;
+  width: 100%;
 }
 
 .directions-list {
   display: flex;
   flex-direction: column;
   min-height: 30vh;
-  max-height: 66vh;
+  max-height: 30vh;
   overflow-y: scroll;
   margin-left: 44px;
+  margin-bottom: 18px;
 }
 
 .directions-list > p {
@@ -108,8 +126,25 @@ font-size: 13pt;
 margin: 5px;
 }
 
+.ingredients-label-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 11px;
+  border-bottom: solid rgb(183, 183, 249) 4px;
+}
+
 .ingredients-label {
   margin: 3px;
+}
+.ingredients-label-2 {
+  margin: 3px;
+  margin-left: 20px;
+}
+
+.inredients-label-wrapper-2 {
+border-left: solid rgb(183, 183, 249) 28px;
 }
 
 .ingredients-list-container {
@@ -178,6 +213,33 @@ nav {
   padding: 0px;
   height: 63px;
   box-shadow: 2px 2px 10px grey;
+}
+
+.pantry-container {
+  width: 38%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 45px;
+  height: 80vh;
+}
+.pantry {
+  width: 100%;
+  height: 42vh;
+  max-width: 130vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 33px;
+  border: solid rgb(183, 183, 249) 6px;
+  justify-content: center;
+  box-shadow: 15px 15px 8px gray;
+  margin-top: 22px;
+}
+
+.pantry-list {
+  overflow-y: scroll;
+
 }
 
 .recipe {
@@ -296,6 +358,17 @@ nav {
   margin: 0px;
   margin-top: -107px;
   margin-left: 13px;
+}
+
+.recipe-name-large {
+ display: flex;
+ justify-content: center;
+  margin: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 15pt;
+  width: 68%;
 }
 
 .recipe-page-container {

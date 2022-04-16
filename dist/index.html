@@ -71,6 +71,10 @@
           </div>
           <section class="tags">
             <div>
+              <input data-tag-name="recipeToCook" type="checkbox" class="checkboxes" id="tag0">
+              <label for="tag0">Cook List</label><br>
+            </div>
+            <div>
               <input data-tag-name="favorite" type="checkbox" class="checkboxes" id="tag1">
               <label for="tag1">Favorites</label><br>
             </div>
@@ -167,8 +171,14 @@
 
             </div>
             <div class="recipe-ingredients">
-              <div>
-                <h3 class="ingredients-label">Ingredients</h3>
+              <div class="ingredients-label-container">
+
+                <div class="inredients-label-wrapper">
+                  <h3 class="ingredients-label">Ingredients in Stock</h3>
+                </div>
+                <div class="inredients-label-wrapper-2">
+                  <h3 class="ingredients-label-2">Ingredients Out of Stock</h3>
+                </div>
               </div>
               <div class="ingredients-list-container">
                 <div class="ingredients-list">
@@ -181,23 +191,30 @@
               </div>
             </div>
           </section>
-          <section class="directions-box">
-            <!-- <div> -->
-              <div class="directions-label-container">
+          <section class="pantry-container">
 
-                  <h3 class="recipe-name-large">Recipe_Name</h3>
-
-                <div>
-                  <div class="add-to-cook-checkbox">
-                    <input data-tag-name="add-to-cook" type="checkbox" class="save-recipe" id="saveRecipe">
-                    <label data-tag-name="add-to-cook-label" for="saveRecipe">Add to Recipes to Cook</label><br>
+            <section class="directions-box">
+              <!-- <div> -->
+                <div class="directions-label-container">
+  
+                    <h3 class="recipe-name-large">Recipe_Name</h3>
+  
+                  <div class="add-to-cook-checkbox-container">
+                    <button class="button-cook-now">Cook Now</button>
+                    <div class="add-to-cook-checkbox">
+                      <input data-tag-name="add-to-cook" type="checkbox" class="save-recipe" id="saveRecipe">
+                      <label data-tag-name="add-to-cook-label" for="saveRecipe">Cook Later</label><br>
+                    </div>
                   </div>
+                  <!-- <h3 class="directions-label">Directions</h3> -->
                 </div>
-                <h3 class="directions-label">Directions</h3>
-              </div>
-              <div class="directions-list">
-              </div>
-            <!-- </div> -->
+                <div class="directions-list">
+                </div>
+              <!-- </div> -->
+            </section>
+            <section class="pantry">
+  
+            </section>
           </section>
         </article>
       </section>

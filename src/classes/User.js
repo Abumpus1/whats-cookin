@@ -26,6 +26,30 @@ class User {
   decideToCook(recipeId) {
     this.toggleId(recipeId,this.recipesToCook);
   }
+
+  compareIngredients(recipe) {
+    //access array of ingredients, per ingredient, look through pantry
+    // see if pantry has ingredient, if so,
+    //see if pantry ingredient has correct amount
+    return recipe.ingredients.every(recipeIng => {
+      let pantryIngredient = this.pantry.find(pantryIng => recipeIng.id === pantryIng.id);
+      if (pantryIngredient && pantryIngredient.amount >= recipeIng.quantity.amount) {
+        return true;
+        //not sure if this enough for what we need, may need to do more
+        //possibly else if that returns missing ings?
+      }
+    });
+  }
+
+  showPantry(ingredientsData) {
+    return this.pantry.map(pantryIng => {
+      return {
+        id: pantryIng.ingredient,
+        name: ingredientsData.find(dataIng => pantryIng.ingredient === dataIng.id).name,
+        amount: pantryIng.amount
+      }
+    });
+  }
 }
 
 export default User;

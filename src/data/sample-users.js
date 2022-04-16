@@ -4,11 +4,11 @@ const sampleUsers = [
     "id": 1,
     "pantry": [
       {
-        "ingredient": 11297,
+        "ingredient": 18372,
         "amount": 4
       },
       {
-        "ingredient": 1082047,
+        "ingredient": 9003,
         "amount": 10
       },
       {
@@ -16,11 +16,11 @@ const sampleUsers = [
         "amount": 5
       },
       {
-        "ingredient": 11215,
+        "ingredient": 19334,
         "amount": 5
       },
       {
-        "ingredient": 2047,
+        "ingredient": 1001,
         "amount": 6
       }]
   },
