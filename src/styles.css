@@ -125,6 +125,19 @@ h4 {
   margin: 6px;
 }
 
+.ing-search-box input {
+  width: 12vw;
+  padding: 5px 10px;
+  position: absolute;
+  font-size: 12pt;
+  border-radius: 8px 8px 0 0;
+  z-index: 100%;
+  border: solid #605c80 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s;
+}
+
 .ingredients-cost > h3, span {
 font-size: 13pt;
 margin: 5px;
@@ -414,6 +427,7 @@ nav {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .select-box .options-container {
@@ -432,6 +446,11 @@ nav {
   max-height: 50%;
   opacity: 1;
   overflow-y: scroll;
+}
+
+.select-box .options-container.active ~ .ing-search-box input {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .select-box .options-container::-webkit-scrollbar {
@@ -469,6 +488,10 @@ nav {
   border-radius: 8px;
   margin-bottom: 4px;
   order: 0;
+}
+
+.spacing-box {
+  height: 50px;
 }
 
 .tags > div > input, label{

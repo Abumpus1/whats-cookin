@@ -71,7 +71,16 @@ let domUpdates = {
       recipeDirections.innerHTML += `<p>${direction}<p>`;
     });
     recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
-    optionsContainer.innerHTML = ""
+    this.fillDropdown(activeRecipeRepo, optionsContainer)
+  },
+
+  fillDropdown(activeRecipeRepo, optionsContainer, searchInput) {
+    if (!searchInput) {
+      searchInput = "";
+    }
+    optionsContainer.innerHTML = `
+    <div class="spacing-box"></div>
+    `
     let sortedIngredients = activeRecipeRepo.ingredients.sort((a, b) => {
       let aUp = a.name.toUpperCase();
       let bUp = b.name.toUpperCase();
@@ -84,13 +93,14 @@ let domUpdates = {
       return 0;
     });
     sortedIngredients.forEach(ingredient => {
+      if (ingredient.name.toLowerCase().includes(searchInput))
       optionsContainer.innerHTML += `
       <div class="option" data-id="${ingredient.id}" data-label="${ingredient.name}">
         <input type="radio" data-label="${ingredient.name}" class="radio" id="${ingredient.id}" data-id="${ingredient.id}" name="category">
         <label for="${ingredient.id}">${ingredient.name}</label>
       </div>
       `
-    })
+    });
   },
 
   toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput){
