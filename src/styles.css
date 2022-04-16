@@ -191,6 +191,11 @@ border-left: solid rgb(183, 183, 249) 28px;
   overflow-y: scroll;
 }
 
+.ingredients-list-oos > p {
+  margin: 3px;
+  margin-left: 43px
+}
+
 .ingredients-list > p {
   margin: 3px;
   margin-left: 43px

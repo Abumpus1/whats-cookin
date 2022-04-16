@@ -11,6 +11,7 @@ const recipePage = document.querySelector(".recipe-page-container");
 const recipeName = document.querySelector(".recipe-name-large");
 const recipeImage = document.querySelector(".recipe-image-large");
 const recipeIngredients = document.querySelector(".ingredients-list");
+const recipeIngsMissing = document.querySelector(".ingredients-list-oos");
 const recipeDirections = document.querySelector(".directions-list");
 const addToCookCheckBox = document.querySelector(".add-to-cook-checkbox");
 const addToCookInput = document.querySelector(".save-recipe");
@@ -57,7 +58,7 @@ const displayRecipePage = (event) => {
       domUpdates.hide(allRecipesPage);
       domUpdates.hideVis(searchInput);
       domUpdates.show(recipePage);
-      domUpdates.displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer);
+      domUpdates.displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing);
       domUpdates.toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput);
     }
   });

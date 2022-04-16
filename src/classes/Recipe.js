@@ -15,7 +15,7 @@ class Recipe {
   getIngredientNames(ingredientsData) {
     return this.ingredients.reduce((acc, ingredient) => {
       let filteredIngs = this.filterIngredients(ingredient, ingredientsData);
-      filteredIngs.forEach((filterIng) => acc.push(filterIng.name));
+      filteredIngs.forEach((filterIng) => acc.push(filterIng));
       return acc;
     },[]);
   }

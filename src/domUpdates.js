@@ -58,14 +58,23 @@ let domUpdates = {
     searchInput.value = "";
   },
 
-  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer) {
+  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing) {
     addToCookCheckBox.id = `${recipe.id}`
     recipeImage.innerHTML = `<img src="${recipe.image}" alt="${recipe.name}">`;
     recipeName.innerText = `${recipe.name}`
     recipeIngredients.innerHTML = "";
+    recipeIngsMissing.innerHTML = "";
     recipeDirections.innerHTML = "";
+    console.log(recipe);
+    activeRecipeRepo.currentUser.findMissingIngredients(recipe)
+   console.log(activeRecipeRepo.currentUser.missingIngredients);
     recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
-      recipeIngredients.innerHTML += `<p>${ingredient}<p>`;
+      console.log(ingredient);
+        if (activeRecipeRepo.currentUser.missingIngredients.some(missingIng => missingIng.id === ingredient.id)) {
+          recipeIngsMissing.innerHTML += `<p>${ingredient.name}<p>`;
+        } else {
+          recipeIngredients.innerHTML += `<p>${ingredient.name}<p>`;
+        }
     });
     recipe.getRecipeDirections().forEach(direction => {
       recipeDirections.innerHTML += `<p>${direction}<p>`;

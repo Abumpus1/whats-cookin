@@ -33,7 +33,7 @@ class User {
   }
 
   findMissingIngredients(recipe) {
-    this.missingIngredients = recipe.reduce((acc,recipeIng) => {
+    this.missingIngredients = recipe.ingredients.reduce((acc,recipeIng) => {
       this.pantry.forEach(pantryIng => {
         if (pantryIng.ingredient === recipeIng.id && pantryIng.amount < recipeIng.quantity.amount || !this.pantry.some(ing => ing.ingredient === recipeIng.id)) {
           acc.push({
