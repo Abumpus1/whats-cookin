@@ -16,6 +16,17 @@ body {
   text-shadow: 0px 1px 2px #111111;
 }
 
+.add-to-cook-checkbox-container {
+display: flex;
+justify-content: space-between;
+width: 100%;
+border: solid red 1px;
+}
+
+.add-to-cook-checkbox {
+
+}
+
 .all-recipes-container {
   width: 86%;
   display: flex;
@@ -55,7 +66,7 @@ margin-bottom: 15px;
   align-items: center;
   margin: -17pxpx;
   margin-bottom: 4px;
-  border: solid 1px red;
+  width: 100%;
 }
 
 .directions-list {
@@ -350,11 +361,14 @@ nav {
 }
 
 .recipe-name-large {
+ display: flex;
+ justify-content: center;
   margin: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 13px;
+  margin-bottom: 5px;
   font-size: 15pt;
+  width: 68%;
 }
 
 .recipe-page-container {
