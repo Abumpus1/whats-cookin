@@ -55,6 +55,7 @@ margin-bottom: 15px;
   align-items: center;
   margin: -17pxpx;
   margin-bottom: 4px;
+  border: solid 1px red;
 }
 
 .directions-list {
@@ -64,6 +65,7 @@ margin-bottom: 15px;
   max-height: 30vh;
   overflow-y: scroll;
   margin-left: 44px;
+  margin-bottom: 18px;
 }
 
 .directions-list > p {
@@ -113,8 +115,25 @@ font-size: 13pt;
 margin: 5px;
 }
 
+.ingredients-label-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 11px;
+  border-bottom: solid rgb(183, 183, 249) 4px;
+}
+
 .ingredients-label {
   margin: 3px;
+}
+.ingredients-label-2 {
+  margin: 3px;
+  margin-left: 20px;
+}
+
+.inredients-label-wrapper-2 {
+border-left: solid rgb(183, 183, 249) 28px;
 }
 
 .ingredients-list-container {
@@ -205,6 +224,10 @@ nav {
   justify-content: center;
   box-shadow: 15px 15px 8px gray;
   margin-top: 22px;
+}
+
+.pantry-list {
+  overflow-y: scroll;
 
 }
 
@@ -330,6 +353,7 @@ nav {
   margin: 5px;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 13px;
   font-size: 15pt;
 }
 
