@@ -18,7 +18,8 @@ const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 const recipeCount = document.querySelector(".recipe-count");
-
+const selected = document.querySelector(".selected");
+const optionsContainer = document.querySelector(".options-container");
 
 let activeRecipeRepo;
 
@@ -79,6 +80,17 @@ const addToCookList = (event) => {
   }
 }
 
+const openDropdown = () => {
+  optionsContainer.classList.toggle("active");
+}
+
+const checkDropdownId = (event) => {
+  if(event.target.name === "category") {
+    selected.innerText = event.target.dataset.label
+    optionsContainer.classList.remove("active")
+  }
+}
+
 //EVENT LISTENERS//
 window.addEventListener('load', fetchAllData);
 homeButton.addEventListener('click', goHome);
@@ -101,3 +113,7 @@ searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();
 });
+selected.addEventListener("click", openDropdown);
+optionsContainer.addEventListener("click", (event) => {
+  checkDropdownId(event);
+})
