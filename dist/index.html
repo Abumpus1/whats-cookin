@@ -220,21 +220,21 @@
                 </div>
               </div>
               <div class="pantry-dropdown-container">
-                <h4>Add to Pantry</h4>
-
+                
+                <label for="ingOptions">Add to Pantry</label>
                 <form class="select-box">
-                  <div class="options-container">
-                    <!-- ingredients for dropdown go here -->
-                  </div>
-                  <div class="selected">
-                    Select Ingredient
-                  </div>
                   <div class="ing-search-box">
-                    <input type="text" placeholder="Start Typing...">
+                    <input list="ingOptions" type="text" placeholder="Add ingredient...">
                   </div>
+                  <datalist id="ingOptions" class="options-container" data-dropdown>
+                    <!-- ingredients for dropdown go here -->
+                  </datalist>
+                  
                 </form>
                 <div class="number-and-button">
-
+                  <input type="number" id="numberInput" min="0.5" step="0.5">
+                  <label for="numberInput">Add Ingredient Amount</label>
+                  <button>Submit</button>
                 </div>
               </div>
             </section>

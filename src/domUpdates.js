@@ -78,9 +78,7 @@ let domUpdates = {
     if (!searchInput) {
       searchInput = "";
     }
-    optionsContainer.innerHTML = `
-    <div class="spacing-box"></div>
-    `
+    optionsContainer.innerHTML = ""
     let sortedIngredients = activeRecipeRepo.ingredients.sort((a, b) => {
       let aUp = a.name.toUpperCase();
       let bUp = b.name.toUpperCase();
@@ -95,10 +93,7 @@ let domUpdates = {
     sortedIngredients.forEach(ingredient => {
       if (ingredient.name.toLowerCase().includes(searchInput)) {
         optionsContainer.innerHTML += `
-        <div class="option" data-id="${ingredient.id}" data-label="${ingredient.name}">
-          <input type="radio" data-label="${ingredient.name}" class="radio" id="${ingredient.id}" data-id="${ingredient.id}" name="category">
-          <label for="${ingredient.id}">${ingredient.name}</label>
-        </div>
+          <option value="${ingredient.name}" data-label="${ingredient.name}" class="radio" id="${ingredient.id}" data-id="${ingredient.id}" name="category">${ingredient.name}</option>
         `
       }
     });

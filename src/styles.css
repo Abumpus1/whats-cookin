@@ -127,14 +127,14 @@ h4 {
 .ing-search-box input {
   width: 12vw;
   padding: 5px 10px;
-  position: absolute;
+  /* position: absolute; */
   font-size: 12pt;
   border-radius: 8px 8px 0 0;
   z-index: 100%;
   border: solid #605c80 8px;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s;
+  /* opacity: 0; */
+  /* pointer-events: none; */
+  /* transition: all 0.4s; */
 }
 
 .ingredients-cost > h3, span {
@@ -438,18 +438,9 @@ nav {
 .select-box .options-container {
   background: #605c80;
   color: #f5f6fa;
-  max-height: 0;
   width: 100%;
-  opacity: 0;
-  transition: all 0.4s;
   border-radius: 8px;
-  overflow: hidden;
   order: 1;
-}
-
-.select-box .options-container.active {
-  max-height: 50%;
-  opacity: 1;
   overflow-y: scroll;
 }
 
@@ -469,8 +460,7 @@ nav {
   border-radius: 0 8px 8px 0;
 }
 
-.select-box .option,
-.selected {
+.select-box .option {
   padding: 5px 10px;
   cursor: pointer;
 }
@@ -485,14 +475,6 @@ nav {
 
 .select-box label {
   cursor: pointer;
-}
-
-.selected {
-  background: #605c80;
-  color: #f5f6fa;
-  border-radius: 8px;
-  margin-bottom: 4px;
-  order: 0;
 }
 
 .spacing-box {

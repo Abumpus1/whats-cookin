@@ -18,7 +18,6 @@ const recipeTotalCost = document.querySelector(".actual-cost");
 const tagCheckBoxes = document.querySelector(".tags");
 const searchInput = document.querySelector("#query");
 const recipeCount = document.querySelector(".recipe-count");
-const selected = document.querySelector(".selected");
 const optionsContainer = document.querySelector(".options-container");
 const ingSearchBox = document.querySelector(".ing-search-box input");
 
@@ -92,8 +91,8 @@ const openDropdown = () => {
 
 const checkDropdownId = (event) => {
   if(event.target.dataset.label) {
-    selected.innerText = event.target.dataset.label
-    selected.dataset.id = event.target.dataset.id
+    // selected.innerText = event.target.dataset.label
+    // selected.dataset.id = event.target.dataset.id
     optionsContainer.classList.remove("active")
   }
 }
@@ -124,7 +123,6 @@ searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();
 });
-selected.addEventListener("click", openDropdown);
 optionsContainer.addEventListener("click", (event) => {
   checkDropdownId(event);
 });
