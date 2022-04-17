@@ -41,17 +41,50 @@ const fetchAllData = () => {
 }
 
 const postIngredient = (userId, ingId, ingAmount) => {
-  // console.log("before: ", activeRecipeRepo.currentUser.pantry);
-  console.log(ingAmount);
   Promise.all([postData(userId, ingId, ingAmount)])
-  .then(data => {
-    console.log("DATA: ", data[0].message);
-    // console.log("after: ", activeRecipeRepo.currentUser.pantry);
-  })
+    .then(data => {
+      checkResponse(data[0].message);
+    })
 }
 
 const assignData = (response) => {
     activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]);
+}
+
+/*
+press cook now button:
+  we need to pull ingredient id AND ingredient amount from recipe, 
+  and send to POST request how?
+    go through EACH ingredient, and POST each
+    can we do logic within params of Promise.all( //here )?
+    make an array of postData's with an iterator???
+
+    postData(userId, ingId[i], ingAmount[i])
+
+*/
+
+const checkResponse = (responseMsg) => {
+  let splitResponse = responseMsg.split(" ");
+  if (splitResponse[0] === "User") {
+    let ingId = parseInt(splitResponse[9]);
+    let ingAmount = parseInt(splitResponse[4]);
+
+    activeRecipeRepo.currentUser.pantry.forEach(pantryIng => {
+      if (pantryIng.ingredient === ingId) {
+        pantryIng.amount = ingAmount
+      }
+    })
+
+  } else {
+    let ingId = parseInt(splitResponse[5]);
+    let ingAmount = parseInt(splitResponse[0]);
+
+    activeRecipeRepo.currentUser.pantry.push({
+      ingredient: ingId,
+      amount: ingAmount
+    })
+  }
+  domUpdates.displayPantry(pantryList, activeRecipeRepo);
 }
 
 const goHome = () => {
@@ -108,23 +141,6 @@ const addToCookList = (event) => {
   }
 }
 
-// const openDropdown = () => {
-//   optionsContainer.classList.toggle("active");
-//   ingSearchBox.value = "";
-//   filterIngSearch(ingSearchBox.value);
-//   if (optionsContainer.classList.contains("active")) {
-//     ingSearchBox.focus();
-//   }
-// }
-
-// const checkDropdownId = (event) => {
-//   if(event.target.dataset.label) {
-//     // selected.innerText = event.target.dataset.label
-//     // selected.dataset.id = event.target.dataset.id
-//     optionsContainer.classList.remove("active")
-//   }
-// }
-
 const filterIngSearch = (searchInput) => {
   domUpdates.fillDropdown(activeRecipeRepo, optionsContainer, searchInput.toLowerCase())
 }
@@ -137,15 +153,15 @@ const addIngredient = () => {
   let ing = findIng();
 
   if (ing && numberInput.value > 0) {
-    addIngErr.innerText = "PASS"
-    postIngredient(activeRecipeRepo.currentUser.id, ing.id, parseInt(numberInput.value))
+    addIngErr.innerText = "PASS";
+    postIngredient(activeRecipeRepo.currentUser.id, ing.id, parseInt(numberInput.value));
   } else {
-    addIngButton.disabled = true
-    addIngErr.innerText = "Error: Input fields empty or invalid"
+    addIngButton.disabled = true;
+    addIngErr.innerText = "Error: Input fields empty or invalid";
     setTimeout(() => {
-      addIngButton.disabled = false
-      addIngErr.innerText = ""   
-    },4000)
+      addIngButton.disabled = false;
+      addIngErr.innerText = "";
+    },4000);
   }
 }
 

@@ -76,15 +76,21 @@ let domUpdates = {
         recipeIngredients.innerHTML += `<p>(${ingredient.amount}) ${ingredient.name}<p>`;
       }
     });
-    pantryList.innerHTML = "";
-    activeRecipeRepo.currentUser.showPantry(activeRecipeRepo.ingredients).forEach(pantryIng => {
-      pantryList.innerHTML += `<p>(${pantryIng.amount}) ${pantryIng.name}<p>`
-    })
+
+    this.displayPantry(pantryList, activeRecipeRepo)
+    
     recipe.getRecipeDirections().forEach(direction => {
       recipeDirections.innerHTML += `<p>${direction}<p>`;
     });
     recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
     this.fillDropdown(activeRecipeRepo, optionsContainer)
+  },
+
+  displayPantry(pantryList, activeRecipeRepo) {
+    pantryList.innerHTML = "";
+    activeRecipeRepo.currentUser.showPantry(activeRecipeRepo.ingredients).forEach(pantryIng => {
+      pantryList.innerHTML += `<p>(${pantryIng.amount}) ${pantryIng.name}<p>`
+    });
   },
 
   fillDropdown(activeRecipeRepo, optionsContainer, searchInput) {
