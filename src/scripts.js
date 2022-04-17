@@ -1,6 +1,6 @@
 import './styles.css';
 import domUpdates from './domUpdates.js';
-import { fetchData } from './apiCalls';
+import { fetchData, postData } from './apiCalls';
 import RecipeRepository from './classes/recipeRepository';
 
 //QUERY SELECTORS//
@@ -25,6 +25,8 @@ const ingSearchBox = document.querySelector(".ing-search-box input");
 const addIngButton = document.querySelector(".add-ing-button");
 const cookNowButton = document.querySelector(".button-cook-now");
 const cookErrMsg = document.querySelector(".cook-error");
+const numberInput = document.querySelector("#numberInput");
+const addIngErr = document.querySelector(".add-ing-error");
 
 let activeRecipeRepo;
 
@@ -36,6 +38,16 @@ const fetchAllData = () => {
       domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
     })
     .catch(err => console.log(err));
+}
+
+const postIngredient = (userId, ingId, ingAmount) => {
+  // console.log("before: ", activeRecipeRepo.currentUser.pantry);
+  console.log(ingAmount);
+  Promise.all([postData(userId, ingId, ingAmount)])
+  .then(data => {
+    console.log("DATA: ", data[0].message);
+    // console.log("after: ", activeRecipeRepo.currentUser.pantry);
+  })
 }
 
 const assignData = (response) => {
@@ -105,16 +117,36 @@ const addToCookList = (event) => {
 //   }
 // }
 
-const checkDropdownId = (event) => {
-  if(event.target.dataset.label) {
-    // selected.innerText = event.target.dataset.label
-    // selected.dataset.id = event.target.dataset.id
-    optionsContainer.classList.remove("active")
-  }
-}
+// const checkDropdownId = (event) => {
+//   if(event.target.dataset.label) {
+//     // selected.innerText = event.target.dataset.label
+//     // selected.dataset.id = event.target.dataset.id
+//     optionsContainer.classList.remove("active")
+//   }
+// }
 
 const filterIngSearch = (searchInput) => {
   domUpdates.fillDropdown(activeRecipeRepo, optionsContainer, searchInput.toLowerCase())
+}
+
+const findIng = () => {
+  return activeRecipeRepo.ingredients.find(ing => ing.name.toLowerCase() === ingSearchBox.value.toLowerCase());
+}
+
+const addIngredient = () => {
+  let ing = findIng();
+
+  if (ing && numberInput.value > 0) {
+    addIngErr.innerText = "PASS"
+    postIngredient(activeRecipeRepo.currentUser.id, ing.id, parseInt(numberInput.value))
+  } else {
+    addIngButton.disabled = true
+    addIngErr.innerText = "Error: Input fields empty or invalid"
+    setTimeout(() => {
+      addIngButton.disabled = false
+      addIngErr.innerText = ""   
+    },4000)
+  }
 }
 
 //EVENT LISTENERS//
@@ -139,12 +171,13 @@ searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();
 });
-optionsContainer.addEventListener("click", (event) => {
-  checkDropdownId(event);
-});
+// optionsContainer.addEventListener("click", (event) => {
+//   checkDropdownId(event);
+// });
 ingSearchBox.addEventListener("input", (event) => {
   event.preventDefault();
   filterIngSearch(event.target.value);
 });
+addIngButton.addEventListener("click", addIngredient);
 
 
