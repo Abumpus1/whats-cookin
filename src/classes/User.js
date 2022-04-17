@@ -29,16 +29,22 @@ class User {
   }
 
   calculateMissing(recipeIng, pantryIng) {
-      return recipeIng.quantity.amount - pantryIng.amount
+    let sum = recipeIng.quantity.amount - pantryIng.amount
+      return sum;
   }
 
   findMissingIngredients(recipe) {
     this.missingIngredients = recipe.ingredients.reduce((acc,recipeIng) => {
       this.pantry.forEach(pantryIng => {
-        if (pantryIng.ingredient === recipeIng.id && pantryIng.amount < recipeIng.quantity.amount || !this.pantry.some(ing => ing.ingredient === recipeIng.id)) {
+        if (pantryIng.ingredient === recipeIng.id && pantryIng.amount < recipeIng.quantity.amount) {
           acc.push({
             id: pantryIng.ingredient,
             amountMissing: this.calculateMissing(recipeIng, pantryIng)
+          });
+        } else if (!this.pantry.find(pantryIng => pantryIng.ingredient === recipeIng.id)) {
+          acc.push({
+            id: recipeIng.id,
+            amountMissing: recipeIng.quantity.amount
           });
         }
       });

@@ -196,6 +196,11 @@ border-left: solid rgb(183, 183, 249) 28px;
   margin-left: 43px
 }
 
+.ingredients-list-oos > p.missing-amount {
+  margin-bottom: 20px;
+  color: red;
+}
+
 .ingredients-list > p {
   margin: 3px;
   margin-left: 43px
@@ -207,7 +212,6 @@ label {
 
 main {
   height: 100%;
-
 }
 
 .home-button {

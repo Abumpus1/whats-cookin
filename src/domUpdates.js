@@ -58,24 +58,28 @@ let domUpdates = {
     searchInput.value = "";
   },
 
-  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing) {
+  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing, pantryList) {
     addToCookCheckBox.id = `${recipe.id}`
     recipeImage.innerHTML = `<img src="${recipe.image}" alt="${recipe.name}">`;
     recipeName.innerText = `${recipe.name}`
     recipeIngredients.innerHTML = "";
     recipeIngsMissing.innerHTML = "";
     recipeDirections.innerHTML = "";
-    console.log(recipe);
     activeRecipeRepo.currentUser.findMissingIngredients(recipe)
-   console.log(activeRecipeRepo.currentUser.missingIngredients);
     recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
-      console.log(ingredient);
-        if (activeRecipeRepo.currentUser.missingIngredients.some(missingIng => missingIng.id === ingredient.id)) {
-          recipeIngsMissing.innerHTML += `<p>${ingredient.name}<p>`;
-        } else {
-          recipeIngredients.innerHTML += `<p>${ingredient.name}<p>`;
-        }
+      if (activeRecipeRepo.currentUser.missingIngredients.some(missingIng => missingIng.id === ingredient.id)) {
+        recipeIngsMissing.innerHTML += `
+        <p>(${ingredient.amount}) ${ingredient.name}<p>
+        <p class="missing-amount">Missing ${activeRecipeRepo.currentUser.missingIngredients.find(missingIng => missingIng.id === ingredient.id).amountMissing}<p>
+        `;
+      } else {
+        recipeIngredients.innerHTML += `<p>(${ingredient.amount}) ${ingredient.name}<p>`;
+      }
     });
+    pantryList.innerHTML = "";
+    activeRecipeRepo.currentUser.showPantry(activeRecipeRepo.ingredients).forEach(pantryIng => {
+      pantryList.innerHTML += `<p>(${pantryIng.amount}) ${pantryIng.name}<p>`
+    })
     recipe.getRecipeDirections().forEach(direction => {
       recipeDirections.innerHTML += `<p>${direction}<p>`;
     });
