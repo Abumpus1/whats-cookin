@@ -24,6 +24,7 @@ const optionsContainer = document.querySelector(".options-container");
 const ingSearchBox = document.querySelector(".ing-search-box input");
 const addIngButton = document.querySelector(".add-ing-button");
 const cookNowButton = document.querySelector(".button-cook-now");
+const cookErrMsg = document.querySelector(".cook-error");
 
 let activeRecipeRepo;
 
@@ -71,8 +72,10 @@ const displayRecipePage = (event) => {
 const checkCookButton = () => {
   if (activeRecipeRepo.currentUser.missingIngredients.length === 0) {
     cookNowButton.disabled = false;
+    cookErrMsg.innerText = "";
   } else {
     cookNowButton.disabled = true;
+    cookErrMsg.innerText = "Missing Ingredients";
   }
 }
 

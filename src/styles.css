@@ -20,6 +20,7 @@ body {
 display: flex;
 justify-content: space-between;
 width: 100%;
+align-items: center;
 }
 
 .add-to-cook-checkbox {
@@ -42,6 +43,21 @@ margin-bottom: 15px;
 .all-recipes-page-container {
   display: flex;
   height: 100%;
+}
+.button-cook-now {
+  margin: 2px;
+  height: 30px;
+  width: 100px;
+}
+
+.cook-button-box {
+  display: flex;
+  align-items: center;
+}
+.cook-error {
+  margin-left: 5px;
+  color: red;
+  font-size: 12pt;
 }
 
 .directions-box {
@@ -242,11 +258,26 @@ nav {
 }
 
 .number-and-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   bottom: 0;
-  border: solid black 3px;
+  /* border: solid black 3px; */
   width: 100%;
-  height: 30%;
+  height: 80%;
   position: absolute;
+}
+
+.number-input-containter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#numberInput {
+  width: 60px;
 }
 
 .pantry-container {

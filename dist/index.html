@@ -200,7 +200,10 @@
                     <h3 class="recipe-name-large">Recipe_Name</h3>
   
                   <div class="add-to-cook-checkbox-container">
-                    <button class="button-cook-now">Cook Now</button>
+                    <div class="cook-button-box">
+                      <button class="button-cook-now">Cook Now</button>
+                      <p class="cook-error"></p>
+                    </div>
                     <div class="add-to-cook-checkbox">
                       <input data-tag-name="add-to-cook" type="checkbox" class="save-recipe" id="saveRecipe">
                       <label data-tag-name="add-to-cook-label" for="saveRecipe">Cook Later</label><br>
@@ -232,8 +235,11 @@
                   
                 </form>
                 <div class="number-and-button">
-                  <input type="number" id="numberInput" min="0.5" step="0.5">
-                  <label for="numberInput">Add Ingredient Amount</label>
+                  <div class="number-input-containter">
+                    <input type="number" id="numberInput" min="0.5" step="0.5">
+                    <label for="numberInput">Add Ingredient Amount</label>
+
+                  </div>
                   <button class="add-ing-button">Submit</button>
                 </div>
               </div>
