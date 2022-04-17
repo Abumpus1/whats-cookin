@@ -198,6 +198,7 @@ border-left: solid rgb(183, 183, 249) 28px;
 
 .ingredients-list-oos > p.missing-amount {
   margin-bottom: 20px;
+  margin-top: 0;
   color: red;
 }
 
@@ -444,53 +445,44 @@ nav {
   position: relative;
 }
 
-.select-box .options-container {
+/* .select-box .options-container {
   background: #605c80;
   color: #f5f6fa;
   width: 100%;
   border-radius: 8px;
   order: 1;
   overflow-y: scroll;
-}
+} */
 
-.select-box .options-container.active ~ .ing-search-box input {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.select-box .options-container::-webkit-scrollbar {
+/* .select-box .options-container::-webkit-scrollbar {
   background: #111111;
   width: 8px;
   border-radius: 0 8px 8px 0;
-}
+} */
 
-.select-box .options-container::-webkit-scrollbar-thumb {
+/* .select-box .options-container::-webkit-scrollbar-thumb {
   background: #718191;
   border-radius: 0 8px 8px 0;
-}
+} */
 
-.select-box .option {
+/* .select-box .option {
   padding: 5px 10px;
   cursor: pointer;
-}
+} */
 
-.select-box .option:hover {
+/* .select-box .option:hover {
   background: #7e7aa3
-}
+} */
 
-.select-box .option .radio {
+/* .select-box .option .radio {
   display: none;
-}
+} */
 
-.select-box label {
+/* .select-box label {
   cursor: pointer;
-}
+} */
 
-.spacing-box {
-  height: 50px;
-}
-
-.tags > div > input, label{
+.tags > div > input, .tags > div > label{
   cursor: pointer;
 }
 

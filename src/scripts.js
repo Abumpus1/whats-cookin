@@ -22,6 +22,8 @@ const searchInput = document.querySelector("#query");
 const recipeCount = document.querySelector(".recipe-count");
 const optionsContainer = document.querySelector(".options-container");
 const ingSearchBox = document.querySelector(".ing-search-box input");
+const addIngButton = document.querySelector(".add-ing-button");
+const cookNowButton = document.querySelector(".button-cook-now");
 
 let activeRecipeRepo;
 
@@ -63,6 +65,15 @@ const displayRecipePage = (event) => {
       domUpdates.toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput);
     }
   });
+  checkCookButton()
+}
+
+const checkCookButton = () => {
+  if (activeRecipeRepo.currentUser.missingIngredients.length === 0) {
+    cookNowButton.disabled = false;
+  } else {
+    cookNowButton.disabled = true;
+  }
 }
 
 const clickTag = (tagName) => {
@@ -82,14 +93,14 @@ const addToCookList = (event) => {
   }
 }
 
-const openDropdown = () => {
-  optionsContainer.classList.toggle("active");
-  ingSearchBox.value = "";
-  filterIngSearch(ingSearchBox.value);
-  if (optionsContainer.classList.contains("active")) {
-    ingSearchBox.focus();
-  }
-}
+// const openDropdown = () => {
+//   optionsContainer.classList.toggle("active");
+//   ingSearchBox.value = "";
+//   filterIngSearch(ingSearchBox.value);
+//   if (optionsContainer.classList.contains("active")) {
+//     ingSearchBox.focus();
+//   }
+// }
 
 const checkDropdownId = (event) => {
   if(event.target.dataset.label) {
@@ -128,6 +139,9 @@ searchInput.addEventListener('input', (event) => {
 optionsContainer.addEventListener("click", (event) => {
   checkDropdownId(event);
 });
-ingSearchBox.addEventListener("keyup", (event) => {
+ingSearchBox.addEventListener("input", (event) => {
+  event.preventDefault();
   filterIngSearch(event.target.value);
 });
+
+
