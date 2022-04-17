@@ -51,17 +51,29 @@ const assignData = (response) => {
     activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]);
 }
 
-/*
-press cook now button:
-  we need to pull ingredient id AND ingredient amount from recipe, 
-  and send to POST request how?
-    go through EACH ingredient, and POST each
-    can we do logic within params of Promise.all( //here )?
-    make an array of postData's with an iterator???
+const cookAllIngs = () => {
+  console.log("made it here");
+  cookErrMsg.innerText = "Cooking...";
+  cookNowButton.disabled = true;
+  let recipe = findActiveRecipe();
+  let promises = recipe.ingredients.map(ing => {
+    return postData(activeRecipeRepo.currentUser.id, ing.id, ing.quantity.amount * -1);
+  });
+  Promise.all(promises)
+    .then(data => {
+      console.log(data);
+      data.forEach(d => {
+        console.log(d.message);
+        checkResponse(d.message);
+        cookErrMsg.innerText = "";
+        cookNowButton.disabled = false;
+      })
+    })
+}
 
-    postData(userId, ingId[i], ingAmount[i])
-
-*/
+const findActiveRecipe = () => {
+  return activeRecipeRepo.recipes.find(recipe => recipe.id === parseInt(addToCookCheckBox.id));
+}
 
 const checkResponse = (responseMsg) => {
   let splitResponse = responseMsg.split(" ");
@@ -84,7 +96,9 @@ const checkResponse = (responseMsg) => {
       amount: ingAmount
     })
   }
-  domUpdates.displayPantry(pantryList, activeRecipeRepo);
+  // domUpdates.displayPantry(pantryList, activeRecipeRepo);
+  domUpdates.displaySelectedRecipe(activeRecipeRepo, findActiveRecipe(), addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing, pantryList);
+  checkCookButton()
 }
 
 const goHome = () => {
@@ -195,5 +209,6 @@ ingSearchBox.addEventListener("input", (event) => {
   filterIngSearch(event.target.value);
 });
 addIngButton.addEventListener("click", addIngredient);
+cookNowButton.addEventListener("click", cookAllIngs);
 
 
