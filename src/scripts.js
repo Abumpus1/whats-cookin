@@ -34,8 +34,8 @@ let activeRecipeRepo;
 const fetchAllData = () => {
   Promise.all([fetchData("recipes"), fetchData("ingredients"), fetchData("users")])
     .then(data => {
-      assignData(data)
-      domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
+      assignData(data);
+      domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo);
     })
     .catch(err => console.log(err));
 }
@@ -43,18 +43,13 @@ const fetchAllData = () => {
 const postIngredient = (userId, ingId, ingAmount) => {
   Promise.all([postData(userId, ingId, ingAmount)])
     .then(data => {
-      checkResponse(data[0].message);
+      acceptResponse(data[0].message);
     })
     .catch(err => console.log(err));
 }
 
-const assignData = (response) => {
-    activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]);
-}
-
 const cookAllIngs = () => {
-  cookErrMsg.innerText = "Cooking...";
-  cookNowButton.disabled = true;
+  domUpdates.disableWhileCooking(cookErrMsg, cookNowButton)
   let recipe = findActiveRecipe();
   let promises = recipe.ingredients.map(ing => {
     return postData(activeRecipeRepo.currentUser.id, ing.id, ing.quantity.amount * -1);
@@ -62,18 +57,17 @@ const cookAllIngs = () => {
   Promise.all(promises)
     .then(data => {
       data.forEach(d => {
-        checkResponse(d.message);
-        cookErrMsg.innerText = "";
-        checkCookButton();
+        acceptResponse(d.message);
+        domUpdates.checkCookButton(activeRecipeRepo, cookNowButton, cookErrMsg);
       })
     })
 }
 
-const findActiveRecipe = () => {
-  return activeRecipeRepo.recipes.find(recipe => recipe.id === parseInt(addToCookCheckBox.id));
+const assignData = (response) => {
+    activeRecipeRepo = new RecipeRepository(response[0], response[1], response[2][Math.floor(Math.random() * response[2].length)]);
 }
 
-const checkResponse = (responseMsg) => {
+const acceptResponse = (responseMsg) => {
   let splitResponse = responseMsg.split(" ");
   if (splitResponse[0] === "User") {
     let ingId = parseInt(splitResponse[9]);
@@ -81,10 +75,9 @@ const checkResponse = (responseMsg) => {
 
     activeRecipeRepo.currentUser.pantry.forEach(pantryIng => {
       if (pantryIng.ingredient === ingId) {
-        pantryIng.amount = ingAmount
+        pantryIng.amount = ingAmount;
       }
-    })
-
+    });
   } else {
     let ingId = parseInt(splitResponse[5]);
     let ingAmount = parseInt(splitResponse[0]);
@@ -92,11 +85,16 @@ const checkResponse = (responseMsg) => {
     activeRecipeRepo.currentUser.pantry.push({
       ingredient: ingId,
       amount: ingAmount
-    })
+    });
   }
-  // domUpdates.displayPantry(pantryList, activeRecipeRepo);
-  domUpdates.displaySelectedRecipe(activeRecipeRepo, findActiveRecipe(), addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing, pantryList);
-  checkCookButton()
+
+  domUpdates.displayRecipeIngredients(activeRecipeRepo, findActiveRecipe(), recipeIngredients, recipeIngsMissing);
+  domUpdates.displayPantry(pantryList, activeRecipeRepo);
+  domUpdates.checkCookButton(activeRecipeRepo, cookNowButton, cookErrMsg);
+}
+
+const findActiveRecipe = () => {
+  return activeRecipeRepo.recipes.find(recipe => recipe.id === parseInt(addToCookCheckBox.id));
 }
 
 const goHome = () => {
@@ -107,39 +105,26 @@ const goHome = () => {
   searchRecipes();
 }
 
-const clickFavoriteButton = (event) => {
-  activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
-  activeRecipeRepo.filterBySearchTerm(searchInput.value);
-  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo);
-}
-
 const displayRecipePage = (event) => {
   activeRecipeRepo.recipes.forEach(recipe => {
     if(event.target.closest(".recipe").id === `${recipe.id}`){
       domUpdates.hide(allRecipesPage);
       domUpdates.hideVis(searchInput);
       domUpdates.show(recipePage);
-      domUpdates.displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing, pantryList);
+      domUpdates.displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeDirections, recipeTotalCost, optionsContainer);
+      domUpdates.displayRecipeIngredients(activeRecipeRepo, findActiveRecipe(), recipeIngredients, recipeIngsMissing);
+      domUpdates.displayPantry(pantryList, activeRecipeRepo);
       domUpdates.toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput);
+      domUpdates.checkCookButton(activeRecipeRepo, cookNowButton, cookErrMsg);
+      domUpdates.clearInputs(ingSearchBox, numberInput);
     }
   });
-  checkCookButton();
-  clearInputs();
 }
 
-const clearInputs = () => {
-  ingSearchBox.value = "";
-  numberInput.value = "";
-}
-
-const checkCookButton = () => {
-  if (activeRecipeRepo.currentUser.missingIngredients.length === 0) {
-    cookNowButton.disabled = false;
-    cookErrMsg.innerText = "";
-  } else {
-    cookNowButton.disabled = true;
-    cookErrMsg.innerText = "Missing Ingredients";
-  }
+const clickFavoriteButton = (event) => {
+  activeRecipeRepo.toggleFavorite(event.target.id, searchInput.value);
+  activeRecipeRepo.filterBySearchTerm(searchInput.value);
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo);
 }
 
 const clickTag = (tagName) => {
@@ -154,41 +139,34 @@ const searchRecipes = () => {
 
 const addToCookList = (event) => {
   if(event.target.dataset.tagName === "add-to-cook") {
-    
     activeRecipeRepo.currentUser.decideToCook(parseInt(addToCookCheckBox.id));
   }
 }
 
 const filterIngSearch = (searchInput) => {
-  domUpdates.fillDropdown(activeRecipeRepo, optionsContainer, searchInput.toLowerCase())
-}
-
-const findIng = () => {
-  return activeRecipeRepo.ingredients.find(ing => ing.name.toLowerCase() === ingSearchBox.value.toLowerCase());
+  domUpdates.fillDropdown(activeRecipeRepo, optionsContainer, searchInput.toLowerCase());
 }
 
 const addIngredient = () => {
   let ing = findIng();
 
   if (ing && numberInput.value > 0) {
-    addIngErr.innerText = "Added!";
-    setTimeout(() => {
-      addIngErr.innerText = "";
-    }, 2000);
+    domUpdates.confirmInputRequest(addIngErr);
     postIngredient(activeRecipeRepo.currentUser.id, ing.id, parseInt(numberInput.value));
   } else {
-    addIngButton.disabled = true;
-    addIngErr.innerText = "Error: Input fields empty or invalid";
-    setTimeout(() => {
-      addIngButton.disabled = false;
-      addIngErr.innerText = "";
-    },4000);
+    domUpdates.denyInputRequest(addIngButton, addIngErr);
   }
+}
+
+const findIng = () => {
+  return activeRecipeRepo.ingredients.find(ing => ing.name.toLowerCase() === ingSearchBox.value.toLowerCase());
 }
 
 //EVENT LISTENERS//
 window.addEventListener('load', fetchAllData);
 homeButton.addEventListener('click', goHome);
+addIngButton.addEventListener("click", addIngredient);
+cookNowButton.addEventListener("click", cookAllIngs);
 recipesList.addEventListener('click', (event) => {
   if(event.target.nodeName === 'P'){
     clickFavoriteButton(event);
@@ -212,7 +190,6 @@ ingSearchBox.addEventListener("input", (event) => {
   event.preventDefault();
   filterIngSearch(event.target.value);
 });
-addIngButton.addEventListener("click", addIngredient);
-cookNowButton.addEventListener("click", cookAllIngs);
+
 
 

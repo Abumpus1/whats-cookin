@@ -33,10 +33,7 @@ class RecipeRepository {
       searchInput = "";
     }
     this.resetFilteredRecipes();
-
-    this.filteredRecipes = this.filteredRecipes.filter(recipe =>
-      this.filterByRecipeName(searchInput, recipe) || this.filterbyIngredientName(searchInput, recipe));
-
+    this.filteredRecipes = this.filteredRecipes.filter(recipe => this.filterByRecipeName(searchInput, recipe) || this.filterbyIngredientName(searchInput, recipe));
     this.filterByTags();
   }
 

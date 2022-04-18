@@ -23,9 +23,9 @@ function postData(userId, ingId, ingAmount) {
   })
   .then(response => {
     if (!response.ok) {
-    throw Error(response.statusText)
-   }
-   return response.json()
+      throw Error(response.statusText)
+    }
+    return response.json()
    })
   .catch(err => console.log(err));
 }
