@@ -6,9 +6,10 @@ import User from '../src/classes/User';
 import Recipe from '../src/classes/Recipe';
 
 describe('User', () => {
-  let user, recipeOne, recipeTwo;
+  let user, userTwo, recipeOne, recipeTwo;
   beforeEach(() => {
    user = new User(sampleUsers[0])
+   userTwo = new User(sampleUsers[1])
    recipeOne = new Recipe(sampleRecipes[0])
    recipeTwo = new Recipe(sampleRecipes[2])
   });
@@ -86,6 +87,23 @@ describe('User', () => {
     user.findMissingIngredients(recipeTwo);
 
     expect(user.missingIngredients).to.have.a.lengthOf(2);
+    expect(user.missingIngredients[0]).to.deep.equal({ id: 1002030, amountMissing: 4 });
+    expect(user.missingIngredients[1]).to.deep.equal({ id: 19334, amountMissing: 3 });
+  });
+
+  it('Should calculate amount if user has ingredient in pantry but not enough for recipe', () => {
+    user.findMissingIngredients(recipeTwo);
+
+    expect(recipeTwo.ingredients[1].quantity.amount).to.equal(8);
+    expect(user.pantry[3].amount).to.equal(5);
+    expect(user.missingIngredients[1]).to.deep.equal({ id: 19334, amountMissing: 3 });
+  });
+
+  it('Should have a method to add ingredients missing from users pantry to missing ingredients array', () => {
+    user.findMissingIngredients(recipeTwo);
+
+    expect(recipeTwo.ingredients[0].quantity.amount).to.equal(4);
+    expect(user.missingIngredients[0]).to.deep.equal({ id: 1002030, amountMissing: 4 });
   });
 
   it('Should have a method that calculates amount of ingredient missing from pantry needed for recipe', () => {
@@ -100,5 +118,5 @@ describe('User', () => {
     expect(userIngredients).to.have.a.lengthOf(5);
     expect(userIngredients).to.deep.include({id:20081, name: "wheat flour", amount: 5});
   });
-});
 
+});
