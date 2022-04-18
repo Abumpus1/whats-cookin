@@ -41,7 +41,7 @@ class User {
             id: pantryIng.ingredient,
             amountMissing: this.calculateMissing(recipeIng, pantryIng)
           });
-        } else if (!this.pantry.find(pantryIng => pantryIng.ingredient === recipeIng.id)) {
+        } else if (!this.pantry.find(pantryIng => pantryIng.ingredient === recipeIng.id) && !acc.some(missingIng =>  missingIng.id === recipeIng.id)) {
           acc.push({
             id: recipeIng.id,
             amountMissing: recipeIng.quantity.amount

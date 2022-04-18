@@ -1,12 +1,16 @@
 import { expect } from 'chai';
 import sampleUsers from '../src/data/sample-users';
 import sampleIngredients from '../src/data/sample-ingredients';
+import sampleRecipes from '../src/data/sample-recipes';
 import User from '../src/classes/User';
+import Recipe from '../src/classes/Recipe';
 
 describe('User', () => {
-  let user;
+  let user, recipeOne, recipeTwo;
   beforeEach(() => {
    user = new User(sampleUsers[0])
+   recipeOne = new Recipe(sampleRecipes[0])
+   recipeTwo = new Recipe(sampleRecipes[2])
   });
 
   it('Should be a function', () => {
@@ -74,16 +78,29 @@ describe('User', () => {
     expect(user.recipesToCook).to.deep.equal([595736]);
   });
 
+  it.only('Should have a method to return an array of recipe ingredients missing from users pantry', () => {
+    let getMissingIngs = user.findMissingIngredients(recipeTwo);
+    console.log(user.missingIngredients)
+
+    expect(user.missingIngredients).to.have.a.lengthOf(2);
+  });
+
+  it('Should have a method that calculates amount of ingredient missing from pantry needed for recipe', () => {
+    let getMissingNum = user.calculateMissing(recipeTwo.ingredients[1], user.pantry[3])
+
+    expect(getMissingNum).to.equal(3);
+});
+
   it('Should have a method to return pantry array with names of ingredients', () => {
     let userIngredients = user.showPantry(sampleIngredients)
-    
+
     expect(userIngredients).to.have.a.lengthOf(5)
     expect(userIngredients).to.deep.include({id:20081, name: "wheat flour", amount: 5})
   });
 });
 
 
-/* 
+/*
 x 1). Determine whether a user’s pantry has enough ingredients to cook a given meal.
   - compare each pantry ingredient & amount to recipe ingredient & amount
     - if user has all, can cook
@@ -108,9 +125,9 @@ x 3). As a user, I should be able to view what ingredients exist inside of my pa
 
 7). As a user, when I cook a meal, those ingredients should be removed from my pantry.
   - (probably filter? maybe splice? ehhh idk.. maybe neither) once pantry has enough ings to cook, need to compare amounts per ingredient,
-    and subtract amount from pantry (and maybe possibly remove whole ingredient from pantry if 0..? may be fine if just 0) 
+    and subtract amount from pantry (and maybe possibly remove whole ingredient from pantry if 0..? may be fine if just 0)
 
-  -iterate through both arrays, 
+  -iterate through both arrays,
    - if id's match, subract recipe ing amount from pantry amount
 
 
@@ -121,7 +138,7 @@ x 3). As a user, I should be able to view what ingredients exist inside of my pa
 
 
 8). As a user, I should be able to add more ingredients to my pantry.
-  - be able to add to ingredient amount(either ++ or by specific amount?) 
+  - be able to add to ingredient amount(either ++ or by specific amount?)
     - should we have the plus on pantry ingredients or recipe ingredients?
 
 
