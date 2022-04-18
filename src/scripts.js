@@ -45,6 +45,7 @@ const postIngredient = (userId, ingId, ingAmount) => {
     .then(data => {
       checkResponse(data[0].message);
     })
+    .catch(err => console.log(err));
 }
 
 const assignData = (response) => {
@@ -52,7 +53,6 @@ const assignData = (response) => {
 }
 
 const cookAllIngs = () => {
-  console.log("made it here");
   cookErrMsg.innerText = "Cooking...";
   cookNowButton.disabled = true;
   let recipe = findActiveRecipe();
@@ -61,12 +61,10 @@ const cookAllIngs = () => {
   });
   Promise.all(promises)
     .then(data => {
-      console.log(data);
       data.forEach(d => {
-        console.log(d.message);
         checkResponse(d.message);
         cookErrMsg.innerText = "";
-        cookNowButton.disabled = false;
+        checkCookButton();
       })
     })
 }
@@ -125,7 +123,13 @@ const displayRecipePage = (event) => {
       domUpdates.toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput);
     }
   });
-  checkCookButton()
+  checkCookButton();
+  clearInputs();
+}
+
+const clearInputs = () => {
+  ingSearchBox.value = "";
+  numberInput.value = "";
 }
 
 const checkCookButton = () => {
@@ -140,12 +144,12 @@ const checkCookButton = () => {
 
 const clickTag = (tagName) => {
   activeRecipeRepo.checkTag(tagName, searchInput.value);
-  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo);
 }
 
 const searchRecipes = () => {
   activeRecipeRepo.filterBySearchTerm(searchInput.value);
-  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo)
+  domUpdates.displayAllRecipes(recipesList, recipeCount, activeRecipeRepo);
 }
 
 const addToCookList = (event) => {
@@ -167,7 +171,10 @@ const addIngredient = () => {
   let ing = findIng();
 
   if (ing && numberInput.value > 0) {
-    addIngErr.innerText = "PASS";
+    addIngErr.innerText = "Added!";
+    setTimeout(() => {
+      addIngErr.innerText = "";
+    }, 2000);
     postIngredient(activeRecipeRepo.currentUser.id, ing.id, parseInt(numberInput.value));
   } else {
     addIngButton.disabled = true;
@@ -201,9 +208,6 @@ searchInput.addEventListener('input', (event) => {
   event.preventDefault();
   searchRecipes();
 });
-// optionsContainer.addEventListener("click", (event) => {
-//   checkDropdownId(event);
-// });
 ingSearchBox.addEventListener("input", (event) => {
   event.preventDefault();
   filterIngSearch(event.target.value);
