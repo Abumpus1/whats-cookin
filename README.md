@@ -11,11 +11,18 @@
 ## Project Overview
 
 ### Welcome to **What's Cookin'**!
-What's Cookin' is an application that presents the user with a variety of recipes. The user can add a recipe to their favorites by clicking the heart icon
-found within the title "sticky note" attached to each recipe. The user can then chose to filter by their favorites, or by any of the other tags found on the left sidebar, by
-clicking their desired tag name.
+What's Cookin' is an application that presents the user with a variety of recipes, allows the user to add ingredients to a randomly generated pantry, and determines if the user has enough ingredients to cook a given recipe.
 
-The user can also search by name by typing their inquiry in the search bar at the top right of the page. When the user clicks on a chosen recipe, they will see the necessary ingredients, total cost, and the instructions for cooking. They can also choose to add the selected recipe to their "What to Cook Next" list.
+From the main page, the user can add a recipe to their favorites by clicking the heart icon
+found within the title "sticky note" attached to each recipe.
+
+The user can then chose to filter by their favorites, or by any of the other tags found on the left sidebar of the page, by
+clicking their desired tag name. The user can select as many tags as they wish, and any recipes that match those tags will be 
+displayed, along with a banner that tells the user how many recipes match their search.
+
+The user can also search by name by typing their inquiry in the search bar at the top right of the page. Additionally, the user can choose to filter by search bar and by tag. The possibilities are nearly endless!
+
+ When the user clicks on a chosen recipe, they will see the necessary ingredients, total cost, and the instructions for cooking. They can also choose to add the selected recipe to their "What to Cook Next" list.
 
 ### Check Out the Page In Action!
 ![Screen Recording 2022-04-04 at 5 51 53 PM](https://user-images.githubusercontent.com/93603551/161645897-7d389f5c-df98-4966-8e1a-a5482d122ffc.gif)
