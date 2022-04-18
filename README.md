@@ -22,7 +22,9 @@ displayed, along with a banner that tells the user how many recipes match their 
 
 The user can also search by name by typing their inquiry in the search bar at the top right of the page. Additionally, the user can choose to filter by search bar and by tag. The filtering possibilities are nearly endless!
 
- When the user clicks on a chosen recipe, they will see the necessary ingredients, total cost, and the instructions for cooking. They can also choose to add the selected recipe to their "Cook Later" list, which can then be found under the main page's filter tags.  If the user does not have enough ingredients for a selected recipe, they will not be able to cook that recipe. If they do have enough ingredients, the 'Cook Now' button under the recipe's title will be clickable. When the user clicks the 'Cook Now' button, all respective amounts of the recipe's ingredients will be deducted from the user's pantry.
+ When the user clicks on a chosen recipe, they will see the necessary ingredients, total cost, and the instructions for cooking. They can also choose to add the selected recipe to their "Cook Later" list, which can then be found under the main page's filter tags.
+
+ If the user does not have enough ingredients for a selected recipe, they will not be able to cook that recipe. If they do have enough ingredients, the 'Cook Now' button under the recipe's title will be clickable. When the user clicks the 'Cook Now' button, all respective amounts of the recipe's ingredients will be deducted from the user's pantry.
 
  In the pantry section located at the bottom right of the page, the user can find a randomly generated pantry, which will determine which recipes they are able to cook. The user can view what is currently in their pantry and add as many ingredients as they wish to their pantry in this section.
 
@@ -42,6 +44,8 @@ The user can also search by name by typing their inquiry in the search bar at th
 - JavaScript
 - Webpack
 - Mocha and Chai
+- TDD
+- Fetch API
 
 ### How to Set Up
 
