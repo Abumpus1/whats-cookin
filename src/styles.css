@@ -1,6 +1,7 @@
 * {
   font-family: monaco;
   font-size: 13pt;
+  border: solid red 1px;
 }
 
 body {
@@ -29,7 +30,7 @@ align-items: center;
 }
 
 .add-to-cook-checkbox {
-
+width: 38%;
 }
 
 .all-recipes-container {
@@ -58,6 +59,8 @@ margin-bottom: 15px;
 .cook-button-box {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
+  width: 68%;
 }
 .cook-error {
   margin-left: 5px;
@@ -86,17 +89,18 @@ margin-bottom: 15px;
   align-items: center;
   margin: -17pxpx;
   margin-bottom: 4px;
-  width: 100%;
+  width: 87%;
+  /* margin-top: 7%; */
 }
 
 .directions-list {
   display: flex;
   flex-direction: column;
-  min-height: 30vh;
+  min-height: 24vh;
   max-height: 30vh;
   overflow-y: scroll;
   margin-left: 44px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
 }
 
 .directions-list > p {
@@ -145,13 +149,23 @@ h4 {
   margin: 6px;
 }
 
+.ing-amount-label {
+width: 83px;
+display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+
 .ing-search-box input {
-  width: 12vw;
+  width: 9vw;
   padding: 5px 10px;
   font-size: 12pt;
   border-radius: 8px 8px 0 0;
   z-index: 100%;
   border: solid #605c80 8px;
+  margin-top: 31px;
+  margin-left: 2px;
 }
 
 .ingredients-cost > h3, span {
@@ -176,9 +190,9 @@ margin: 5px;
   margin-left: 20px;
 }
 
-.inredients-label-wrapper-2 {
+/* .inredients-label-wrapper-2 {
 border-left: solid rgb(183, 183, 249) 28px;
-}
+} */
 
 .ingredients-list-container {
   width: 100%;
@@ -194,34 +208,34 @@ border-left: solid rgb(183, 183, 249) 28px;
   height: 250px;
   display: flex;
   flex-direction: column;
-  border-radius: 33px;
+  /* border-radius: 33px; */
   max-height: 338px;
   overflow-y: scroll;
+}
+
+.ingredients-list > p {
+  margin: 0px;
+  margin-left: 5px
 }
 .ingredients-list-oos {
   width: 100%;
   height: 250px;
   display: flex;
   flex-direction: column;
-  border-radius: 33px;
+  /* border-radius: 33px; */
   max-height: 338px;
   overflow-y: scroll;
 }
 
 .ingredients-list-oos > p {
-  margin: 3px;
-  margin-left: 43px
+  margin: 0px;
+  margin-left: 5px
 }
 
 .ingredients-list-oos > p.missing-amount {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 0;
   color: red;
-}
-
-.ingredients-list > p {
-  margin: 3px;
-  margin-left: 43px
 }
 
 label {
@@ -254,7 +268,7 @@ nav {
   justify-content: space-between;
   border-bottom: solid rgb(183, 183, 249) 9px;
   padding: 0px;
-  height: 63px;
+  height: 53px;
   box-shadow: 2px 2px 10px grey;
 }
 
@@ -265,8 +279,8 @@ nav {
   justify-content: space-around;
   bottom: 0;
   width: 100%;
-  height: 80%;
-  position: absolute;
+  height: 77%;
+  /* position: absolute; */
 }
 
 .number-input-containter {
@@ -274,6 +288,7 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 22px;
 }
 
 #numberInput {
@@ -298,7 +313,7 @@ nav {
   border: solid rgb(183, 183, 249) 6px;
   justify-content: center;
   box-shadow: 15px 15px 8px gray;
-  margin-top: 22px;
+  margin-top: 2vh;
 }
 
 .pantry-list-container {
@@ -306,20 +321,25 @@ nav {
   flex-direction: column;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 65%;
 }
 
 .pantry-list {
   width: 100%;
-  height: 90%;
+  height: 85%;
   overflow-y: scroll;
+
+}
+.pantry-list >p {
+
+  margin: 2px;
 
 }
 
 .pantry-dropdown-container {
   position: relative;
-  height: 100%;
-  width: 50%;
+  height: 96%;
+  /* width: 35%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -336,7 +356,7 @@ nav {
 }
 
 .recipe-details-page {
-  margin-top: 2vh;
+  margin-top: 1vh;
   height: 100vh;
   display: flex;
   justify-content: space-evenly;
@@ -356,13 +376,10 @@ nav {
 }
 
 .recipe-image {
-  top: 0;
-  left: 0;
   height: 200px;
   width: 290px;
   border-radius: 44px;
   box-shadow: 15px 15px 8px gray;
-  margin-top: 12px;
   cursor: pointer;
 }
 
@@ -371,7 +388,7 @@ nav {
   width: 100%;
   max-width: 130vh;
   border-radius: 33px;
-  margin-bottom: 22px;
+  margin-bottom: 2vh;
   border: solid rgb(183, 183, 249) 6px;
   box-shadow: 15px 15px 8px gray;
 }
@@ -447,11 +464,11 @@ nav {
  display: flex;
  justify-content: center;
   margin: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 5px;
+  /* margin-left: 10px; */
+  /* margin-right: 10px; */
+  /* margin-bottom: 5px; */
   font-size: 15pt;
-  width: 68%;
+  width: 78%;
 }
 
 .recipe-page-container {
@@ -472,7 +489,6 @@ nav {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   position: relative;
 }
 
@@ -481,7 +497,7 @@ nav {
 }
 
 .tag-filter {
-  margin-right:10px;
+  /* margin-right:10px; */
   padding:6px;
   padding-top: 0;
   max-width: 230px;
