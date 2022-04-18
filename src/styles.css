@@ -16,11 +16,16 @@ body {
   text-shadow: 0px 1px 2px #111111;
 }
 
+.add-ing-error {
+  margin: 0;
+  color: red;
+}
+
 .add-to-cook-checkbox-container {
 display: flex;
 justify-content: space-between;
 width: 100%;
-border: solid red 1px;
+align-items: center;
 }
 
 .add-to-cook-checkbox {
@@ -43,6 +48,21 @@ margin-bottom: 15px;
 .all-recipes-page-container {
   display: flex;
   height: 100%;
+}
+.button-cook-now {
+  margin: 2px;
+  height: 30px;
+  width: 100px;
+}
+
+.cook-button-box {
+  display: flex;
+  align-items: center;
+}
+.cook-error {
+  margin-left: 5px;
+  color: red;
+  font-size: 12pt;
 }
 
 .directions-box {
@@ -114,11 +134,24 @@ h1 {
   margin-left: 144px;
   margin-top: 3px;
   border-radius: 77px;
-  /* cursor: pointer; */
+
 }
 
 h3 {
   font-size: 14pt;
+}
+
+h4 {
+  margin: 6px;
+}
+
+.ing-search-box input {
+  width: 12vw;
+  padding: 5px 10px;
+  font-size: 12pt;
+  border-radius: 8px 8px 0 0;
+  z-index: 100%;
+  border: solid #605c80 8px;
 }
 
 .ingredients-cost > h3, span {
@@ -175,6 +208,17 @@ border-left: solid rgb(183, 183, 249) 28px;
   overflow-y: scroll;
 }
 
+.ingredients-list-oos > p {
+  margin: 3px;
+  margin-left: 43px
+}
+
+.ingredients-list-oos > p.missing-amount {
+  margin-bottom: 20px;
+  margin-top: 0;
+  color: red;
+}
+
 .ingredients-list > p {
   margin: 3px;
   margin-left: 43px
@@ -186,7 +230,6 @@ label {
 
 main {
   height: 100%;
-
 }
 
 .home-button {
@@ -215,6 +258,28 @@ nav {
   box-shadow: 2px 2px 10px grey;
 }
 
+.number-and-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  bottom: 0;
+  width: 100%;
+  height: 80%;
+  position: absolute;
+}
+
+.number-input-containter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#numberInput {
+  width: 60px;
+}
+
 .pantry-container {
   width: 38%;
   justify-content: space-between;
@@ -229,7 +294,6 @@ nav {
   max-width: 130vh;
   display: flex;
   align-items: center;
-  flex-direction: column;
   border-radius: 33px;
   border: solid rgb(183, 183, 249) 6px;
   justify-content: center;
@@ -237,9 +301,28 @@ nav {
   margin-top: 22px;
 }
 
+.pantry-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
 .pantry-list {
+  width: 100%;
+  height: 90%;
   overflow-y: scroll;
 
+}
+
+.pantry-dropdown-container {
+  position: relative;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .recipe {
@@ -299,7 +382,7 @@ nav {
   width: 100%;
 }
 
- .recipe-ingredients {
+.recipe-ingredients {
   width: 100%;
   height: 42vh;
   max-width: 130vh;
@@ -385,7 +468,15 @@ nav {
   margin-right: 42px;
 }
 
-.tags > div > input, label{
+.select-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.tags > div > input, .tags > div > label{
   cursor: pointer;
 }
 

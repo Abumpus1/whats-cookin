@@ -200,7 +200,10 @@
                     <h3 class="recipe-name-large">Recipe_Name</h3>
   
                   <div class="add-to-cook-checkbox-container">
-                    <button class="button-cook-now">Cook Now</button>
+                    <div class="cook-button-box">
+                      <button class="button-cook-now">Cook Now</button>
+                      <p class="cook-error"></p>
+                    </div>
                     <div class="add-to-cook-checkbox">
                       <input data-tag-name="add-to-cook" type="checkbox" class="save-recipe" id="saveRecipe">
                       <label data-tag-name="add-to-cook-label" for="saveRecipe">Cook Later</label><br>
@@ -213,7 +216,33 @@
               <!-- </div> -->
             </section>
             <section class="pantry">
+              <div class="pantry-list-container">
+                <h4>Your Pantry</h4>
+                <div class="pantry-list">
   
+                </div>
+              </div>
+              <div class="pantry-dropdown-container">
+                
+                <label for="ingOptions">Add to Pantry</label>
+                <div class="select-box">
+                  <div class="ing-search-box">
+                    <input list="ingOptions" type="text" placeholder="Add ingredient...">
+                  </div>
+                  <datalist id="ingOptions" class="options-container" data-dropdown>
+                    <!-- ingredients for dropdown go here -->
+                  </datalist>
+                  
+                </div>
+                <div class="number-and-button">
+                  <div class="number-input-containter">
+                    <input type="number" id="numberInput" min="1" step="1">
+                    <label for="numberInput">Add Ingredient Amount</label>
+                  </div>
+                  <button class="add-ing-button">Submit</button>
+                  <p class="add-ing-error"></p>
+                </div>
+              </div>
             </section>
           </section>
         </article>

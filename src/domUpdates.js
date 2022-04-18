@@ -58,19 +58,64 @@ let domUpdates = {
     searchInput.value = "";
   },
 
-  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost) {
+  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing, pantryList) {
     addToCookCheckBox.id = `${recipe.id}`
     recipeImage.innerHTML = `<img src="${recipe.image}" alt="${recipe.name}">`;
     recipeName.innerText = `${recipe.name}`
     recipeIngredients.innerHTML = "";
+    recipeIngsMissing.innerHTML = "";
     recipeDirections.innerHTML = "";
+    activeRecipeRepo.currentUser.findMissingIngredients(recipe)
     recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
-      recipeIngredients.innerHTML += `<p>${ingredient}<p>`;
+      if (activeRecipeRepo.currentUser.missingIngredients.some(missingIng => missingIng.id === ingredient.id)) {
+        recipeIngsMissing.innerHTML += `
+        <p>(${ingredient.amount}) ${ingredient.name}<p>
+        <p class="missing-amount">Missing ${activeRecipeRepo.currentUser.missingIngredients.find(missingIng => missingIng.id === ingredient.id).amountMissing}<p>
+        `;
+      } else {
+        recipeIngredients.innerHTML += `<p>(${ingredient.amount}) ${ingredient.name}<p>`;
+      }
     });
+
+    this.displayPantry(pantryList, activeRecipeRepo)
+    
     recipe.getRecipeDirections().forEach(direction => {
       recipeDirections.innerHTML += `<p>${direction}<p>`;
     });
     recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
+    this.fillDropdown(activeRecipeRepo, optionsContainer)
+  },
+
+  displayPantry(pantryList, activeRecipeRepo) {
+    pantryList.innerHTML = "";
+    activeRecipeRepo.currentUser.showPantry(activeRecipeRepo.ingredients).forEach(pantryIng => {
+      pantryList.innerHTML += `<p>(${pantryIng.amount}) ${pantryIng.name}<p>`
+    });
+  },
+
+  fillDropdown(activeRecipeRepo, optionsContainer, searchInput) {
+    if (!searchInput) {
+      searchInput = "";
+    }
+    optionsContainer.innerHTML = ""
+    let sortedIngredients = activeRecipeRepo.ingredients.sort((a, b) => {
+      let aUp = a.name.toUpperCase();
+      let bUp = b.name.toUpperCase();
+      if (aUp > bUp) {
+        return 1;
+      }
+      if (aUp < bUp) {
+        return -1;
+      }
+      return 0;
+    });
+    sortedIngredients.forEach(ingredient => {
+      if (ingredient.name.toLowerCase().includes(searchInput)) {
+        optionsContainer.innerHTML += `
+          <option value="${ingredient.name}" data-label="${ingredient.name}" class="radio" id="${ingredient.id}" data-id="${ingredient.id}" name="category">${ingredient.name}</option>
+        `
+      }
+    });
   },
 
   toggleCookInput(activeRecipeRepo, addToCookCheckBox, addToCookInput){

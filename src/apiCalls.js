@@ -9,6 +9,27 @@ function fetchData(dataLocation) {
  .catch(err => displayErrorMessage(err));
 }
 
+function postData(userId, ingId, ingAmount) {
+  return fetch("http://localhost:3001/api/v1/users", {
+    method: 'POST',
+    body: JSON.stringify({
+      userID: userId,
+      ingredientID: ingId,
+      ingredientModification: ingAmount
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+    throw Error(response.statusText)
+   }
+   return response.json()
+   })
+  .catch(err => console.log(err));
+}
+
 
 const displayErrorMessage = (err) => {
   const errorBox = document.querySelector(".error-box");
@@ -16,5 +37,6 @@ const displayErrorMessage = (err) => {
 }
 
 export {
-  fetchData
+  fetchData,
+  postData
 }
