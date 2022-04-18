@@ -27,7 +27,8 @@ The user can also search by name by typing their inquiry in the search bar at th
  In the pantry section located at the bottom right of the page, the user can find a randomly generated pantry, which will determine which recipes they are able to cook. The user can view what is currently in their pantry and add as many ingredients as they wish to their pantry in this section.
 
 ### Check Out the Page In Action!
-![Screen Recording 2022-04-04 at 5 51 53 PM](https://user-images.githubusercontent.com/93603551/161645897-7d389f5c-df98-4966-8e1a-a5482d122ffc.gif)
+![Screen Recording of What's Cookin Page](https://user-images.githubusercontent.com/93603551/163867681-e72b1f38-5ddc-448e-b9f4-11e15d397880.gif)
+
 
 ### Project Wireframes Using Excalidraw
 
