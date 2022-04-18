@@ -86,6 +86,8 @@ describe('User', () => {
     user.findMissingIngredients(recipeTwo);
 
     expect(user.missingIngredients).to.have.a.lengthOf(2);
+    expect(user.missingIngredients[0]).to.deep.equal({ id: 1002030, amountMissing: 4 });
+    expect(user.missingIngredients[1]).to.deep.equal({ id: 19334, amountMissing: 3 });
   });
 
   it('Should have a method that calculates amount of ingredient missing from pantry needed for recipe', () => {
@@ -101,4 +103,3 @@ describe('User', () => {
     expect(userIngredients).to.deep.include({id:20081, name: "wheat flour", amount: 5});
   });
 });
-
