@@ -10,11 +10,11 @@ class User {
 
   toggleId(recipeId, dataArray) {
     if(!dataArray.includes(recipeId)){
-      dataArray.push(recipeId)
+      dataArray.push(recipeId);
     } else {
       dataArray.forEach((recipe, i) => {
         if(recipe === recipeId) {
-          dataArray.splice(i, 1)
+          dataArray.splice(i, 1);
         }
       });
     }
@@ -29,7 +29,7 @@ class User {
   }
 
   calculateMissing(recipeIng, pantryIng) {
-    let sum = recipeIng.quantity.amount - pantryIng.amount
+    let sum = recipeIng.quantity.amount - pantryIng.amount;
       return sum;
   }
 

@@ -1,7 +1,6 @@
 * {
   font-family: monaco;
   font-size: 13pt;
-  border: solid red 1px;
 }
 
 body {
@@ -21,6 +20,9 @@ body {
   margin: 0;
   color: red;
 }
+.add-ing-button {
+  border-radius: 8px;
+}
 
 .add-to-cook-checkbox-container {
 display: flex;
@@ -30,7 +32,8 @@ align-items: center;
 }
 
 .add-to-cook-checkbox {
-width: 38%;
+  min-width: 150px;
+  width: 38%;
 }
 
 .all-recipes-container {
@@ -39,6 +42,7 @@ width: 38%;
   flex-direction: column;
   align-items: center;
 }
+
 .all-recipes-container > p {
 margin-right: 6vw;
 font-size: 1.3vw;
@@ -52,8 +56,9 @@ margin-bottom: 15px;
 }
 .button-cook-now {
   margin: 2px;
-  height: 30px;
-  width: 100px;
+  height: 40px;
+  width: 150px;
+  border-radius: 8px;
 }
 
 .cook-button-box {
@@ -161,7 +166,7 @@ align-items: center;
   width: 9vw;
   padding: 5px 10px;
   font-size: 12pt;
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px;
   z-index: 100%;
   border: solid #605c80 8px;
   margin-top: 31px;
@@ -179,7 +184,6 @@ margin: 5px;
   flex-direction: row;
   width: 100%;
   margin-bottom: 11px;
-  border-bottom: solid rgb(183, 183, 249) 4px;
 }
 
 .ingredients-label {
@@ -496,8 +500,11 @@ nav {
   cursor: pointer;
 }
 
+.tags > div > label:hover {
+  border-bottom: 3px solid #605c80;
+}
+
 .tag-filter {
-  /* margin-right:10px; */
   padding:6px;
   padding-top: 0;
   max-width: 230px;

@@ -58,14 +58,24 @@ let domUpdates = {
     searchInput.value = "";
   },
 
-  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeIngredients, recipeDirections, recipeTotalCost, optionsContainer, recipeIngsMissing, pantryList) {
+  displaySelectedRecipe(activeRecipeRepo, recipe, addToCookCheckBox, recipeImage, recipeName, recipeDirections, recipeTotalCost, optionsContainer) {
     addToCookCheckBox.id = `${recipe.id}`
     recipeImage.innerHTML = `<img src="${recipe.image}" alt="${recipe.name}">`;
     recipeName.innerText = `${recipe.name}`
+
+    recipeDirections.innerHTML = "";
+    recipe.getRecipeDirections().forEach(direction => {
+      recipeDirections.innerHTML += `<p>${direction}<p>`;
+    });
+    recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
+    this.fillDropdown(activeRecipeRepo, optionsContainer)
+  },
+
+  displayRecipeIngredients(activeRecipeRepo, recipe, recipeIngredients, recipeIngsMissing) {
+    activeRecipeRepo.currentUser.findMissingIngredients(recipe);
     recipeIngredients.innerHTML = "";
     recipeIngsMissing.innerHTML = "";
-    recipeDirections.innerHTML = "";
-    activeRecipeRepo.currentUser.findMissingIngredients(recipe)
+
     recipe.getIngredientNames(activeRecipeRepo.ingredients).forEach(ingredient => {
       if (activeRecipeRepo.currentUser.missingIngredients.some(missingIng => missingIng.id === ingredient.id)) {
         recipeIngsMissing.innerHTML += `
@@ -76,14 +86,6 @@ let domUpdates = {
         recipeIngredients.innerHTML += `<p>(${ingredient.amount}) ${ingredient.name}<p>`;
       }
     });
-
-    this.displayPantry(pantryList, activeRecipeRepo)
-    
-    recipe.getRecipeDirections().forEach(direction => {
-      recipeDirections.innerHTML += `<p>${direction}<p>`;
-    });
-    recipeTotalCost.innerText = ` $${recipe.getRecipeCost(activeRecipeRepo.ingredients)}`;
-    this.fillDropdown(activeRecipeRepo, optionsContainer)
   },
 
   displayPantry(pantryList, activeRecipeRepo) {
@@ -124,6 +126,42 @@ let domUpdates = {
     } else {
       addToCookInput.checked = false;
     }
+  },
+
+  checkCookButton(activeRecipeRepo, cookNowButton, cookErrMsg) {
+    if (activeRecipeRepo.currentUser.missingIngredients.length === 0) {
+      cookNowButton.disabled = false;
+      cookErrMsg.innerText = "";
+    } else {
+      cookNowButton.disabled = true;
+      cookErrMsg.innerText = "You're missing ingredients!";
+    }
+  },
+
+  disableWhileCooking(cookErrMsg, cookNowButton) {
+    cookErrMsg.innerText = "Cooking...";
+    cookNowButton.disabled = true;
+  },
+
+  clearInputs(ingSearchBox, numberInput) {
+    ingSearchBox.value = "";
+    numberInput.value = "";
+  },
+
+  confirmInputRequest(addIngErr) {
+    addIngErr.innerText = "Added!";
+    setTimeout(() => {
+      addIngErr.innerText = "";
+    }, 2000);
+  },
+
+  denyInputRequest(addIngButton, addIngErr) {
+    addIngButton.disabled = true;
+    addIngErr.innerText = "Error: Input fields empty or invalid";
+    setTimeout(() => {
+      addIngButton.disabled = false;
+      addIngErr.innerText = "";
+    },4000);
   }
 
 };

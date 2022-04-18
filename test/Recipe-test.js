@@ -42,9 +42,9 @@ describe('Recipe', () => {
     ]);
   });
 
-  it('Should have method that determines ingredient name', () => {
+  it('Should have method that returns ingredients that include names', () => {
     let ingNames = recipe.getIngredientNames(sampleIngredients);
-    expect(ingNames).to.deep.equal(["wheat flour", "bicarbonate of soda"]);
+    expect(ingNames).to.deep.equal([{"amount": 1.5, "id": 20081, "name": "wheat flour"}, {"amount": 0.5, "id": 18372, "name": "bicarbonate of soda"}]);
   });
 
   it('Should have method to get cost of ingredients', () => {
