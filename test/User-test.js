@@ -91,19 +91,20 @@ describe('User', () => {
     expect(user.missingIngredients[1]).to.deep.equal({ id: 19334, amountMissing: 3 });
   });
 
-  //THIS EXISTS JUST NOT ENOUGH
-  it.only('Should calculate amount if user has ingredient in pantry but not enough for recipe', () => {
+  it('Should calculate amount if user has ingredient in pantry but not enough for recipe', () => {
     user.findMissingIngredients(recipeTwo);
 
     expect(recipeTwo.ingredients[1].quantity.amount).to.equal(8);
     expect(user.pantry[3].amount).to.equal(5);
     expect(user.missingIngredients[1]).to.deep.equal({ id: 19334, amountMissing: 3 });
-  })
+  });
 
-  //THIS ONE DOES NOT EXIST IN PANTRY - 1002030
-  // it('Should have a method to ')
+  it('Should have a method to add ingredients missing from users pantry to missing ingredients array', () => {
+    user.findMissingIngredients(recipeTwo);
 
-
+    expect(recipeTwo.ingredients[0].quantity.amount).to.equal(4);
+    expect(user.missingIngredients[0]).to.deep.equal({ id: 1002030, amountMissing: 4 });
+  });
 
   it('Should have a method that calculates amount of ingredient missing from pantry needed for recipe', () => {
     let getMissingNum = user.calculateMissing(recipeTwo.ingredients[1], user.pantry[3]);
